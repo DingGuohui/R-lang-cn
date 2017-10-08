@@ -1,0 +1,94 @@
+<html lang="zh">
+<head>
+<title>Indexing by vectors - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Indexing.html#Indexing" title="Indexing">
+<link rel="prev" href="Indexing.html#Indexing" title="Indexing">
+<link rel="next" href="Indexing-matrices-and-arrays.html#Indexing-matrices-and-arrays" title="Indexing matrices and arrays">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Indexing-by-vectors"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Indexing-matrices-and-arrays.html#Indexing-matrices-and-arrays">Indexing matrices and arrays</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Indexing.html#Indexing">Indexing</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Indexing.html#Indexing">Indexing</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">3.4.1 通过向量进行索引</h4>
+
+<p>通过向量作为索引，R实现了一些功能非常强大的构造。
+首先我们将会讨论简单向量的索引。为了简单起见，假定
+表达式是 <code>x[i]</code>。依据<code>i</code>类型的不同，有下面几种情况。
+
+     <ul>
+<li><a name="index-_00cb_00f7_00d2_00fd-114"></a><strong>整数</strong>。<code>i</code>的所有元素必须是一样的符号。如果它们是正数，
+<code>x</code>中下标和这些数字一样的元素将会被选中。
+<code>i</code> 中的元素是负数，那么除这些数字对应的元素外的所有元素被选中。
+
+     <p>如果<code>i</code>是正数，并且大于 <code>length(x)</code>，那么对应的所选元素是
+<code>NA</code>。
+<code>i</code>里面有超过一定范围的负数会导致一个错误。
+
+     <p>一个特别的例子是零索引，它不会有任何影响：<code>x[0]</code>是一个
+空向量并且其它含有零的正整数或负整数索引有一样的效果因为零索引会被忽略。
+<!-- Are there any useful uses of zero indices?? -->
+
+     <li><strong>其它数值</strong>。非整数值在作为索引前会被转换成整数
+（直接去掉小数部分）。
+
+     <li><strong>逻辑值</strong>。索引 <code>i</code>通常和<code>x</code>长度一致。
+如果它比较短，那么它的元素将会被循环使用（见<a href="Elementary-arithmetic-operations.html#Elementary-arithmetic-operations">Elementary arithmetic operations</a>）。
+如果它的长度过长，那么 <code>x</code> 在概念上会被 <code>NA</code> 扩展。
+从<code>x</code>中选中的元素将是对应位置上<code>i</code> 是<code>TRUE</code>的元素。
+<!-- @findex TRUE -->
+<!-- @findex FALSE -->
+
+     <p><a name="index-_00be_00d6_00b2_00bf_00c6_00a5_00c5_00e4-115"></a><li><strong>字符</strong>。<code>i</code>里面的字符串和<code>x</code> 的名字属性进行匹配，其
+结果整数将会被使用。在精确匹配失败后，<code>[[</code> 和 <code>$</code>都采用局部匹配
+，因此如果 <code>x</code>没有一个分量的名字为<code>"aa"</code>并且<code>"aabb"</code>
+是第一个以<code>"aa"</code>作为前缀名字，那么 <code>x$aa</code> 将会匹配 <code>x$aabb</code>。
+但是，<code>[</code> 需要精确匹配。字符串<code>""</code>会被特殊处理：
+它表示`没有名字'和没有元素匹配(甚至是些没有名字的元素)。注意局部匹配仅用于
+提取信息，在替换操作时不适用。
+
+     <li><strong>因子</strong>。其结果等价于 <code>x[as.integer(i)]</code>。
+因子水平不会被采用。如果真的需要，请使用
+<code>x[as.character(i)]</code> 或者类似的构造。
+
+     <li><strong>空索引</strong>。表达式 <code>x[]</code> 返回 <code>x</code>，但结果会扔掉
+&ldquo;不相关&rdquo;的属性，仅保留 <code>names</code>属性和多维数组里面的 <code>dim</code> 和
+<code>dimnames</code> 属性。
+
+     <li><strong>NULL</strong>。在索引处理时，它似乎就是<code>integer(0)</code>。
+
+   </ul>
+
+   <p>索引是缺失值 (如 <code>NA</code>)时将返回 <code>NA</code>。
+该规则同样用于逻辑索引，即，<code>x</code>在使用含<code>NA</code>选择器的
+索引<code>i</code>时，返回结果中对应索引<code>NA</code>的位置上是<code>NA</code>。
+<a name="index-NA-116"></a>
+但是，需要注意的是，<code>NA</code>有不同的模式&mdash;字面上的常量是
+<code>"logical"</code>模式，但它常常自动强制转换成其它类型。
+这样做的后果是<code>x[NA]</code> 长度和 <code>x</code>一致，而 <code>x[c(1, NA)]</code>
+的长度为2。因为前者是逻辑索引，而后者是整数索引。
+
+   <p>用 <code>[</code> 作索引操作同样也对名字属性进行相关的子集操作。
+
+   </body></html>
+

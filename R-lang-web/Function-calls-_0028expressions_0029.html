@@ -1,0 +1,62 @@
+<html lang="zh">
+<head>
+<title>Function calls (expressions) - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Expressions.html#Expressions" title="Expressions">
+<link rel="prev" href="Expressions.html#Expressions" title="Expressions">
+<link rel="next" href="Infix-and-prefix-operators.html#Infix-and-prefix-operators" title="Infix and prefix operators">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Function-calls-_0028expressions_0029"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Infix-and-prefix-operators.html#Infix-and-prefix-operators">Infix and prefix operators</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Expressions.html#Expressions">Expressions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Expressions.html#Expressions">Expressions</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">10.4.1 函数调用</h4>
+
+<p><a name="index-_00ba_00af_00ca_00fd-286"></a>函数调用的形式是一个函数引用后面伴随着放在括弧里面的
+一个以逗号分隔的参数列表。
+
+<pre class="example">     <var>function_reference</var> ( <var>arg1</var>, <var>arg2</var>, ...... , <var>argn</var> )
+</pre>
+   <p>函数引用可以是
+     <ul>
+<li>标识符（函数名字）
+<li>文本字符串（同上，在如果一个函数有一
+个不是合法标识符的名字时执行）
+<li>表达式（它可以求值成为一个函数对象）
+</ul>
+
+   <p>任何参数都可以加上标签(<var>tag</var><code>=</code><var>expr</var>)，
+或者仅仅是一个简单的表达式。它还可以是空，或者是
+特殊标记 <span class="samp">...</span>， <span class="samp">..2</span> 等。
+
+   <p>标签可以是标识符或文本字符串。
+
+   <p>例如 ，
+
+<pre class="example">     f(x)
+     g(tag = value, , 5)
+     "odd name"("strange tag" = 5, y)
+     (function(x) x^2)(5)
+</pre>
+   </body></html>
+

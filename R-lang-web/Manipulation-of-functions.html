@@ -1,0 +1,57 @@
+<html lang="zh">
+<head>
+<title>Manipulation of functions - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Computing-on-the-language.html#Computing-on-the-language" title="Computing on the language">
+<link rel="prev" href="Manipulation-of-function-calls.html#Manipulation-of-function-calls" title="Manipulation of function calls">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Manipulation-of-functions"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="Manipulation-of-function-calls.html#Manipulation-of-function-calls">Manipulation of function calls</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Computing-on-the-language.html#Computing-on-the-language">Computing on the language</a>
+<hr><br>
+</div>
+
+<h3 class="section">6.6 函数操作</h3>
+
+<p>可以操作一个函数或闭包的分量常常非常有用。
+<a name="index-_00ba_00af_00ca_00fd-224"></a>R 为这种目的提供了一整套接口函数。
+
+     <dl>
+<dt><code>body</code><a name="index-_0040code_007bbody_007d-225"></a><dd>返回函数主体的表达式。
+<br><dt><code>formals</code><a name="index-_0040code_007bformals_007d-226"></a><dd>返回一个函数的形式参数列表。它是
+<code>pairlist</code>。
+<br><dt><code>environment</code><a name="index-_0040code_007benvironment_007d-227"></a><dd><a name="index-_00bb_00b7_00be_00b3-228"></a>返回函数的关联环境。
+<br><dt><code>body&lt;-</code><a name="index-_0040code_007bbody_003c_002d_007d-229"></a><dd>用给定的表达式设置函数的主体。
+<br><dt><code>formals&lt;-</code><a name="index-_0040code_007bformals_003c_002d_007d-230"></a><dd>用给定列表设置函数的形式参数。
+<br><dt><code>environment&lt;-</code><a name="index-_0040code_007benvironment_003c_002d_007d-231"></a><dd>用给定的环境设置函数的环境。
+</dl>
+
+   <p>用<code>evalq(x &lt;- 5, environment(f))</code> 可以改变函数环境中
+不同变量的绑定。
+
+   <p>用<code>as.list</code>可以把一个函数变为列表。
+<a name="index-_00ba_00af_00ca_00fd-232"></a>这样做的结果是形式参数的列表和函数主体的连接。相反，
+这种列表可以用<code>as.function</code>转换为函数。
+这种用法是为了和 S 兼容。注意当<code>as.list</code>被使用时，
+环境信息会丢失，而 <code>as.function</code> 有一个参数
+允许重新设置环境。
+
+   </body></html>
+

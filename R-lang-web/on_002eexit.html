@@ -1,0 +1,69 @@
+<html lang="zh">
+<head>
+<title>on.exit - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Exception-handling.html#Exception-handling" title="Exception handling">
+<link rel="prev" href="warning.html#warning" title="warning">
+<link rel="next" href="Error-options.html#Error-options" title="Error options">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="on_002eexit"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Error-options.html#Error-options">Error options</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="warning.html#warning">warning</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Exception-handling.html#Exception-handling">Exception handling</a>
+<hr><br>
+</div>
+
+<h3 class="section">8.3 on.exit 函数</h3>
+
+<p><a name="index-on_002eexit-267"></a>
+可以在一个函数主体部分中的任何地方插入一个 <code>on.exit</code> 的调用。
+<code>on.exit</code> 调用的作用是保存函数主体的值使得函数跳出后它仍然可以被执行。
+它允许函数改变一些系统参数和保证在函数结束时它们设有恰当的值。
+<code>on.exit</code> 保证函数在直接退出或警告退出的情况下一定运行。
+
+   <p><code>on.exit</code> 代码求值过程中的错误会导致立即跳至
+顶层而不进一步执行 <code>on.exit</code> 代码。
+
+   <p><code>on.exit</code> 只用一个参数，就是一个在
+函数结束时才会被执行的表达式。
+
+<!-- @node restart, Error options, on.exit, Exception handling -->
+<!-- @section restart -->
+<!-- @findex restart -->
+<!-- A call to @code{restart} effectively makes the function a possible point -->
+<!-- of return if an error occurs during the evaluation of that function (or -->
+<!-- one of the functions it calls). -->
+<!-- @code{restart} takes a single argument which is a logical variable.  If -->
+<!-- the value of the logical is @code{TRUE} then a jump-point is -->
+<!-- established.  If the value is @code{FALSE} then the jump-point is -->
+<!-- removed. -->
+<!-- When a jump is executed the jump-point is removed. -->
+<!-- When an error occurs and one or more jump points are active then control -->
+<!-- is returned to the innermost function that has a jump-point established. -->
+<!-- Execution begins with the first statement in the body of the selected -->
+<!-- function.  The -->
+<!-- @cindex 环境 -->
+<!-- environment for subsequent -->
+<!-- @cindex 赋值 -->
+<!-- evaluation is the environment -->
+<!-- that was in effect at the time that the error that triggered the jump -->
+<!-- was signalled. -->
+</body></html>
+

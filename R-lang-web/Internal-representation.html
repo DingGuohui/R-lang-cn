@@ -1,0 +1,46 @@
+<html lang="zh">
+<head>
+<title>Internal representation - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="The-parsing-process.html#The-parsing-process" title="The parsing process">
+<link rel="prev" href="Modes-of-parsing.html#Modes-of-parsing" title="Modes of parsing">
+<link rel="next" href="Deparsing.html#Deparsing" title="Deparsing">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Internal-representation"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Deparsing.html#Deparsing">Deparsing</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Modes-of-parsing.html#Modes-of-parsing">Modes of parsing</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="The-parsing-process.html#The-parsing-process">The parsing process</a>
+<hr><br>
+</div>
+
+<!-- node-name,  next,  previous,  up -->
+<h4 class="subsection">10.1.2 内在描述</h4>
+
+<p><a name="index-_00bd_00e2_00ce_00f6-278"></a>解析后的表达式保存在一个含有解析树的R对象中。
+这种对象的完整描述可以参考
+<a href="Language-objects.html#Language-objects">Language objects</a> 和 <a href="Expression-objects.html#Expression-objects">Expression objects</a>。总之，每个基本的
+R 表达式都以函数调用的形式保存，并且是一个首元素为函数名字，其它
+元素是参数（也可能是R表达式）的列表。
+<a name="index-_00ba_00af_00ca_00fd-279"></a>列表元素可以被命名，和形式与事实参数的标签匹配对应。注意
+<em>所有</em> R 的语法元素都是以这种方式处理的，例如：
+赋值操作 <code>x &lt;- 1</code> 编码为 <code>"&lt;-"(x, 1)</code>。
+
+   </body></html>
+

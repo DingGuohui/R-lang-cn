@@ -1,0 +1,70 @@
+<html lang="zh">
+<head>
+<title>Group methods - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Object_002doriented-programming.html#Object_002doriented-programming" title="Object-oriented programming">
+<link rel="prev" href="NextMethod.html#NextMethod" title="NextMethod">
+<link rel="next" href="Writing-methods.html#Writing-methods" title="Writing methods">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Group-methods"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Writing-methods.html#Writing-methods">Writing methods</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="NextMethod.html#NextMethod">NextMethod</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Object_002doriented-programming.html#Object_002doriented-programming">Object-oriented programming</a>
+<hr><br>
+</div>
+
+<h3 class="section">5.6 成组方法</h3>
+
+<p>对多种内置函数的类型，
+<a name="index-_00ba_00af_00ca_00fd_002c-_00c4_00da_00d6_00c3-202"></a>R 为操作符提供了一个分发机制。这表明
+操作符如 <code>==</code> 或
+<code>&lt;</code> 对特定类的成员可以设定特定行为。
+函数和操作符已经分成三类。对任何一组分类可以
+编写成组函数。
+现在还没有增加组的机制，但可以为一个组内的任一函数编写
+特定的方法。
+
+   <p>下表中列出了不同组（Groups）的函数。
+
+     <dl>
+<dt><span class="samp">数学</span><dd>abs, acos, acosh, asin, asinh, atan, atanh, ceiling, cos, cosh, cumsum,
+exp, floor, gamma, lgamma, log, log10, round, signif, sin, sinh, tan,
+tanh, trunc
+
+     <br><dt><span class="samp">汇总</span><dd>all, any, max, min, prod, range, sum
+
+     <br><dt><span class="samp">操作符</span><dd><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code>, <code>&lt;</code> , <code>&gt;</code>,
+<code>&lt;=</code>, <code>&gt;=</code>, <code>!=</code>, <code>==</code>, <code>%%</code>, <code>%/%</code>,
+<code>&amp;</code>, <code>|</code>, <code>!</code>
+</dl>
+
+   <p>对于操作符组的操作符，如果两个放在一起的操作数暗示着一个方法，则
+一个特定的方法会被调用。特别是，两个操作数对应相同的方法，或者
+一个操作数对应的方法优先级高于另外一个操作数对应的方法。
+如果它们没有暗示单独的一个方法，那么默认的方法将会被采用。
+如果另一个操作数没有对应的方法，则成组方法或类方法起支配地位。
+类方法支配成组方法。
+
+   <p>当组是操作符组时，特殊变量 <code>.Method</code> 是一个双元素的字符向量。
+如果对应参数是决定方法的类的一个成员，<code>.Method</code> 的元素设为方法的名字。
+否则，<code>.Method</code>的对应元素设为长度为0的字符串<code>""</code>。
+
+   </body></html>
+

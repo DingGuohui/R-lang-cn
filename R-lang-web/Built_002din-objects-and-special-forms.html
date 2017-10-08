@@ -1,0 +1,49 @@
+<html lang="zh">
+<head>
+<title>Built-in objects and special forms - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Basic-types.html#Basic-types" title="Basic types">
+<link rel="prev" href="NULL-object.html#NULL-object" title="NULL object">
+<link rel="next" href="Promise-objects.html#Promise-objects" title="Promise objects">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Built_002din-objects-and-special-forms"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Promise-objects.html#Promise-objects">Promise objects</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="NULL-object.html#NULL-object">NULL object</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Basic-types.html#Basic-types">Basic types</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">2.1.7 内置对象和特别形态</h4>
+
+<p>有两种类型的对象含有R的内置函数，
+<a name="index-_00ba_00af_00ca_00fd-53"></a>就是代码列表中
+显示为 <code>.Primitive</code> 的部分。这两种对象的
+差异在于参数的处理方式。
+内置函数将对它们所有参数求值并且传给原始的函数，即
+<em>值调用（call-by-value）</em>。而一些特别函数把没有求值的
+表达式传给内部函数。
+
+   <p>从R语言的角度来说，这些对象仅仅是另外一种函数，只是它们
+的定义不能列出而已。
+函数<code>typeof</code>可以把它们与解释型函数（interpreted function）区分开。
+<a name="index-_00ba_00af_00ca_00fd-54"></a>
+
+   </body></html>
+

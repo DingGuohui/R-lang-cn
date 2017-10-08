@@ -1,0 +1,151 @@
+<html lang="zh">
+<head>
+<title>Subset assignment - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Indexing.html#Indexing" title="Indexing">
+<link rel="prev" href="Indexing-other-structures.html#Indexing-other-structures" title="Indexing other structures">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Subset-assignment"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="Indexing-other-structures.html#Indexing-other-structures">Indexing other structures</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Indexing.html#Indexing">Indexing</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">3.4.4 子集赋值</h4>
+
+<p><a name="index-_00b8_00b3_00d6_00b5-119"></a><a name="index-_00b8_00b4_00ba_00cf_00b8_00b3_00d6_00b5-120"></a>
+结构的子集赋值只是复合赋值一般机制的一个特例：
+<pre class="example">     x[3:5] &lt;- 13:15
+</pre>
+   <p>该命令的结果就像执行了下面的代码
+<pre class="example">     `*tmp*` &lt;- x
+     x &lt;- "[&lt;-"(`*tmp*`,3:5, value=13:15)
+</pre>
+   <p>这样的机制可用于其它函数，而不仅仅是 <code>[</code>。
+赋值函数和前面贴的 <code>&lt;-</code> 有一样的名字。
+它的最后一个名为 <code>value</code> 的参数是
+将被分配的新值。
+<pre class="example">     names(x) &lt;- c("a","b")
+</pre>
+   <p>等价于
+<pre class="example">     `*tmp*` &lt;- x
+     x &lt;- "names&lt;-"(`*tmp*`, value=c("a","b"))
+</pre>
+   <p>嵌套复合赋值的可以递归求值
+<pre class="example">     names(x)[3] &lt;- "Three"
+</pre>
+   <p>等价于
+<pre class="example">     `*tmp*` &lt;- x
+     x &lt;- "names&lt;-"(`*tmp*`, value="[&lt;-"(names(`*tmp*`), 3, value="Three"))
+</pre>
+   <p>在外围环境中的复合赋值（用<code>&lt;&lt;-</code>）也是允许的：
+<pre class="example">     names(x)[3] &lt;&lt;- "Three"
+</pre>
+   <p>等价于
+<pre class="example">     `*tmp*` &lt;&lt;- get(x, envir=parent.env(), inherits=TRUE)
+     names(`*tmp*`)[3] &lt;- "Three"
+     x &lt;&lt;- `*tmp*`
+</pre>
+   <p>也等价于
+<pre class="example">     `*tmp*` &lt;- get(x,envir=parent.env(), inherits=TRUE)
+     x &lt;&lt;- "names&lt;-"(`*tmp*`, value="[&lt;-"(names(`*tmp*`), 3, value="Three"))
+</pre>
+   <p>在外围环境中，仅仅目标变量被求值，因此
+<pre class="example">     e&lt;-c(a=1,b=2)
+     i&lt;-1
+     local({
+        e &lt;- c(A=10,B=11)
+        i &lt;-2
+        e[i] &lt;&lt;- e[i]+1
+     })
+</pre>
+   <p>在 LHS 和 RHS 中使用<code>i</code>的局部值，在超赋值语句（superassignment statement）
+的 RHS 中使用<code>e</code>的局部值。
+在环境外把
+<code>e</code> 的值设为
+<pre class="example">      a  b
+      1 12
+</pre>
+   <p>也就是说，超赋值等价于下面三行
+<pre class="example">     `*tmp*` &lt;- get(x,envir=parent.env(), inherits=TRUE)
+     `*tmp*`[i] &lt;- e[i]+1
+     x &lt;&lt;- `*tmp*`
+</pre>
+   <p>类似的是
+<pre class="example">     x[is.na(x)] &lt;&lt;- 0
+</pre>
+   <p>等价于
+<pre class="example">     `*tmp*` &lt;- get(x,envir=parent.env(), inherits=TRUE)
+     `*tmp*`[is.na(x)] &lt;- 0
+     x &lt;&lt;- `*tmp*`
+</pre>
+   <p>但与下面的代码不一样
+<pre class="example">     `*tmp*` &lt;- get(x,envir=parent.env(), inherits=TRUE)
+     `*tmp*`[is.na(`*tmp*`)] &lt;- 0
+     x &lt;&lt;- `*tmp*`
+</pre>
+   <p>这两种解释的差异仅仅在于是否有一个局部变量 <code>x</code>。
+应该尽量避免一个局部变量名字和一个超赋值的目标变量名字一样。
+因为这种情况在1.9.1版本或者之前的版本
+不能正常处理，所以没有必要采用这些代码。
+
+<!-- Example session sketch -->
+<!-- @example -->
+<!-- Make some data -->
+<!-- > x <- rbinom(10,5,.5) -->
+<!-- > x -->
+<!-- [1] 3 2 3 0 1 1 0 4 3 1 -->
+<!-- Select one element -->
+<!-- > x[6] -->
+<!-- [1] 1 -->
+<!-- Select several -->
+<!-- > x[6:10] -->
+<!-- [1] 1 0 4 3 1 -->
+<!-- Select by condition -->
+<!-- > x[x>=3] -->
+<!-- [1] 3 3 4 3 -->
+<!-- ..by name (add element names first) -->
+<!-- > names(x)<-letters[1:10] -->
+<!-- > x -->
+<!-- a b c d e f g h i j -->
+<!-- 3 2 3 0 1 1 0 4 3 1 -->
+<!-- > x["e"] -->
+<!-- e -->
+<!-- 1 -->
+<!-- Notice that names vector is subsetted as well: -->
+<!-- > names(x[x>=3]) -->
+<!-- [1] "a" "c" "h" "i" -->
+<!-- Indexing with [[ drops names attrib. whereas [ keeps (and subsets) it. -->
+<!-- > x[[4]] -->
+<!-- [1] 0 -->
+<!-- > x[4] -->
+<!-- d -->
+<!-- 0 -->
+<!-- [[ also works on matrices -->
+<!-- > a<-matrix(1:4,2) -->
+<!-- > a[[2,2]] -->
+<!-- [1] 4 -->
+<!-- However, one can not use fancy indexes: -->
+<!-- > x[[1:4]] -->
+<!-- Error: attempt to select more than one element -->
+<!-- [need examples of basic matrix operations, empty indexes, drop=TRUE/FALSE] -->
+<!-- @end example -->
+</body></html>
+

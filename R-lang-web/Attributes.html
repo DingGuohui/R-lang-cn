@@ -1,0 +1,65 @@
+<html lang="zh">
+<head>
+<title>Attributes - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Objects.html#Objects" title="Objects">
+<link rel="prev" href="Basic-types.html#Basic-types" title="Basic types">
+<link rel="next" href="Special-compound-objects.html#Special-compound-objects" title="Special compound objects">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Attributes"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Special-compound-objects.html#Special-compound-objects">Special compound objects</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Basic-types.html#Basic-types">Basic types</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Objects.html#Objects">Objects</a>
+<hr><br>
+</div>
+
+<h3 class="section">2.2 属性</h3>
+
+<p><a name="index-_00b6_00d4_00cf_00f3-68"></a>除了 <code>NULL</code>，所有对象有一个或多个相关属性。
+属性以列表形式保存，其中所有元素都有名字。
+属性列表可以通过 <code>attributes</code> 得到或通过
+<code>attributes&lt;-</code> 设定。
+<a name="index-attributes-69"></a><a name="index-attributes_003c_002d-70"></a>单个的属性分量可以通过 <code>attr</code> 和 <code>attr&lt;-</code>访问。
+<a name="index-attr-71"></a><a name="index-attr_003c_002d-72"></a><!-- Shouldn't we discuss replacement functions before this? -->
+
+   <p>一些属性有特别的访问函数
+<a name="index-_00ba_00af_00ca_00fd_002c-_00b7_00c3_00ce_00ca-73"></a>（如和因子相关的 <code>levels&lt;-</code>），但这些只在可用的情况下
+才能使用。为了隐藏实现细节，它们可以进行一些额外的操作。
+R 尝试拦截对含有特别属性的 <code>attr&lt;-</code> 和
+<code>attributes&lt;-</code> 的调用，以强迫进行一致性的检验。
+
+   <p>矩阵和数组是含有属性<code>dim</code>及可选属性<code>dimnames</code>的简单向量。
+
+   <p>属性用于实现 R 里面的类结构。
+如果一个对象有一个<code>class</code>属性，
+那么该属性将会在求值过程中被检验。
+<a name="index-_00c7_00f3_00d6_00b5_002c-_00b7_00fb_00ba_00c5-74"></a>R的类结构会在 <a href="Object_002doriented-programming.html#Object_002doriented-programming">Object-oriented programming</a>
+部分仔细描述。
+
+<ul class="menu">
+<li><a accesskey="1" href="Names.html#Names">Names</a>:  名字
+<li><a accesskey="2" href="Dimensions.html#Dimensions">Dimensions</a>: 维度
+<li><a accesskey="3" href="Dimnames.html#Dimnames">Dimnames</a>: 维度名字
+<li><a accesskey="4" href="Classes.html#Classes">Classes</a>: 类
+<li><a accesskey="5" href="Time-series-attributes.html#Time-series-attributes">Time series attributes</a>: 时间序列属性
+</ul>
+
+   </body></html>
+

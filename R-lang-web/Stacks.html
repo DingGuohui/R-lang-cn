@@ -1,0 +1,69 @@
+<html lang="zh">
+<head>
+<title>Stacks - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Scope-of-variables.html#Scope-of-variables" title="Scope of variables">
+<link rel="prev" href="Lexical-environment.html#Lexical-environment" title="Lexical environment">
+<link rel="next" href="Search-path.html#Search-path" title="Search path">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Stacks"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Search-path.html#Search-path">Search path</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Lexical-environment.html#Lexical-environment">Lexical environment</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Scope-of-variables.html#Scope-of-variables">Scope of variables</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">3.5.3 调用堆栈</h4>
+
+<p>当函数被调用时，
+<a name="index-_00ba_00af_00ca_00fd-131"></a>一个新的求值框架会被创建。在程序执行的任何时刻，
+通过<em>调用堆栈</em>（call stack）可以访问当前激活环境。
+每当一个函数被调用时，一个被称为上下文（context）的
+特殊结构会在内部创建并存放在一个上下文的列表里面。
+当一个函数完成求值，它的上下文会从调用堆栈里面去除。
+
+   <p>变量定义高于可以得到的调用堆栈时称为动态作用域。
+<a name="index-_00d7_00f7_00d3_00c3_00d3_00f2-132"></a>一个变量的绑定由变量的最近定义决定。
+这和R里面默认的作用域规则相违背。R里面默认的规则是
+变量绑定在函数定义的环境中（词法作用域）。
+<a name="index-_00bb_00b7_00be_00b3-133"></a>一些函数，特别是使用和操作模型公式的函数，需要
+通过直接访问调用堆栈来模拟动态作用域。
+
+   <p>通过
+<a name="index-_00b5_00f7_00d3_00c3_00b6_00d1_00d5_00bb-134"></a>函数名以 <span class="samp">sys.</span> 开头的一族函数来访问调用堆栈。
+现将它们简单列举如下。
+
+   <p><a name="index-_00b8_00b3_00d6_00b5-135"></a>
+     <dl>
+<dt><code>sys.call</code><dd>获得特定上下文的调用。
+<br><dt><code>sys.frame</code><dd>获得特定上下文的求值框架。
+<br><dt><code>sys.nframe</code><dd>获得所有被激活的上下文的环境框架。
+<br><dt><code>sys.function</code><dd>获得在特定上下文中被调用的函数。
+<br><dt><code>sys.parent</code><dd>获得当前函数调用的父节点。
+<br><dt><code>sys.calls</code><dd>获得所有激活的上下文的调用。
+<br><dt><code>sys.frames</code><dd>获得所有被激活的上下文的求值框架。
+<br><dt><code>sys.parents</code><dd>获得所有被激活的上下文的数值标签。
+<br><dt><code>sys.on.exit</code><dd>设置一个特定上下文退出时执行的函数。
+<br><dt><code>sys.status</code><dd>调用 <code>sys.frames</code>，<code>sys.parents</code> 和 <code>sys.calls</code>。
+<br><dt><code>parent.frame</code><dd>获得特定父上下文的求值框架。
+</dl>
+
+   </body></html>
+

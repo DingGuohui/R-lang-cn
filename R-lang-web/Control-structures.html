@@ -1,0 +1,89 @@
+<html lang="zh">
+<head>
+<title>Control structures - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Evaluation-of-expressions.html#Evaluation-of-expressions" title="Evaluation of expressions">
+<link rel="prev" href="Simple-evaluation.html#Simple-evaluation" title="Simple evaluation">
+<link rel="next" href="Elementary-arithmetic-operations.html#Elementary-arithmetic-operations" title="Elementary arithmetic operations">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Control-structures"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Elementary-arithmetic-operations.html#Elementary-arithmetic-operations">Elementary arithmetic operations</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Simple-evaluation.html#Simple-evaluation">Simple evaluation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Evaluation-of-expressions.html#Evaluation-of-expressions">Evaluation of expressions</a>
+<hr><br>
+</div>
+
+<h3 class="section">3.2 控制结构</h3>
+
+<p>R里面的计算包括顺序地对<em>语句</em>求值。
+程序语句，如 <code>x&lt;-1:10</code> 或
+<code>mean(y)</code>，可以被分号或者新的一行分割。
+只要
+<a name="index-_00c7_00f3_00d6_00b5_002c-_00d3_00ef_00be_00e4-94"></a>整个语句在语法上是完整的，该语句就会被求值
+并且将 <em>值</em>返回。
+一个语句的求值结果可以看作是该语句
+的值<a rel="footnote" href="#fn-1" name="fnd-1"><sup>1</sup></a>
+这个值通常会赋给一个符号。
+
+   <p>分号和换行符可以用来分隔程序语句。
+分号一般表示一个语句的结束而新的一行只是
+<em>有可能</em>表示一个语句的结束。
+如果当前语句在语法上还不完整，换行符会被
+求值程序忽略掉。
+如果会话（session）是交互式的，提示符会从
+<span class="samp">&gt;</span> 变为 <span class="samp">+</span>。
+
+<pre class="example">     &gt; x &lt;- 0; x + 5
+     [1] 5
+     &gt; y &lt;- 1:10
+     &gt; 1; 2
+     [1] 1
+     [1] 2
+</pre>
+   <p>语句可以用 <span class="samp">{</span> 和 <span class="samp">}</span> 组合在一起。
+一组这样的语句有时会被称为<em>句块</em>（block）。单个语句
+会在其语法完整后键入新的一行时求值。
+句块不会求值，直到在一个封闭的大括号后面键入新的一行。
+这一节余下的部分，<em>语句</em> 要么指单个语句
+要么指句块。
+
+<pre class="example">     &gt; { x &lt;- 0
+     + x + 5
+     + }
+     [1] 5
+</pre>
+   <ul class="menu">
+<li><a accesskey="1" href="if.html#if">if</a>: if语句
+<li><a accesskey="2" href="Looping.html#Looping">Looping</a>: 循环控制
+<li><a accesskey="3" href="repeat.html#repeat">repeat</a>: repeat语句
+<li><a accesskey="4" href="while.html#while">while</a>: while语句
+<li><a accesskey="5" href="for.html#for">for</a>: for语句
+<li><a accesskey="6" href="switch.html#switch">switch</a>: switch语句
+</ul>
+
+   <div class="footnote">
+<hr>
+<h4>Footnotes</h4><p class="footnote"><small>[<a name="fn-1" href="#fnd-1">1</a>]</small> 求值常常在一个环境中进行。
+<a name="index-_00bb_00b7_00be_00b3-95"></a>具体参考 <a href="Scope-of-variables.html#Scope-of-variables">Scope of variables</a>。</p>
+
+   <p><hr></div>
+
+   </body></html>
+

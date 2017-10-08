@@ -1,0 +1,103 @@
+<html lang="zh">
+<head>
+<title>UseMethod - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Object_002doriented-programming.html#Object_002doriented-programming" title="Object-oriented programming">
+<link rel="prev" href="Method-dispatching.html#Method-dispatching" title="Method dispatching">
+<link rel="next" href="NextMethod.html#NextMethod" title="NextMethod">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="UseMethod"></a>Next:&nbsp;<a rel="next" accesskey="n" href="NextMethod.html#NextMethod">NextMethod</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Method-dispatching.html#Method-dispatching">Method dispatching</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Object_002doriented-programming.html#Object_002doriented-programming">Object-oriented programming</a>
+<hr><br>
+</div>
+
+<h3 class="section">5.4 UseMethod 函数</h3>
+
+<p><a name="index-UseMethod-194"></a>
+<code>UseMethod</code> 是一个比较特殊的函数，它的行为和其它的函数调用有点差异。
+该函数的调用语法是
+<code>UseMethod(</code><var>generic</var><code>, </code><var>object</var><code>)</code>，其中 <var>generic</var>是
+泛型函数的名字， <var>object</var> 用于决定哪一个方法将会被采用的对象。
+<code>UseMethod</code> 仅可在函数内部被调用。
+S 定义里面的 <code>UseMethod</code> 含有一个额外的参数 <span class="samp">...</span>，
+该参数可能会影响随后被调用方法的一些默认值。
+R 在 <code>UseMethod</code> 有多于两个参数时给出警告，并且
+忽略多余的参数。
+
+   <p><a name="index-_00b8_00b3_00d6_00b5-195"></a><code>UseMethod</code>通过两种方式改变求值模式。第一种方式是，当它被调用时，它决定下一个
+被调用的方法（函数），然后利用当前求值环境调用该函数；
+<a name="index-_00bb_00b7_00be_00b3-196"></a>这个过程将会被简单描述。第二种方式是，<code>UseMethod</code> 会改变求值环境，
+但不会返回对函数调用的控制。这就意味着，任何在<code>UseMethod</code>调用后面出现的语句
+肯定不会被执行。
+
+   <p>当<code>UseMethod</code>被调用时，泛型函数是调用<code>UseMethod</code>时的指定值。
+准备分发的对象要么是当前函数的第一个参数要么是给定的第二个参数。
+参数的类可以被确定，它的一个元素结合泛型函数的名字可用来确定适当的方法。
+因此，如果泛型的名字是 <code>foo</code> 而对象的类是 <code>"bar"</code>，那么
+R 将会搜索一个名为 <code>foo.bar</code> 的方法。如果不存在这样的方法，
+那么上面描述的继承机制可用来查找适当的方法。
+
+   <p>一旦一个方法已经被确定，R 能以一种特别的方式调用它。
+和创建新的求值环境不同的是，
+<a name="index-_00bb_00b7_00be_00b3-197"></a>R 使用当前函数调用（泛型的调用）的环境。
+任何在调用 <code>UseMethod</code> 前的赋值或求值都将有效。
+<a name="index-_00b8_00b3_00d6_00b5-198"></a>用于调用泛型函数的参数会再次匹配所选方法的形式参数。
+
+   <p>当一个方法被调用时，所使用的参数在参数数目和名字上和调用泛型时采用的都是
+一样的。利用R里面标准的参数匹配规则，这些参数会和所调用方法的参数比较。
+但第一个参数会被求值。
+
+   <p>调用 <code>UseMethod</code> 的一个后果是把一些特殊对象放在
+求值框架中。它们是 <code>.Class</code>，
+<code>.Generic</code> 和 <code>.Method</code>。这些特殊对象被R用来
+处理方法分发和继承。 <code>.Class</code> 是对象的类，
+<code>.Generic</code> 是泛型函数的名字以及
+<code>.Method</code> 是当前调用的方法的名字。
+如果方法通过内部接口调用，可能还会有一个称为<code>.Group</code>的对象。
+这些将在 <a href="Group-methods.html#Group-methods">Group methods</a> 部分描述。在初始调用 <code>UseMethod</code> 后，
+这些特别的变量，不是对象自身，控制了随后方法的选择。
+
+   <p>方法的主体然后以标准的方式求值。特别是，主体中的变量搜索方式遵循
+为方法设置的规则。因此如果一个方法有相关的环境，那么该环境将会被使用。
+结果是，我们用方法调用代替了泛型调用。
+泛型框架下的局部赋值会传递给方法调用。
+<a name="index-_00b8_00b3_00d6_00b5-199"></a>不过，这种<em>特性</em>的使用一般不被推崇。
+需要了解的是，控制不会返回给泛型因此调用
+<code>UseMethod</code> 后的任何表达式都不会被执行。
+
+   <p>泛型的任何可求值参数在调用
+<code>UseMethod</code> 前保留其可求值特性。
+
+   <p>泛型调用过程中的参数会使用标准的参数匹配机制
+在方法参数中再次匹配。第一个参数（也是一个对象）
+将被求值。
+
+   <p>如果没有提供<code>UseMethod</code>的第一个参数，则假定是当前函数的名字。
+如果<code>UseMethod</code>有两个参数，则第一个是方法名，第二个假定是方法分发时
+参考的对象。它将会被求值使得可以确定必须的方法。在这种情况下，
+泛型调用的第一个参数不会被求值并会被抛弃。
+没有办法改变方法调用中的其它参数，它们似乎仍在泛型调用中。
+这和另外一种方法调用中的参数可以改变的 <code>NextMethod</code>
+函数形成鲜明对比。
+
+   </body></html>
+

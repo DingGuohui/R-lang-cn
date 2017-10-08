@@ -1,0 +1,101 @@
+<html lang="zh">
+<head>
+<title>Data frame objects - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Special-compound-objects.html#Special-compound-objects" title="Special compound objects">
+<link rel="prev" href="Factors.html#Factors" title="Factors">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Data-frame-objects"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="Factors.html#Factors">Factors</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Special-compound-objects.html#Special-compound-objects">Special compound objects</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">2.3.2 数据框对象</h4>
+
+<p>数据框是 R 里面模仿 SAS或SPSS 数据集最像的数据结构，即
+数据的&ldquo;个体-变量&rdquo;（cases by variables）矩阵。
+
+   <p>数据框是由长度一样（如果是矩阵则是行数一致）的向量，因子和/或矩阵
+构成的列表。此外，数据框通常有一个 <code>names</code> 属性来标记变量和
+<code>row.names</code> 属性来标记个体。
+
+   <p>数据框可以包含一个同其它分量长度一致的列表。
+该列表可以包含不同长度的元素，这样就
+提供了一种参差数组（ragged arrays）的数据结构。但是
+在写本文档的时候，这种数组通常还不能正确处理。
+
+<!-- FIXME: these details really need to be filled in -->
+<!-- @node Type checking and coercion,  , Special compound objects, Objects -->
+<!-- @section Type checking and coercion -->
+<!-- For most of the basic data types we can check the type and coerce -->
+<!-- objects of one type to another type.  Should we have a table??? -->
+<!-- @menu -->
+<!-- * mode/typeof:: -->
+<!-- * Specific types:: -->
+<!-- * Metatypes:: -->
+<!-- @end menu -->
+<!-- @node mode/typeof, Specific types, Type checking and coercion, Type checking and coercion -->
+<!-- @subsection mode/typeof -->
+<!-- @node Specific types, Metatypes, mode/typeof, Type checking and coercion -->
+<!-- @subsection Specific types -->
+<!-- @node Metatypes,  , Specific types, Type checking and coercion -->
+<!-- @subsection Metatypes -->
+<!-- @findex is.numeric -->
+<!-- @findex is.finite -->
+<!--  -->
+<!-- @node Data structures, Evaluation of expressions, Objects, Top -->
+<!-- @chapter Data structures -->
+<!-- @menu -->
+<!-- * Vectors:: -->
+<!-- * Lists:: -->
+<!-- * Arrays:: -->
+<!-- * Matrices:: -->
+<!-- * Assignment:: -->
+<!-- * Matrix operations:: -->
+<!-- * Data Frames:: -->
+<!-- @end menu -->
+<!-- @node Vectors, Lists, Data structures, Data structures -->
+<!-- @section Vectors -->
+<!-- @node Lists, Arrays, Vectors, Data structures -->
+<!-- @section Lists -->
+<!-- @node Arrays, Matrices, Lists, Data structures -->
+<!-- @section Arrays -->
+<!-- @node Matrices, Assignment, Arrays, Data structures -->
+<!-- @section Matrices -->
+<!-- @node Assignment, Matrix operations, Matrices, Data structures -->
+<!-- @section Assignment -->
+<!-- @menu -->
+<!-- * simple:: -->
+<!-- * indexed:: -->
+<!-- * function:: -->
+<!-- @end menu -->
+<!-- @node simple, indexed, Assignment, Assignment -->
+<!-- @subsection simple -->
+<!-- @node indexed, function, simple, Assignment -->
+<!-- @subsection indexed -->
+<!-- @node function,  , indexed, Assignment -->
+<!-- @subsection function -->
+<!-- @node Matrix operations, Data Frames, Assignment, Data structures -->
+<!-- @section Matrix operations -->
+<!-- @node Data Frames,  , Matrix operations, Data structures -->
+<!-- @section Data Frames -->
+</body></html>
+

@@ -1,0 +1,61 @@
+<html lang="zh">
+<head>
+<title>Identifiers - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Tokens.html#Tokens" title="Tokens">
+<link rel="prev" href="Literal-constants.html#Literal-constants" title="Literal constants">
+<link rel="next" href="Reserved-words.html#Reserved-words" title="Reserved words">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Identifiers"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Reserved-words.html#Reserved-words">Reserved words</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Literal-constants.html#Literal-constants">Literal constants</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Tokens.html#Tokens">Tokens</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">10.3.2 标识符</h4>
+
+<p><a name="index-_00b1_00ea_00ca_00b6_00b7_00fb-282"></a>标识符由字母，数字，点号 (<span class="samp">.</span>) 和下划线构成。它们不能以
+数字和下划线开始，也不能以点号后面跟数字开始。
+
+   <p>字母的定义依赖于本地的环境：合法字符的精确集合由 C 表达式
+<code>(isalnum(c) || c == '.' || c == '_')</code> 给定，并且在许多
+西欧的本地环境中还包括重音符号。
+
+   <p>注意，以点号开头的标识符默认不被<code>ls</code>函数列出，
+并且 <span class="samp">...</span>， <span class="samp">..1</span> 和
+<span class="samp">..2</span> 等是比较特殊的。
+
+   <p>同样需要注意的是，对象可以有不是标识符的名字。这些
+通常通过<code>get</code> 和 <code>assign</code>读取，尽管它们在一些
+不会混淆的情况下（很少出现）可以用文本字符串表示（如<code>"x" &lt;- 1</code>）。
+因为 <code>get</code> 和 <code>assign</code> 没有要求它们所赋的名字一定是标识符，
+所以它们不能区分下标操作和赋值函数。下面两个例子
+<em>不是</em> 等价的
+<a name="index-get-283"></a><a name="index-assign-284"></a>
+<blockquote>
+        <p><table summary=""><tr align="left"><td valign="top"><code>x$a&lt;-1</code> </td><td valign="top"><code>assign("x$a",1)</code>
+<br></td></tr><tr align="left"><td valign="top"><code>x[[1]]</code> </td><td valign="top"><code>get("x[[1]]")</code>
+<br></td></tr><tr align="left"><td valign="top"><code>names(x)&lt;-nm</code> </td><td valign="top"><code>assign("names(x)",nm)</code>
+        <br></td></tr></table>
+</blockquote>
+
+   </body></html>
+

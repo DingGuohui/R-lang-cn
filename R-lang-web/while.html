@@ -1,0 +1,48 @@
+<html lang="zh">
+<head>
+<title>while - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Control-structures.html#Control-structures" title="Control structures">
+<link rel="prev" href="repeat.html#repeat" title="repeat">
+<link rel="next" href="for.html#for" title="for">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="while"></a>Next:&nbsp;<a rel="next" accesskey="n" href="for.html#for">for</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="repeat.html#repeat">repeat</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Control-structures.html#Control-structures">Control structures</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">3.2.4 while语句</h4>
+
+<p><a name="index-while-99"></a>
+<code>while</code> 语句和 <code>repeat</code> 语句非常的类似。
+<code>while</code> 循环的语法如下
+
+<pre class="example">     while ( <var>statement1</var> ) <var>statement2</var>
+</pre>
+   <p class="noindent">其中 <var>statement1</var> 会被求值，如果它的值是 <code>TRUE</code>那么
+<var>statement2</var> 会被执行。这个过程重复直到
+<var>statement1</var> 的值是 <code>FALSE</code>。如果 <var>statement2</var>
+从来都没有被执行， 那么 <code>while</code>语句返回<code>NULL</code>，否则它将会返回
+最后一次执行 <var>statement2</var> 所得到的值。
+
+   </body></html>
+

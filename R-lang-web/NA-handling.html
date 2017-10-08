@@ -1,0 +1,66 @@
+<html lang="zh">
+<head>
+<title>NA handling - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Elementary-arithmetic-operations.html#Elementary-arithmetic-operations" title="Elementary arithmetic operations">
+<link rel="prev" href="Dimensional-attributes.html#Dimensional-attributes" title="Dimensional attributes">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="NA-handling"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="Dimensional-attributes.html#Dimensional-attributes">Dimensional attributes</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Elementary-arithmetic-operations.html#Elementary-arithmetic-operations">Elementary arithmetic operations</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">3.3.4 NA 处理</h4>
+
+<p>统计学意义上缺失变量（值不知道的变量）的值是 <code>NA</code>。
+这和一个函数参数的 <code>missing</code> 特性（即一个函数的参数没有提供）
+不能混淆（见<a href="Arguments.html#Arguments">Arguments</a>）。
+<a name="index-missing-103"></a><a name="index-NA-104"></a><a name="index-NaN-105"></a>
+<a name="index-_00c0_00e0_00d0_00cd-106"></a>因为原子向量的元素必须是一样的类型，因此<code>NA</code>值有多种类型。
+有一种情况对用户非常重要。<code>NA</code>的默认类型是 <code>logical</code>，
+除非强制转换成其它类型，因此缺失值可能会触发逻辑索引而不是数值索引
+（细节见 <a href="Indexing.html#Indexing">Indexing</a>）。
+
+   <p>含 <code>NA</code> 的数值和逻辑计算通常返回 <code>NA</code>。
+如果对于<code>NA</code>所有取值运算结果都一样，那么就返回这个一样的值。
+特别是，<span class="samp">FALSE &amp; NA</span> 结果是 <code>FALSE</code>，
+<span class="samp">TRUE | NA</span> 结果是 <code>TRUE</code>。  <code>NA</code> 不等于任何其它值（包括自身）；
+测试一个对象是否为<code>NA</code>应该用 <code>is.na</code>。
+<a name="index-is_002ena-107"></a>但是，在函数 <code>match</code> 里面，<code>NA</code> 可以匹配另外一个 <code>NA</code> 值。
+
+   <p>结果不明确的数值计算（如<span class="samp">0/0</span>）返回结果是 <code>NaN</code>。
+这仅仅发生在实数的 <code>double</code> 类型或者复数的虚部中。
+函数 <code>is.nan</code> 用于检验一个对象是否是
+<a name="index-is_002enan-108"></a><code>NaN</code>，函数 <code>is.na</code> 对 <code>NaN</code>也返回<code>TRUE</code>。
+<a name="index-_00c7_00bf_00d6_00c6_00d7_00aa_00bb_00bb-109"></a>把 <code>NaN</code> 强制转换成逻辑型或整型将返回对应类型的 <code>NA</code>，
+但是强制转换成字符型将返回 <code>"NaN"</code>。<code>NaN</code> 是不可比较的，因此
+检验<code>NaN</code>是否相等的式子将返回 <code>NA</code>。通过<code>match</code>可以匹配
+<code>NaN</code>值（其它值不行，甚至是<code>NA</code>）。
+
+   <p><code>NA</code>的字符类型从 R 1.5.0 开始才和字符 <code>"NA"</code> 区分开。
+程序员如果需要指定一个外在的字符串型
+<code>NA</code>，应该使用 <span class="samp">as.character(NA)</span> 而不是 <code>"NA"</code>，
+或者用<code>is.na&lt;-</code> 对 <code>NA</code> 设置元素。
+
+   <p>原味型向量没有 <code>NA</code> 值。
+
+   </body></html>
+

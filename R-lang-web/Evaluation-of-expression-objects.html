@@ -1,0 +1,80 @@
+<html lang="zh">
+<head>
+<title>Evaluation of expression objects - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Computing-on-the-language.html#Computing-on-the-language" title="Computing on the language">
+<link rel="prev" href="More-on-evaluation.html#More-on-evaluation" title="More on evaluation">
+<link rel="next" href="Manipulation-of-function-calls.html#Manipulation-of-function-calls" title="Manipulation of function calls">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Evaluation-of-expression-objects"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Manipulation-of-function-calls.html#Manipulation-of-function-calls">Manipulation of function calls</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="More-on-evaluation.html#More-on-evaluation">More on evaluation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Computing-on-the-language.html#Computing-on-the-language">Computing on the language</a>
+<hr><br>
+</div>
+
+<h3 class="section">6.4 表达式对象的求值</h3>
+
+<p>模式为 <code>"expression"</code>的对象在<a href="Expression-objects.html#Expression-objects">Expression objects</a> 有具体定义。它们和引用对象的列表非常相似。
+
+<pre class="example">     &gt; ex &lt;- expression(2 + 2, 3 + 4)
+     &gt; ex[[1]]
+     2 + 2
+     &gt; ex[[2]]
+     3 + 4
+     &gt; eval(ex)
+     [1] 7
+</pre>
+   <p>注意，对一个表达式对象求值会对每个调用依次求值，
+但是最终的值是最后一个引用的值。基于这种考虑，
+它的行为几乎和复合语言对象 <code>quote({2 + 2; 3 + 4})</code>
+完全一致。但也有一些细微的差别：
+调用对象在解析树里面不能和子表达式区分。
+这就说明它们是以子表达式一样的方式自动求值。
+表达式对象可以在求值过程中被识别，并且在某种意义上，保留了它们的引用。
+求值程序不会递归对一个表达式对象求值，仅仅当它如前面的例子一样直接
+传递给函数<code>eval</code>时求值。它们的差异
+可以通过下面的例子看出：
+
+<pre class="example">     &gt; eval(substitute(mode(x), list(x = quote(2 + 2))))
+     [1] "numeric"
+     &gt; eval(substitute(mode(x), list(x = expression(2 + 2))))
+     [1] "expression"
+</pre>
+   <p>语法分析器通过创建它的调用来描述一个表达式对象。
+这和处理数值向量和多个其它没有特别额外表示的对象的方法类似。
+但是，它会导致一些困惑：
+
+<pre class="example">     &gt; e &lt;- quote(expression(2 + 2))
+     &gt; e
+     expression(2 + 2)
+     &gt; mode(e)
+     [1] "call"
+     &gt; ee &lt;- expression(2 + 2)
+     &gt; ee
+     expression(2 + 2)
+     &gt; mode(ee)
+     [1] "expression"
+</pre>
+   <p class="noindent">即， <code>e</code> 和 <code>ee</code> 在打印的时候看上去是一样的，但是
+其中一个是产生表达式对象的调用，而另外一个则是对象本身。
+
+   </body></html>
+

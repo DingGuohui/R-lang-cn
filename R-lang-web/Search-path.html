@@ -1,0 +1,48 @@
+<html lang="zh">
+<head>
+<title>Search path - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Scope-of-variables.html#Scope-of-variables" title="Scope of variables">
+<link rel="prev" href="Stacks.html#Stacks" title="Stacks">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Search-path"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="Stacks.html#Stacks">Stacks</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Scope-of-variables.html#Scope-of-variables">Scope of variables</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">3.5.4 搜索路径</h4>
+
+<p>除了求值环境结构，
+<a name="index-_00bb_00b7_00be_00b3-136"></a><a name="index-_00cb_00d1_00cb_00f7_00c2_00b7_00be_00b6-137"></a>R 还有一个用来搜索其它地方找不到的变量的环境搜索路径。
+它主要用于两件事情：函数的包和被用户邦定的数据。
+
+   <p>搜索路径的第一个元素是全局环境，最后一个是基础包。
+<code>Autoloads</code> 环境用于保存在需要时可能载入的代理对象（proxy objects）。
+其它环境通过 <code>attach</code> 和 <code>library</code> 插入。
+
+   <p><a name="index-_00c3_00fc_00c3_00fb_00bf_00d5_00bc_00e4-138"></a>含有<em>命名空间</em>（namespace）的包有不同的搜索路径。
+当一个 R 对象从这种包里面的一个对象开始搜索时，该包首先被搜索，
+然后是它的引用，随后是基础命名空间，最后是全局环境和其它正规搜索路径
+的其它部分。这样做的后果是，在同一包里面其它对象的引用将会在这个包里
+解决，并且里面的对象不能被全局环境或其它包里面同名的对象屏蔽。
+
+   </body></html>
+

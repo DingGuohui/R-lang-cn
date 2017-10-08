@@ -1,0 +1,99 @@
+<html lang="zh">
+<head>
+<title>Argument evaluation - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Evaluation.html#Evaluation" title="Evaluation">
+<link rel="prev" href="Argument-matching.html#Argument-matching" title="Argument matching">
+<link rel="next" href="Scope.html#Scope" title="Scope">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Argument-evaluation"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Scope.html#Scope">Scope</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Argument-matching.html#Argument-matching">Argument matching</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Evaluation.html#Evaluation">Evaluation</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">4.3.3 参数求值</h4>
+
+<p>为了了解函数参数的求值情况，知道
+给定参数和默认参数的不同处理方式
+是非常重要的。
+<a name="index-_00c7_00f3_00d6_00b5_002c-_00b2_00ce_00ca_00fd-156"></a><a name="index-_00ba_00af_00ca_00fd-157"></a>函数的给定参数在调用函数的求值框架下求值。
+函数的默认参数在函数的求值框架下求值。
+
+   <p>语义上，R里面调用一个函数，参数是 <em>值传递</em>（call-by-value）。
+通常，给定参数的行为似乎它们是用给定值和对应的形式参数名字
+初始化后的局部变量。
+<a name="index-_00c3_00fb_00d7_00d6-158"></a>改变一个函数里面给定参数的值不会影响调用框架里面参数的值。
+
+   <p>R 有一种函数参数的悠闲求值方式。参数只有在需要的时候才求值。
+需要知道的是在一些情况下，这些参数永远不会被求值。因此，在函数
+中使用参数有时会有副作用。虽然在 <strong>C</strong> 里面，<code>foo(x = y)</code>常
+用来调用 <code>foo</code>，其中用到 <code>y</code> 并同时把 <code>y</code>赋给
+<code>x</code>，不过这种方式最好不要用于 R。这里不能保证参数会被求值，
+<a name="index-_00b8_00b3_00d6_00b5-159"></a>该赋值操作可能不会发生。
+
+   <p>值得提醒的是<code>foo(x &lt;- y)</code>的影响。如果该参数被求值，它将会
+改变调用环境中的<code>x</code>值，而不是
+<a name="index-_00bb_00b7_00be_00b3-160"></a><a name="index-_00bb_00b7_00be_00b3_002c-_00c7_00f3_00d6_00b5-161"></a><code>foo</code> 的求值空间。
+
+   <p>可以访问事实上的（不是默认的）函数内部作为参数的表达式。
+这个机制是通过允诺来实现。
+当一个函数被求值，实际上作为参数的表达式
+<a name="index-_00ba_00af_00ca_00fd-162"></a>和一个指向函数调用来源环境的指针一起存储在允诺中。
+如果参数被求值，函数调用来源环境中存储的表达式将会被求值。
+既然只有一个指向环境的指针，任何对环境进行的修改在求值过程中
+都是有效的。结果值随后保存在允诺里面一个单独的地方。
+随后的求值可以取得该值（不会进行再次求值）。用 <code>substitute</code> 可以
+访问没有求值的表达式。
+<!-- Because @R{} is a very -->
+<!-- flexible program it is possible to encounter promises in the interpreted -->
+<!-- language, however, users are advised not to rely on them in their own -->
+<!-- programs. -->
+
+   <p>当一个函数被调用时，
+<a name="index-_00ba_00af_00ca_00fd-163"></a>每个形式参数都会被分配到一个相关调用的局部环境中的允诺里面。该允诺
+包括含有实际参数（如果存在）的表达式槽和含有调用者环境的环境槽。
+如果没有实际参数对应调用中给定的形式参数以及没有默认的表达式，这就
+类似被分配到一个形式参数的表达式槽，但拥有局部环境的环境集合。
+<a name="index-_00bb_00b7_00be_00b3-164"></a>
+通过对允诺环境中表达式槽的上下文求值来提供一个允诺值槽的过程
+<a name="index-_00b8_00b3_00d6_00b5-165"></a>称之为<em>强制</em>（forcing）允诺。
+允诺只有后面在值槽上下文被直接使用时是被强制的。
+
+   <p>一个允诺在需要它的值时是强制的。这常常发生在内部函数中，
+<a name="index-_00ba_00af_00ca_00fd-166"></a><a name="index-_00ba_00af_00ca_00fd_002c-_00c4_00da_00b2_00bf_00b5_00c4-167"></a>但可以通过直接对允诺自身求值来强制允诺。
+这个有时会非常有用，如在默认的表达式倚赖另外一个形式参数的值或
+局部环境的其它变量时。这可以在下面的例子中看到，孤立的
+<code>label</code> 保证了它在下一行中改变前标签依赖于 <code>x</code>的值。
+
+<pre class="example">     function(x, label = deparse(x)) {
+         label
+         x &lt;- x + 1
+         print(label)
+     }
+</pre>
+   <p>一个允诺的表达式槽自身可以包含其它允诺。
+这在一个未求值的参数作为参数传给另外一个函数的时候发生。
+当强制一个允诺的时候，其表达式中的其它允诺会被
+递归强制，就好像它们被求值一样。
+
+   </body></html>
+

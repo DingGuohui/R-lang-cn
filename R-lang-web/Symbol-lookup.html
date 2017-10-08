@@ -1,0 +1,78 @@
+<html lang="zh">
+<head>
+<title>Symbol lookup - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Simple-evaluation.html#Simple-evaluation" title="Simple evaluation">
+<link rel="prev" href="Constants.html#Constants" title="Constants">
+<link rel="next" href="Function-calls.html#Function-calls" title="Function calls">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Symbol-lookup"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Function-calls.html#Function-calls">Function calls</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Constants.html#Constants">Constants</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Simple-evaluation.html#Simple-evaluation">Simple evaluation</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">3.1.2 符号查找</h4>
+
+<p>当一个新的变量创建时，它需要一个可以被引用的名字。
+通常，它还需要一个值。
+<a name="index-_00c3_00fb_00d7_00d6-83"></a>名字本身就是
+<a name="index-_00b7_00fb_00ba_00c5-84"></a>符号。当一个符号被求值时，
+<a name="index-_00c7_00f3_00d6_00b5_002c-_00b7_00fb_00ba_00c5-85"></a>它的值就会被返回。
+<a name="index-_00d6_00b5-86"></a>后面我们将会仔细解释
+怎样决定一个和符号相关的值。
+
+   <p>在下面简单的例子中，<code>y</code>是一个符号并且它的值是4。
+符号也是R对象，但是我们很少需要直接处理符号，
+除了&ldquo;在语言上编程&rdquo;（programming on the language）(<a href="Computing-on-the-language.html#Computing-on-the-language">Computing on the language</a>)。
+
+<pre class="example">     &gt; y &lt;- 4
+     &gt; y
+     [1] 4
+</pre>
+   <!-- FIXME: Probably needs to go somewhere, but not here (parser section?) -->
+<!-- @node Key words, Calling functions, Symbol lookup, Simple evaluation -->
+<!-- @subsection Key words -->
+<!-- @R{} contains a number of key words.  These are symbols that the parser -->
+<!-- treats in a special fashion.  They are, -->
+<!-- @quotation -->
+<!-- @multitable @columnfractions 0.2 0.7 -->
+<!-- @item @code{NULL}  @tab the null object -->
+<!-- @item @code{NA}    @tab missing value -->
+<!-- @item @code{TRUE}  @tab logical true -->
+<!-- @item @code{FALSE} @tab logical false -->
+<!-- @item @code{GLOBAL.ENV} @tab the users workspace -->
+<!-- @item @code{Inf}   @tab infinity -->
+<!-- @item @code{NaN}   @tab not a number -->
+<!-- @item @code{function} @tab a special form for creating functions -->
+<!-- @item @code{while} @tab while flow control -->
+<!-- @item @code{repeat} @tab repeat flow control -->
+<!-- @item @code{for}   @tab for flow control -->
+<!-- @item @code{if}    @tab if-then-else statements -->
+<!-- @item @code{in}    @tab used in flow control -->
+<!-- @item @code{else}  @tab part of the if-then-else construct -->
+<!-- @item @code{next}  @tab flow control -->
+<!-- @item @code{break} @tab flow control -->
+<!-- @item @code{...}   @tab special argument for functions -->
+<!-- @end multitable -->
+<!-- @end quotation -->
+</body></html>
+

@@ -1,0 +1,53 @@
+<html lang="zh">
+<head>
+<title>browser - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Debugging.html#Debugging" title="Debugging">
+<link rel="prev" href="Debugging.html#Debugging" title="Debugging">
+<link rel="next" href="debug_002fundebug.html#debug_002fundebug" title="debug/undebug">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="browser"></a>Next:&nbsp;<a rel="next" accesskey="n" href="debug_002fundebug.html#debug_002fundebug">debug/undebug</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Debugging.html#Debugging">Debugging</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Debugging.html#Debugging">Debugging</a>
+<hr><br>
+</div>
+
+<h3 class="section">9.1 浏览</h3>
+
+<p><a name="index-browser-271"></a>
+在函数 <code>browser</code> 调用的地方，R 会暂停执行，
+并且为用户提供特别的提示。赋给 <code>browser</code> 的参数会被自动
+忽略。
+
+<pre class="example">     &gt; foo &lt;- function(s) {
+     + c &lt;- 3
+     + browser()
+     + }
+     &gt; foo(4)
+     Called from: foo(4)
+     Browse[1]&gt; s
+     [1] 4
+     Browse[1]&gt; get("c")
+     [1] 3
+     Browse[1]&gt;
+</pre>
+   </body></html>
+

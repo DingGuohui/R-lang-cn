@@ -1,0 +1,53 @@
+<html lang="zh">
+<head>
+<title>trace/untrace - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Debugging.html#Debugging" title="Debugging">
+<link rel="prev" href="debug_002fundebug.html#debug_002fundebug" title="debug/undebug">
+<link rel="next" href="traceback.html#traceback" title="traceback">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="trace_002funtrace"></a>Next:&nbsp;<a rel="next" accesskey="n" href="traceback.html#traceback">traceback</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="debug_002fundebug.html#debug_002fundebug">debug/undebug</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Debugging.html#Debugging">Debugging</a>
+<hr><br>
+</div>
+
+<h3 class="section">9.3 跟踪/不跟踪</h3>
+
+<p><a name="index-trace-274"></a><a name="index-untrace-275"></a>
+另外一种监控 R 行为的方法是 <code>trace</code> 机制。
+具体用法是以你想跟踪的函数名字作为参数调用 <code>trace</code>。
+这里的名字一般不需要用引号括住，但也一些函数名字需要用引号引住
+以防止语法错误。
+
+   <p>当对一个函数调用 <code>trace</code> 时，每次该函数求值，
+它的调用都会被打印出来。该机制可以通过调用以函数作
+为参数的 <code>untrace</code> 去除。
+
+<pre class="example">     &gt; get("[&lt;-")
+     .Primitive("[&lt;-")
+     &gt; trace("[&lt;-")
+     &gt; x &lt;- 1:10
+     &gt; x[3] &lt;- 4
+     trace: "[&lt;-"(*tmp*, 3, value = 4)
+</pre>
+   </body></html>
+

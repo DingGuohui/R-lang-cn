@@ -1,0 +1,108 @@
+<html lang="zh">
+<head>
+<title>Literal constants - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Tokens.html#Tokens" title="Tokens">
+<link rel="prev" href="Tokens.html#Tokens" title="Tokens">
+<link rel="next" href="Identifiers.html#Identifiers" title="Identifiers">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Literal-constants"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Identifiers.html#Identifiers">Identifiers</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Tokens.html#Tokens">Tokens</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Tokens.html#Tokens">Tokens</a>
+<hr><br>
+</div>
+
+<!-- node-name,  next,  previous,  up -->
+<h4 class="subsection">10.3.1 常量</h4>
+
+<p>有四种常量类型，逻辑型，数值型，复数型和字符串型。
+
+   <p>此外，还有四种特殊常量，<code>NULL</code>，<code>NA</code>，
+<code>Inf</code> 和 <code>NaN</code>。
+
+   <p><code>NULL</code> 用于标识空对象。<code>NA</code> 用于说明缺失(&ldquo;不可得到&rdquo;)值。
+<code>Inf</code> 表示无穷大， <code>NaN</code> 则表示一个在<acronym>IEEE</acronym>浮点计算中
+不能表示的值（例如，1/0 和 0/0的结果）。
+
+   <p>逻辑常量要么是 <code>TRUE</code> 要么是 <code>FALSE</code>。
+
+   <p>数值常量遵循和<strong>C</strong>语言类似的语法规则。它们有一个零或更多数字构成的
+整数部分，随后是一个可选的<span class="samp">.</span>，一个零或更多数字构成的小数部分，
+以及一个由<span class="samp">E</span>或 <span class="samp">e</span>构成的指数部分，有时还有一个可选的符号和零
+或更多数字构成的字符串。任何一部分都可以是空，但不能同时为空。
+
+<pre class="example">     <span class="roman">有效的数值常量：</span> 1 10 0.1 .2 1e-7 1.2e+7 2e 3e+
+</pre>
+   <p class="noindent">后面两个例子在实践中几乎没有任何用途，但是它们
+是合法的<a rel="footnote" href="#fn-1" name="fnd-1"><sup>1</sup></a>，
+并且分别解释为<span class="samp">2</span> 和 <span class="samp">3</span>。
+
+   <p>数值常量还可以是十六进制值，只是需要以 <span class="samp">0x</span> 开始，或在
+<span class="samp">0x</span> 后加上零或更多的数字，包括 <span class="samp">a-f</span> 或 <span class="samp">A-F</span>。
+
+   <p>注意没有整型常量的隔离类。
+
+   <p>还要注意的是，前置符号以一元操作符看待，而不是常量的一部分。
+
+   <p>复数常量含有以<span class="samp">i</span>作为后缀的十进制数值常量。注意
+只有虚部数字是事实上的常量，其它
+复数数值可以解析为数字和虚部数字间的一元或二元操作。
+
+<pre class="example">     <span class="roman">合法的复数常量：</span> 2i 4.1i 1e-2i
+</pre>
+   <p>字符串常量通过一对单引号 (<span class="samp">'</span>) 或双引号
+(<span class="samp">"</span>) 界定，它可以包括所有其它可以打印的符号。
+字符串里面的引号和其它特殊字符可以用
+<em>转义控制序列</em>（escape sequences）实现：
+
+     <dl>
+<dt><code>\'</code><dd>单引号
+<br><dt><code>\"</code><dd>双引号
+<br><dt><code>\n</code><dd>新的一行
+<br><dt><code>\r</code><dd>回车符
+<br><dt><code>\t</code><dd>制表符
+<br><dt><code>\b</code><dd>退格符
+<br><dt><code>\a</code><dd>bell
+<br><dt><code>\f</code><dd>form feed
+<br><dt><code>\v</code><dd>垂直制表符
+<br><dt><code>\\</code><dd>反斜杠
+<br><dt><code>\</code><var>nnn</var><dd>通过给定八进制代码得到字符 &ndash;
+<code>0 ... 8</code> 里面的任何一个，两个，三个数字都是合法的。
+<br><dt><code>\x</code><var>nn</var><dd>通过给定的十六进制代码得到字符 &ndash;
+一个或两个十六进制数字（<code>0 ... 9 A ... F a ... f</code>中的一个）
+的序列。
+<br><dt><code>\u</code><var>nnnn</var><code> \u{</code><var>nnnn</var><code>}</code><dd>（其中要求本地系统支持多字节码，否则报错）。
+以给定的十六进制数字获得 Unicode 字符 &ndash;
+最多可以是四个十六进制数字。字符需要是本地系统合法的字符。
+<br><dt><code>\U</code><var>nnnnnnnn</var><code> \U{</code><var>nnnnnnnn</var><code>}</code><dd>（其中要求本地系统支持多字节码并且不是Windows，否则报错）。
+ 以给定的十六进制数字获得 Unicode 字符 &ndash; 最多可以是八个十六进制数字。
+</dl>
+
+<p class="noindent">单引号可以直接嵌入双引号界定的字符串中，反之也然。
+
+   <div class="footnote">
+<hr>
+<h4>Footnotes</h4><p class="footnote"><small>[<a name="fn-1" href="#fnd-1">1</a>]</small> 译者注：我直接在控制台键入，报语法错误</p>
+
+   <p><hr></div>
+
+   </body></html>
+

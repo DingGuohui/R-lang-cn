@@ -1,0 +1,54 @@
+<html lang="zh">
+<head>
+<title>Arguments - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Writing-functions.html#Writing-functions" title="Writing functions">
+<link rel="prev" href="Syntax-and-examples.html#Syntax-and-examples" title="Syntax and examples">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Arguments"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="Syntax-and-examples.html#Syntax-and-examples">Syntax and examples</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Writing-functions.html#Writing-functions">Writing functions</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">4.1.2 参数</h4>
+
+<p>函数的形式参数定义了函数被调用时哪些变量的值需要提供。
+这些参数的名字可用于函数的主体而且函数的主体在函数调用时
+可以通过这些名字得到外部所赋的值。
+
+   <p><a name="index-_00b2_00ce_00ca_00fd_002c-_00c4_00ac_00c8_00cf_00d6_00b5-144"></a>参数默认值可以用 <var>name</var><span class="samp"> = </span><var>expression</var> 形式指定。
+在这种情况下，如果用户不给定一个参数的值，则在函数调用时，
+默认设定表达式会和对应的符号关联。
+当需要一个值时，<var>expression</var> 会在函数的求值框架下求值。
+<a name="index-_00c7_00f3_00d6_00b5_002c-_00b1_00ed_00b4_00ef_00ca_00bd-145"></a>
+用函数 <code>missing</code> 也能设定默认的行为。
+当根据形式参数的名字调用函数<code>missing</code>时，
+<a name="index-_00c3_00fb_00d7_00d6-146"></a>在形式参数不匹配任何实际参数以及在函数主体内没有进行任何修改时返回
+<code>TRUE</code>。如果需要的话，<code>missing</code>的参数可以有它自己的默认值。
+<code>missing</code>函数不会强制参数求值。
+
+   <p>特别类型参数 <span class="samp">...</span> 可以包含任意数目的参数。它有各种各样的用途。
+它允许你编写一个含有任意多参数的函数。
+<a name="index-_00ba_00af_00ca_00fd-147"></a>它还可来吸收一些参数传递给一个中间函数，
+该函数能被其它随后调用的函数提取。
+
+   </body></html>
+

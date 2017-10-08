@@ -1,0 +1,65 @@
+<html lang="zh">
+<head>
+<title>Operating system access - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="System-and-foreign-language-interfaces.html#System-and-foreign-language-interfaces" title="System and foreign language interfaces">
+<link rel="prev" href="System-and-foreign-language-interfaces.html#System-and-foreign-language-interfaces" title="System and foreign language interfaces">
+<link rel="next" href="Foreign-language-interfaces.html#Foreign-language-interfaces" title="Foreign language interfaces">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Operating-system-access"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Foreign-language-interfaces.html#Foreign-language-interfaces">Foreign language interfaces</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="System-and-foreign-language-interfaces.html#System-and-foreign-language-interfaces">System and foreign language interfaces</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="System-and-foreign-language-interfaces.html#System-and-foreign-language-interfaces">System and foreign language interfaces</a>
+<hr><br>
+</div>
+
+<h3 class="section">7.1 操作系统访问</h3>
+
+<p>R 通过函数 <code>system</code> 访问操作系统的命令层。
+<a name="index-system-233"></a>不同的操作系统在细节上可能有点不同（见在线帮助），
+但基本上第一个参数是用于执行的字符串 <code>command</code>（不一定通过命令层），
+第二个参数是 <code>internal</code>，如果它是真的话，它会把
+命令的输出结果输入到一个 R 字符向量中。
+
+   <p>函数 <code>system.time</code>
+<a name="index-system_002etime-234"></a>和 <code>proc.time</code>
+<a name="index-proc_002etime-235"></a>用来计时用的（尽管在非Unix类型的系统中，可以得到的计时信息非常有限）。
+
+   <p>可以用下面的函数访问和获得
+操作系统环境的信息
+<a name="index-_00bb_00b7_00be_00b3-236"></a><blockquote>
+        <p><table summary=""><tr align="left"><td valign="top" width="30%"><code>Sys.getenv</code> </td><td valign="top" width="70%">操作系统环境变量 <a name="index-Sys_002egetenv-237"></a><br></td></tr><tr align="left"><td valign="top" width="30%"><code>Sys.putenv</code>                               <a name="index-Sys_002eputenv-238"></a><br></td></tr><tr align="left"><td valign="top" width="30%"><code>Sys.getlocale</code> </td><td valign="top" width="70%">系统本地变量（locale）         <a name="index-Sys_002egetlocale-239"></a><br></td></tr><tr align="left"><td valign="top" width="30%"><code>Sys.putlocale</code>                            <a name="index-Sys_002eputlocale-240"></a><br></td></tr><tr align="left"><td valign="top" width="30%"><code>Sys.localeconv</code>                           <a name="index-Sys_002elocaleconv-241"></a><br></td></tr><tr align="left"><td valign="top" width="30%"><code>Sys.time</code> </td><td valign="top" width="70%">当前时间               <a name="index-Sys_002etime-242"></a><br></td></tr><tr align="left"><td valign="top" width="30%"><code>Sys.timezone</code> </td><td valign="top" width="70%">时区              <a name="index-Sys_002etimezone-243"></a>
+        <br></td></tr></table>
+</blockquote>
+
+   <p>在所有系统上，有一套统一的文件读取函数集：
+<blockquote>
+        <p><table summary=""><tr align="left"><td valign="top" width="30%"><code>file.access</code> </td><td valign="top" width="70%">确定文件的权限 <a name="index-file_002eaccess-244"></a><br></td></tr><tr align="left"><td valign="top" width="30%"><code>file.append</code> </td><td valign="top" width="70%">连接文件            <a name="index-file_002eappend-245"></a><br></td></tr><tr align="left"><td valign="top" width="30%"><code>file.choose</code> </td><td valign="top" width="70%">提示用户文件名    <a name="index-file_002echoose-246"></a><br></td></tr><tr align="left"><td valign="top" width="30%"><code>file.copy</code>  </td><td valign="top" width="70%">拷贝文件                    <a name="index-file_002ecopy-247"></a><br></td></tr><tr align="left"><td valign="top" width="30%"><code>file.create</code> </td><td valign="top" width="70%">创建或截取文件   <a name="index-file_002ecreate-248"></a><br></td></tr><tr align="left"><td valign="top" width="30%"><code>file.exists</code> </td><td valign="top" width="70%">检测文件的存在性           <a name="index-file_002eexists-249"></a><br></td></tr><tr align="left"><td valign="top" width="30%"><code>file.info</code> </td><td valign="top" width="70%">各种文件信息汇总 <a name="index-file_002einfo-250"></a><br></td></tr><tr align="left"><td valign="top" width="30%"><code>file.remove</code> </td><td valign="top" width="70%">删除文件                 <a name="index-file_002eremove-251"></a><br></td></tr><tr align="left"><td valign="top" width="30%"><code>file.rename</code> </td><td valign="top" width="70%">重命名文件                 <a name="index-file_002erename-252"></a><br></td></tr><tr align="left"><td valign="top" width="30%"><code>file.show</code> </td><td valign="top" width="70%">显示一个文本文件            <a name="index-file_002eshow-253"></a><br></td></tr><tr align="left"><td valign="top" width="30%"><code>unlink</code> </td><td valign="top" width="70%">去除文件或目录      <a name="index-unlink-254"></a>
+        <br></td></tr></table>
+</blockquote>
+
+   <p>还有平台依赖的文件名和路径的操作函数。
+<blockquote>
+        <p><table summary=""><tr align="left"><td valign="top" width="30%"><code>basename</code> </td><td valign="top" width="70%">没有目录的文件名     <a name="index-basename-255"></a><br></td></tr><tr align="left"><td valign="top" width="30%"><code>dirname</code> </td><td valign="top" width="70%">目录名                   <a name="index-dirname-256"></a><br></td></tr><tr align="left"><td valign="top" width="30%"><code>file.path</code> </td><td valign="top" width="70%">构建文件的路径         <a name="index-file_002epath-257"></a><br></td></tr><tr align="left"><td valign="top" width="30%"><code>path.expand</code> </td><td valign="top" width="70%">在 Unix 路径下展开 <code>~</code> 路径 <a name="index-path_002eexpand-258"></a>
+        <br></td></tr></table>
+</blockquote>
+
+   </body></html>
+

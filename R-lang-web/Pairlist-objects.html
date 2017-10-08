@@ -1,0 +1,57 @@
+<html lang="zh">
+<head>
+<title>Pairlist objects - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Basic-types.html#Basic-types" title="Basic types">
+<link rel="prev" href="Environment-objects.html#Environment-objects" title="Environment objects">
+<link rel="next" href="Any_002dtype.html#Any_002dtype" title="Any-type">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Pairlist-objects"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Any_002dtype.html#Any_002dtype">Any-type</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Environment-objects.html#Environment-objects">Environment objects</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Basic-types.html#Basic-types">Basic types</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">2.1.11 成对列表对象</h4>
+
+<p>成对列表对象和 Lisp 的点-对列表（dotted-pair list）类似。
+它们广泛用于R的内部。但很少见于解释型的代码里面，尽管
+它们被 <code>formals</code> 返回或通过函数<code>pairlist</code>创建。
+一个零长度的成对列表是
+<code>NULL</code>，这和 Lisp 期望的一样但与零长度列表不一样。
+<a name="index-pairlist-66"></a>每个这样的对象有三个槽变量，CAR值，CDR值和TAG值。
+TAG值是文本字符串，CAR和CDR分别表示一个以空对象作为终结符
+的列表的列表项目（头）和剩余项目（尾）（CAR/CDR术语是传统Lisp术语，
+最初用于60年代 IBM 电脑的寄存器）。
+<!-- FIXME: Check: Is it *required* that TAG is a STRSXP and CDR is a -->
+<!-- LISTSXP?? (or NULL of course). -->
+
+   <p>R 语言里面成对列表的操作和广义向量(&ldquo;列表&rdquo;)完全一样。
+特别的是，元素也是通过 <code>[[]]</code> 方式访问。
+由于广义向量可以更为高效地应用，一般不赞同使用成对列表。
+如果通过 R 访问一个内部的成对列表，
+我们常常把它转换成广义向量（包括取子集的操作）。
+<!-- FIXME: There are still exceptions.  Change code or docs? -->
+
+   <p>在很少情况下，用户可以看到成对列表：其中一个例子是 <code>.Options</code>。
+
+   </body></html>
+

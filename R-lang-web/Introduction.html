@@ -1,0 +1,75 @@
+<html lang="zh">
+<head>
+<title>Introduction - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Notes.html#Notes" title="Notes">
+<link rel="next" href="Objects.html#Objects" title="Objects">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Introduction"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Objects.html#Objects">Objects</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Notes.html#Notes">Notes</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr><br>
+</div>
+
+<h2 class="chapter">1 绪论</h2>
+
+<p>R 是为统计计算和图形展示而设计的一个系统。
+它包括一种编程语言，高级别图形展示函数，和其它语言的接口以及调试工具。
+本手册将会详细描述和定义R语言。
+
+   <p>R 是统计领域广泛使用的诞生于 1980年左右的 S 语言的一个分支。
+S的主要设计者John M. Chambers 因为S语言方面的工作获得了1998年
+ACM 软件系统奖（ACM Software Systems Award）。
+
+   <p>该语言的语法表面上类似 C，但在语义上是函数设计语言的（functional programming language）
+的变种并且和Lisp 以及 <acronym>APL</acronym>有很强的兼容性。
+特别的是，它允许在&ldquo;语言上计算&rdquo;（computing on the language）。
+这使得它可以把表达式作为函数的输入参数，而这种做法对
+统计模拟和绘图非常有用。
+
+   <p>通过命令行运行简单的表达式可以充分地交互使用 R 的功能。
+<a name="index-_00b1_00ed_00b4_00ef_00ca_00bd-1"></a>一些用户可能这样做就能满足要求了，但还有一些用户想编写他们自己的函数。
+编写函数的用户要么用以一种特别的方式，系统化一些常常重复的工作或者
+为新的功能编写扩展包。
+
+   <p>本手册的目的是想记录R语言的<em>本质</em>。
+也就是它所工作的对象，表达式赋值过程的细节。这些内容的了解对编写R函数非常有用。
+另外一些针对特定任务的主题，如绘图，在本册里面只是简单描述，而在其它手册里面
+有专门的论述。
+
+   <p>尽管手册中的大部分内容同样适用于S，但S和R还是有一些
+实质上的差异。为了不至于混淆，我们集中描述R。
+
+   <p>R 语言的设计包含了一系列亮点，当然也有让用户惊讶的公共缺陷。
+许多设计是基于底层的连贯性考虑，我们会在后面的行文中解释。
+它还包括很多有用的快捷方式和特殊用法，使得用户可以很简洁的表述复杂的操作。
+一旦用户熟悉底层的概念，这些用法将会变得非常的自然。
+在某些情况下，有多种方法完成同一件事情，但是
+其中有些技术依赖于语言的实现，另外一些技术则是一个更高层次上的抽象。
+在这种情况下，我们会指出首选的用法。
+
+   <p>读本册前，我们假定用户对R已经有一定的了解。这不是一本R的入门读物，
+而是一本程序员的参考手册。其它文档给出了互补的信息：
+特别 <a href="../R-intro/Preface.html#Preface">Preface (R Introduction)</a> 给出 R 语言的入门介绍和 <a href="../R-exts/System-and-foreign-language-interfaces.html#System-and-foreign-language-interfaces">System and foreign language interfaces (Writing R Extensions)</a>
+详细介绍如何用编译好的代码扩充 R语言。
+
+   </body></html>
+

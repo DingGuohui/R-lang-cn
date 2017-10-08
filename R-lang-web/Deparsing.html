@@ -1,0 +1,44 @@
+<html lang="zh">
+<head>
+<title>Deparsing - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="The-parsing-process.html#The-parsing-process" title="The parsing process">
+<link rel="prev" href="Internal-representation.html#Internal-representation" title="Internal representation">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Deparsing"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="Internal-representation.html#Internal-representation">Internal representation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="The-parsing-process.html#The-parsing-process">The parsing process</a>
+<hr><br>
+</div>
+
+<!-- node-name,  next,  previous,  up -->
+<h4 class="subsection">10.1.3 语法分析</h4>
+
+<p>任何 R 对象可以用 <code>deparse</code> 转换成 R 表达式。
+这常常用于连接结果输出，如为了在图上加标签。注意，只有模式是<code>"expression"</code>
+的对象在语法分析后结果再解析时不会改变。
+例如，数值向量 <code>1:5</code> 会被语法分析为 <code>"c(1, 2, 3, 4, 5)"</code>，
+接下来的则会解析为对函数 <code>c</code> 的调用。如果可能，对语法分析和
+再解析的表达式求值会得到和原始表达式一样的求值结果，但是
+也有一些难以使用的例外，主要是一些首先就不是从文本描述中
+产生的表达式。
+
+   </body></html>
+

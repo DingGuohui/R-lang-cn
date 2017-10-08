@@ -1,0 +1,123 @@
+<html lang="zh">
+<head>
+<title>Direct manipulation of language objects - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Computing-on-the-language.html#Computing-on-the-language" title="Computing on the language">
+<link rel="prev" href="Computing-on-the-language.html#Computing-on-the-language" title="Computing on the language">
+<link rel="next" href="Substitutions.html#Substitutions" title="Substitutions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Direct-manipulation-of-language-objects"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Substitutions.html#Substitutions">Substitutions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Computing-on-the-language.html#Computing-on-the-language">Computing on the language</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Computing-on-the-language.html#Computing-on-the-language">Computing on the language</a>
+<hr><br>
+</div>
+
+<h3 class="section">6.1 直接操作语言对象</h3>
+
+<p>有三种语言对象可用于修改，调用，表达式和函数。
+基于这种认识，我们集中讨论调用对象。就是有时称之为
+&ldquo;未求值表达式&rdquo;（unevaluated expressions）的对象，尽管
+这个术语有点让人困惑。获得一个调用对象最直接的方法是把
+一个表达式参数赋给 <code>quote</code> 函数，如
+
+<pre class="example">     &gt; e1 &lt;- quote(2 + 2)
+     &gt; e2 &lt;- quote(plot(x, y))
+</pre>
+   <p>参数没有被求值，结果简单地解析为参数。
+对象 <code>e1</code> 和 <code>e2</code> 可以随后用
+<code>eval</code>求值，或简单地当作数据。这就很明显
+为什么 <code>e2</code> 对象的模式是 <code>"call"</code>，
+因为它利用一些参数调用了函数 <code>plot</code>。但是 <code>e1</code> 实际上有和调用
+双参数的二元操作符<code>+</code>完全一样的结构。
+这个事实可以通过下面的例子更清晰地展示
+
+<pre class="example">     &gt; quote("+"(2, 2))
+     2 + 2
+</pre>
+   <p>调用对象的分量可以通过列表类似的语法访问，并且可能用<code>as.list</code> 和
+<code>as.call</code> 与列表进行相互转换
+<!-- FIXME man page for as.call says that this doesn't work, but it -->
+<!-- does... -->
+
+<pre class="example">     &gt; e2[[1]]
+     plot
+     &gt; e2[[2]]
+     x
+     &gt; e2[[3]]
+     y
+</pre>
+   <p>在使用关键字参数匹配时，关键字可以作为
+列表的标签：
+
+<pre class="example">     &gt; e3 &lt;- quote(plot(x = age, y = weight))
+     &gt; e3$x
+     age
+     &gt; e3$y
+     weight
+</pre>
+   <p>在前面的例子中，调用对象的所有分量的模式是 <code>"name"</code>。
+对于调用对象里面的标识符确实是这样，但是一个调用对象的分量还可以是
+任意类型的常量，尽管在该调用随后被成功执行时第一个分量
+最好是一个函数&mdash;或者是其它调用对象以对应的子表达式。
+模式名的对象可以用<code>as.name</code>
+<a name="index-_00c3_00fb_00d7_00d6-206"></a>通过字符串创建，因此我们可以如下
+修改 <code>e2</code> 对象
+
+<pre class="example">     &gt; e2[[1]] &lt;- as.name("+")
+     &gt; e2
+     x + y
+</pre>
+   <p>为说明子表达式是自身调用的简单分量，考虑下面的例子
+
+<pre class="example">     &gt; e1[[2]] &lt;- e2
+     &gt; e1
+     x + y + 2
+</pre>
+   <p>所有输入的成组括号在解析后的表达式中是受保护的。
+它们以单参数函数调用的方式展示，因此
+<code>4 - (2 - 2)</code> 在前缀方式中变成 <code>"-"(4, "(" ("-"(2, 2)))</code>。
+在求值过程中，<span class="samp">(</span> 操作符仅仅返回它的参数。
+
+   <p>这有点不幸，但是编写一个同时保护用户输入，以最简形式保存并且
+保证解析一个语法分析过的表达式时可以返回
+一样的表达式的解析器/语法分析器
+不是一件容易的事情。
+<a name="index-_00bd_00e2_00ce_00f6-207"></a>
+因为很难做到，所以 R 的解析器不可以很好的可逆，同样它的语法分析器也不行
+，如下面的例子所示
+
+<pre class="example">     &gt; deparse(quote(c(1, 2)))
+     [1] "c(1, 2)"
+     &gt; deparse(1:2)
+     [1] "c(1, 2)"
+     &gt; quote("-"(2, 2))
+     2 - 2
+     &gt; quote(2 - 2)
+     2 - 2
+</pre>
+   <p class="noindent">但是语法分析过的表达式可以得到和
+原始表达式一样的求值结果（直到精度错误）。
+
+   <p>...流控制结构的内部存储...注意和 Splus
+不兼容...
+
+   </body></html>
+

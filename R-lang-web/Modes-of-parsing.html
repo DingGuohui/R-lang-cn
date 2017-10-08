@@ -1,0 +1,62 @@
+<html lang="zh">
+<head>
+<title>Modes of parsing - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="The-parsing-process.html#The-parsing-process" title="The parsing process">
+<link rel="prev" href="The-parsing-process.html#The-parsing-process" title="The parsing process">
+<link rel="next" href="Internal-representation.html#Internal-representation" title="Internal representation">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Modes-of-parsing"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Internal-representation.html#Internal-representation">Internal representation</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="The-parsing-process.html#The-parsing-process">The parsing process</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="The-parsing-process.html#The-parsing-process">The parsing process</a>
+<hr><br>
+</div>
+
+<!-- node-name,  next,  previous,  up -->
+<h4 class="subsection">10.1.1 解析模式</h4>
+
+<p>R 里面的解析以三个不同的形式存在：
+
+     <ul>
+<li>&ldquo;读入-求值-打印&rdquo;（read-eval-print）循环
+<li>文本文件的解析
+<li>字符串的解析
+</ul>
+
+   <p>&ldquo;读入-求值-打印&rdquo;循环构成了R基本命令行操作的接口。
+它一直运行，直到可以得到完整的R表达式，才停止读入文本输入。
+表达式可以被不同的输入行分割。主要提示符（默认是<span class="samp">&gt; </span>）表示
+解析器准备读入新的表达式，而延续提示符（默认是<span class="samp">+ </span>）表明解析器
+在等待输入不完整的表达式的剩余部分。在输入过程中，表达式会被
+转换为内部形式，解析后的表达式会传递给求值程序并且把结果打印出来（除非
+特别要求不显示）。如果解析器发现有和语言语法不兼容的地方，会提示&ldquo;语法错误&rdquo;，
+然后解析器自身会重新设置并且在下一个输入行的开始重新等待输入。
+
+   <p>文本文件可以用<code>parse</code>函数解析。特别是，在执行函数<code>source</code>的时候
+也是这样，因此使得命令可以保存在外部文件中，而执行的时候就像直接从键盘上
+键入的一样。注意，尽管整个文件被解析了，但在任何求值操作进行前，首先会进行
+语法检查。
+
+   <p>字符串，或它的向量，都可以通过参数<code>text=</code>赋给<code>parse</code>解析。
+字符串会被精确处理，就好像它们是一个输入文件的行。
+
+   </body></html>
+

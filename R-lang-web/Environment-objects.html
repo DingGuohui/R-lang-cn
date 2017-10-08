@@ -1,0 +1,64 @@
+<html lang="zh">
+<head>
+<title>Environment objects - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Basic-types.html#Basic-types" title="Basic types">
+<link rel="prev" href="Dot_002ddot_002ddot.html#Dot_002ddot_002ddot" title="Dot-dot-dot">
+<link rel="next" href="Pairlist-objects.html#Pairlist-objects" title="Pairlist objects">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Environment-objects"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Pairlist-objects.html#Pairlist-objects">Pairlist objects</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Dot_002ddot_002ddot.html#Dot_002ddot_002ddot">Dot-dot-dot</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Basic-types.html#Basic-types">Basic types</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">2.1.10 环境</h4>
+
+<p><a name="index-_00bb_00b7_00be_00b3-62"></a>环境可以简单地看作由两部分组成。一个是包含&ldquo;符号-值&rdquo;
+对集合的<em>框架（frame）</em>
+，另一个是指向外围环境的指针（又称为<em>（外围）</em>）（enclosure）。
+当 R 搜索一个符号的值时，框架将会被检查。如果找到了一个
+匹配的符号，它的值将会被返回。
+如果找不到，外围环境将会被访问并且重复这个过程。
+环境形成一个树形结构，而外围起到一个父节点的角色。
+环境的树结构的根部是一个空的环境，可以通过没有父节点的
+<a name="index-emptyenv-63"></a><code>emptyenv()</code> 访问。
+它是基本包环境的直接父节点（可以通过函数<code>baseenv()</code>访问）。
+<a name="index-baseenv-64"></a>以前， <code>baseenv()</code> 可以是 <code>NULL</code>，但从
+版本 2.3.0 开始，不赞成用 <code>NULL</code> 作为环境。
+
+   <p>环境通过函数调用隐式创建，这些内容在
+<a href="Function-objects.html#Function-objects">Function objects</a> 和 <a href="Lexical-environment.html#Lexical-environment">Lexical environment</a>部分将会描述。在这种情况下，
+环境含有函数的局部变量（包括参数），而它的外围是当前调用函数的环境。
+环境还可以直接通过
+ <code>new.env</code> 创建。
+<a name="index-new_002eenv-65"></a>一个环境的框架内容可以通过 <code>ls</code>，<code>get</code>，<code>assign</code> 以及 <code>eval</code> 和
+<code>evalq</code> 访问和操作。
+
+   <p>函数 <code>parent.env</code> 可以用于访问一个环境的外围。
+
+   <p>和其它的 R 对象不一样，环境不是通过拷贝一份新的传递给函数或者用于
+赋值操作中。因此，如果你将一个的环境赋给好几个符号并且改变其中的一个，
+那么其它的也都会改变。特别是，把一个属性赋给一个环境会导致一些
+非常奇异的事情。
+
+   </body></html>
+

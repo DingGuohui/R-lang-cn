@@ -1,0 +1,59 @@
+<html lang="zh">
+<head>
+<title>Lexical environment - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Scope-of-variables.html#Scope-of-variables" title="Scope of variables">
+<link rel="prev" href="Global-environment.html#Global-environment" title="Global environment">
+<link rel="next" href="Stacks.html#Stacks" title="Stacks">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Lexical-environment"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Stacks.html#Stacks">Stacks</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Global-environment.html#Global-environment">Global environment</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Scope-of-variables.html#Scope-of-variables">Scope of variables</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">3.5.2 词法环境</h4>
+
+<p>对任何函数的调用
+<a name="index-_00ba_00af_00ca_00fd-125"></a><a name="index-_00bf_00f2_00bc_00dc-126"></a><a name="index-_00bb_00b7_00be_00b3-127"></a>都会创建一个<em>框架</em>（frame）。该框架包括函数中创建的局部变量，
+以及在一个环境中求值时组合创建的新环境。
+
+   <p>注意以下术语：框架指的是一组变量的集合，环境则是
+一组框架的嵌套（或者说：内部框架加上外围环境）。
+
+   <p>环境可以赋给变量或包含在其它对象里面。
+但是，没有标准的对象 &mdash; 特别是，它们在赋值的时候
+不会进行拷贝。
+
+   <p>闭包（closure；<code>"function"</code>模式）对象含定义时就作为它的一部分的环境
+（默认情况下，环境可以用 <code>environment&lt;-</code> 来操作）。当函数随后被调用时，
+它的求值环境是以闭包的环境作为外围创建。
+<a name="index-_00bb_00b7_00be_00b3_002c-_00c7_00f3_00d6_00b5-128"></a>注意，对于调用者的环境没有这样的必要。
+
+   <p>因此，当需要一个函数中的变量时，
+<a name="index-_00ba_00af_00ca_00fd-129"></a>首先在求值环境中搜索，
+<a name="index-_00bb_00b7_00be_00b3_002c-_00c7_00f3_00d6_00b5-130"></a>然后再外围，外围的外围，等等；一旦达到全局环境或一个包的环境，
+搜索路径会继续延伸到基本包的环境。
+如果仍然没有发现对象，
+搜索会随后在空环境中进行，并且会失败。
+
+   </body></html>
+

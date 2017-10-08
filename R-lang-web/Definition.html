@@ -1,0 +1,142 @@
+<html lang="zh">
+<head>
+<title>Definition - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Object_002doriented-programming.html#Object_002doriented-programming" title="Object-oriented programming">
+<link rel="prev" href="Object_002doriented-programming.html#Object_002doriented-programming" title="Object-oriented programming">
+<link rel="next" href="Inheritance.html#Inheritance" title="Inheritance">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Definition"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Inheritance.html#Inheritance">Inheritance</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Object_002doriented-programming.html#Object_002doriented-programming">Object-oriented programming</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Object_002doriented-programming.html#Object_002doriented-programming">Object-oriented programming</a>
+<hr><br>
+</div>
+
+<h3 class="section">5.1 定义</h3>
+
+<p>和一般的完整面向对象系统不一样的是，
+<a name="index-_00c3_00e6_00cf_00f2_00b6_00d4_00cf_00f3-184"></a>R 有一个类系统和基于类对象的分发机制。
+为解释型代码设置的分发机制依赖于求值框架下的
+四个特殊对象。它们分别是 <code>.Generic</code>，<code>.Class</code>，<code>.Method</code>和
+<code>.Group</code>。还有一个用于内部函数和类型的独立分发机制，但
+不是这里讨论的内容。
+
+   <p><code>class</code> 属性使类系统变得更加容易。该属性是类名字的列表。
+为创建类<code>"foo"</code>的一个对象，可以简单地把字符串<span class="samp">"foo"</span>赋给一个对象的
+类属性。事实上，任何东西都可成为类 <code>"foo"</code> 的一个对象。
+
+   <p>对象系统通过两个分发函数，<code>UseMethod</code> 和 <code>NextMethod</code>，
+来使用
+<a name="index-_00ba_00af_00ca_00fd_002c-_00b7_00ba_00d0_00cd-185"></a><em>泛型函数</em>（generic functions）。
+对象系统的典型应用是从调用泛型函数开始的。
+通常，函数非常的简单，只有一行代码。系统函数 <code>mean</code>
+就是这样的一个函数，
+
+<pre class="example">     &gt; mean
+     function (x, ...)
+     UseMethod("mean")
+</pre>
+   <p>在调用<code>mean</code>的时候，可以给定任意多的参数，但是它的第一个参数
+是特定的并且第一个参数的类用来决定调用那一种方法。
+变量 <code>.Class</code> 设为 <code>x</code> 的类属性，<code>.Generic</code> 设为字符串
+<code>"mean"</code>，然后寻找正确的方法来执行。<code>mean</code>的任何其它
+参数的类属性都会被忽略。
+
+   <p>假定 <code>x</code> 有一个依次含有 <code>"foo"</code>
+和<code>"bar"</code> 的类属性列表。 R 可能首先搜索名为 <code>mean.foo</code> 的函数，
+如果该函数找不到，它可能随后去找名为 <code>mean.bar</code> 的函数，
+此时如果还不能成功，则最后寻找函数 <code>mean.default</code>。
+如果最后的搜索仍不能成功， R 将会报错。
+因此，记得编写默认的方法是一个好习惯。
+注意，这里提到的
+<code>mean.foo</code> 等函数指的是方法。
+
+   <p><code>NextMethod</code> 还提供里另外一种分发机制。
+<a name="index-_00ba_00af_00ca_00fd-186"></a>函数可以在其内部任何地方调用 <code>NextMethod</code>。
+决定哪个方法会被调用主要基于 <code>.Class</code> 和 <code>.Generic</code> 的当前值。
+这里稍稍有点问题，因为方法实际上就是普通的函数，那么用户就可能直接调用它。
+如果他们这样做，那 <code>.Generic</code> 或 <code>.Class</code> 就没有赋值了。
+
+   <p>如果一个方法被直接调用，它就包括一个对 <code>NextMethod</code> 的调用，
+并且 <code>NextMethod</code> 的第一个参数用于决定泛型函数。
+<a name="index-_00ba_00af_00ca_00fd_002c-_00b7_00ba_00d0_00cd-187"></a>如果这个参数没有提供，系统会报错；因此
+最好记得提供该参数。
+
+   <p>在方法直接调用的时候，方法的第一个参数的类属性作为 <code>.Class</code> 的值。
+
+   <p>方法自身利用 <code>NextMethod</code> 提供继承形态。通常，一个特定方法用一些
+操作启动数据然后根据 <code>NextMethod</code> 调用下一个适当的方法。
+
+<!-- FIXME -->
+<!-- See also further above. -->
+<!-- We say that CDFs have three slots (perhaps should not used that -->
+<!-- terminology), but in the example we simply add a class attribute to a -->
+<!-- function, so where are the range and parameters? -->
+<!-- Now let's consider the distribution function example.  We will assume -->
+<!-- that all objects of class @code{"cdf"} have three slots.  They will have -->
+<!-- a @emph{range} slot that specifies the range or support of the -->
+<!-- distribution, a @emph{parameters} slot that contains a tagged list of -->
+<!-- the parameters and finally a @emph{fun} slot that contains the actual -->
+<!-- cdf.  The @code{"pdf"} class will have the same three slots, however the -->
+<!-- function will be different. -->
+<!-- Suppose that we have the unit Exponential distribution.  The following -->
+<!-- code segment defines objects of class @code{"cdf"} and @code{"pdf"} that -->
+<!-- represent the cdf and pdf or the unit Exponential. -->
+<!-- @example -->
+<!-- > ucexp <- function(x) 1 - exp(-x) -->
+<!-- > class(ucexp) <- "cdf" -->
+<!-- > udexp <- function(x) exp(-x) -->
+<!-- > class(udexp) <- "pdf" -->
+<!-- @end example -->
+<!-- @noindent -->
+<!-- Note that the corresponding classes have no slots and that there was -->
+<!-- nothing, apart from common sense, that prevented us from making -->
+<!-- @code{udexp} have class @code{"cdf"}. -->
+<!-- </FIXME> -->
+<p>考虑一下下面这个简单的例子。二维欧氏空间里面的一个点可以通过笛卡尔坐标
+或极坐标（r-θ）确定。因此，为存储点的位置信息，我们可以定义两个类，<code>"xypoint"</code>
+和 <code>"rthetapoint"</code>。 所有 `xypoint' 数据结构由一个x-分量和一个y-分量构成的
+列表组成。所有 `rthetapoint' 对象由一个r-分量和一个theta-分量构成的列表组成。
+
+   <p>现在，假定我们想得到任一对象的x-位置坐标。通过泛型函数，
+这非常容易实现。
+<a name="index-_00ba_00af_00ca_00fd_002c-_00b7_00ba_00d0_00cd-188"></a>我们如下定义了一个泛型函数 <code>xpos</code>。
+
+<pre class="example">     xpos &lt;- function(x, ...)
+         UseMethod("xpos")
+</pre>
+   <p class="noindent">现在我们可以定义方法：
+
+<pre class="example">     xpos.xypoint &lt;- function(x) x$x
+     xpos.rthetapoint &lt;- function(x) x$r * cos(x$theta)
+</pre>
+   <p>用户可以简单地用任一描述方法作为参数调用函数 <code>xpos</code>。
+内在的分发方法判断对象的类，然后调用恰当的方法。
+
+   <p>这使得非常容易加入其它坐标表述方式。我们没有必要写一个新的泛型函数，我们
+只要写新的方法就可以了。因此，对一个已经存在的系统非常容易扩展的，因为用户
+只负责处理新的表述方式而不用考虑已有的表述方式。
+
+   <p>使用这种思路的一个例子是为不同类型的对象提供专门的打印输出；
+现在已经为 <code>print</code> 设计了40种方法。
+
+   </body></html>
+

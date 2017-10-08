@@ -1,0 +1,47 @@
+<html lang="zh">
+<head>
+<title>Classes - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Attributes.html#Attributes" title="Attributes">
+<link rel="prev" href="Dimnames.html#Dimnames" title="Dimnames">
+<link rel="next" href="Time-series-attributes.html#Time-series-attributes" title="Time series attributes">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Classes"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Time-series-attributes.html#Time-series-attributes">Time series attributes</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Dimnames.html#Dimnames">Dimnames</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Attributes.html#Attributes">Attributes</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">2.2.4 类</h4>
+
+<p>R有一个精心设计的类系统。它通过 <code>class</code> 属性控制。
+该属性是一个含有类列表的字符向量，这些类可以被对象继承。
+这构成了 R 里面&ldquo;泛型方法&rdquo;（generic methods）功能性的基础。
+
+   <p>该属性可以没有限制的被用户虚拟访问和操作。
+对于一个对象是否真的含有类方法期望的组成要素是不会被检验的。
+因此，改变
+<code>class</code> 属性需要小心一点。当实在需要的时候，
+建议使用一些特别的创建和强制转换函数。
+<a name="index-_00c7_00bf_00d6_00c6_00d7_00aa_00bb_00bb-79"></a>
+
+   </body></html>
+

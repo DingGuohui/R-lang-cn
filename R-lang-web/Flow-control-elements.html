@@ -1,0 +1,60 @@
+<html lang="zh">
+<head>
+<title>Flow control elements - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Expressions.html#Expressions" title="Expressions">
+<link rel="prev" href="Compound-expressions.html#Compound-expressions" title="Compound expressions">
+<link rel="next" href="Function-definitions.html#Function-definitions" title="Function definitions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Flow-control-elements"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Function-definitions.html#Function-definitions">Function definitions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Compound-expressions.html#Compound-expressions">Compound expressions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Expressions.html#Expressions">Expressions</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">10.4.5 流控制元素</h4>
+
+<p>R 含有作为特殊语法结构的流控制结构
+
+<pre class="example">     if ( <var>cond</var> ) <var>expr</var>
+     if ( <var>cond</var> ) <var>expr1</var> else <var>expr2</var>
+     while ( <var>cond</var> ) <var>expr</var>
+     repeat <var>expr</var>
+     for ( <var>var</var> in <var>list</var> ) <var>expr</var>
+</pre>
+   <p>这些结构中的表达式是典型的复合表达式。
+
+   <p>在循环结构（<code>while</code>，<code>repeat</code>，<code>for</code>）中，
+我们还可以使用
+<code>break</code> （终止循环） 和 <code>next</code>（忽略本次循环进入下次循环）。
+
+   <p>在内部，这些结构都以函数调用的方式保存：
+
+<pre class="example">     "if"(<var>cond</var>, <var>expr</var>)
+     "if"(<var>cond</var>, <var>expr1</var>, <var>expr2</var>)
+     "while"(<var>cond</var>, <var>expr</var>)
+     "repeat"(<var>expr</var>)
+     "for"(<var>var</var>, <var>list</var>, <var>expr</var>)
+     "break"()
+     "next"()
+</pre>
+   </body></html>
+

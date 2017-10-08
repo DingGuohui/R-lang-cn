@@ -1,0 +1,51 @@
+<html lang="zh">
+<head>
+<title>warning - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Exception-handling.html#Exception-handling" title="Exception handling">
+<link rel="prev" href="stop.html#stop" title="stop">
+<link rel="next" href="on_002eexit.html#on_002eexit" title="on.exit">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="warning"></a>Next:&nbsp;<a rel="next" accesskey="n" href="on_002eexit.html#on_002eexit">on.exit</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="stop.html#stop">stop</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Exception-handling.html#Exception-handling">Exception handling</a>
+<hr><br>
+</div>
+
+<h3 class="section">8.2 警告</h3>
+
+<p><a name="index-warning-266"></a>
+函数 <code>warning</code> 只有一个字符串类型的参数。
+调用 <code>warning</code> 的行为依赖于可选函数<code>"warn"</code>的值。
+如果 <code>"warn"</code> 的值是负的，警告将会被忽略。
+如果是0，它们将会被保存，在顶层函数结束后打印出来。
+如果是1，它们会在发生时就打印出来，如果是2（或更大），
+警告就变成错误了。
+
+   <p>如果 <code>"warn"</code> 是 0（默认），顶层变量
+<code>last.warning</code> 将会被创建，随后调用的 <code>warning</code> 所产生
+的信息会保存在这个向量中。如果函数求值结束时，产生的警告信息少于
+10条，它们将会被直接打印。如果超过10条，
+只打印显示有多少条警告信息。这两种情况下，
+<code>last.warning</code> 都是包含信息的向量。
+
+   </body></html>
+

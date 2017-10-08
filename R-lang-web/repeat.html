@@ -1,0 +1,47 @@
+<html lang="zh">
+<head>
+<title>repeat - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Control-structures.html#Control-structures" title="Control structures">
+<link rel="prev" href="Looping.html#Looping" title="Looping">
+<link rel="next" href="while.html#while" title="while">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="repeat"></a>Next:&nbsp;<a rel="next" accesskey="n" href="while.html#while">while</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Looping.html#Looping">Looping</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Control-structures.html#Control-structures">Control structures</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">3.2.3 repeat 语句</h4>
+
+<p><a name="index-repeat-98"></a>
+<code>repeat</code> 语句会重复对主体部分求值直到明确地要求退出。
+这就意味着你必须小心使用 <code>repeat</code>，因为可能导致死循环。
+<code>repeat</code> 循环的语法如下
+
+<pre class="example">     repeat <var>statement</var>
+</pre>
+   <p>在使用 <code>repeat</code> 语句时，<var>statement</var> 必须是一个句块。
+另外，你需要执行一些计算并且测试语句是否会从循环里面跳出。
+这样做通常需要两条语句。
+
+   </body></html>
+

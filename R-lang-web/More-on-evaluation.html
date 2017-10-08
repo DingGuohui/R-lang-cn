@@ -1,0 +1,69 @@
+<html lang="zh">
+<head>
+<title>More on evaluation - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Computing-on-the-language.html#Computing-on-the-language" title="Computing on the language">
+<link rel="prev" href="Substitutions.html#Substitutions" title="Substitutions">
+<link rel="next" href="Evaluation-of-expression-objects.html#Evaluation-of-expression-objects" title="Evaluation of expression objects">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="More-on-evaluation"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Evaluation-of-expression-objects.html#Evaluation-of-expression-objects">Evaluation of expression objects</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Substitutions.html#Substitutions">Substitutions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Computing-on-the-language.html#Computing-on-the-language">Computing on the language</a>
+<hr><br>
+</div>
+
+<h3 class="section">6.3 求值之外的东西</h3>
+
+<p><a name="index-_00b8_00b3_00d6_00b5-213"></a>在本章前面就引入的<code>eval</code> 函数作为调用对象求值的一种方法。
+但是，这不是全部。它还可以指定
+求值发生的环境。
+<a name="index-_00bb_00b7_00be_00b3-214"></a>默认情况下，这就是<code>eval</code>被调用时的求值框架，但是它常常
+需要设成其它值。
+<a name="index-eval-215"></a>一般情况下，相应的求值框架是当前框架的父框架。
+特别，当求值对象是函数参数<code>substitute</code>操作后的结果，
+它将包含只对调用者有意义的变量（注意，没有理由
+期望调用者的变量也在被调用者的词法作用域里面）。
+<a name="index-_00d7_00f7_00d3_00c3_00d3_00f2-216"></a>既然父框架里面的求值频繁发生，函数 <code>eval.parent</code>
+可以作为 <code>eval(expr, sys.frame(sys.parent()))</code>
+的简写方式存在。
+
+   <p>另外一个常常出现的例子是一个列表或数据框的求值。
+例如，当 <code>data</code> 参数给定时，可能和<code>model.frame</code>函数
+发生关联。通常，模型公式的条目需要在
+<code>data</code> 里面求值，但是它们偶尔也包括对 <code>model.frame</code> 的
+调用者内部条目的引用。在仿真研究时，这可能非常有用。
+因为这个原因，不仅需要对一个列表里面的表达式求值，还需要
+指定一个外围以便于变量在列表中找不到时可以继续搜索。
+因此，调用有下面的形式
+
+<pre class="example">     eval(expr, data, sys.frame(sys.parent()))
+</pre>
+   <p>注意，在一个给定环境中求值可能事实上改变了那个环境，
+在赋值操作中这最明显，
+<a name="index-_00b8_00b3_00d6_00b5-217"></a>如
+
+<pre class="example">     eval(quote(total &lt;- 0), environment(robert$balance)) # <span class="roman">rob Rob</span>
+</pre>
+   <p class="noindent">这对于列表中的求值同样适用，但是原始的列表不会改变，
+因为我们操作的只是原始列表的一个拷贝。
+
+   </body></html>
+

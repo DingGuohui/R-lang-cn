@@ -1,0 +1,64 @@
+<html lang="zh">
+<head>
+<title>Vector objects - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Basic-types.html#Basic-types" title="Basic types">
+<link rel="prev" href="Basic-types.html#Basic-types" title="Basic types">
+<link rel="next" href="List-objects.html#List-objects" title="List objects">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Vector-objects"></a>Next:&nbsp;<a rel="next" accesskey="n" href="List-objects.html#List-objects">List objects</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Basic-types.html#Basic-types">Basic types</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Basic-types.html#Basic-types">Basic types</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">2.1.1 向量</h4>
+
+<p><a name="index-_00cf_00f2_00c1_00bf-14"></a>向量可以看着是由一系列包含数据的紧密联结的单元格子构成。
+这些单元格通过
+<a name="index-_00cb_00f7_00d2_00fd-15"></a>类似<code>x[5]</code>的索引操作来访问。
+更细节的内容可以参考<a href="Indexing.html#Indexing">Indexing</a>。
+<!-- @ref{Data structures} -->
+
+   <p><a name="index-_00c0_00e0_00d0_00cd-16"></a><a name="index-_00c4_00a3_00ca_00bd-17"></a><a name="index-_00d4_00ad_00d7_00d3_00d0_00cd-18"></a>R 有六个基本（`原子性'）向量类型：逻辑型，整数型，实数型，
+复数型，字符串（字符）型和原味型（raw）。
+这些不同向量类型的模式和存储模式如下表所示。
+
+   <blockquote>
+        <p><table summary=""><tr align="left"><th valign="top">typeof      </th><th valign="top">mode             </th><th valign="top">storage.mode
+<br></th></tr><tr align="left"><td valign="top"><code>logical</code>   </td><td valign="top"><code>logical</code>   </td><td valign="top"><code>logical</code>
+<br></td></tr><tr align="left"><td valign="top"><code>integer</code>   </td><td valign="top"><code>numeric</code>   </td><td valign="top"><code>integer</code>
+<br></td></tr><tr align="left"><td valign="top"><code>double</code>    </td><td valign="top"><code>numeric</code>   </td><td valign="top"><code>double</code>
+<br></td></tr><tr align="left"><td valign="top"><code>complex</code>   </td><td valign="top"><code>complex</code>   </td><td valign="top"><code>complex</code>
+<br></td></tr><tr align="left"><td valign="top"><code>character</code> </td><td valign="top"><code>character</code> </td><td valign="top"><code>character</code>
+<br></td></tr><tr align="left"><td valign="top"><code>raw</code>       </td><td valign="top"><code>raw</code>       </td><td valign="top"><code>raw</code>
+        <br></td></tr></table>
+</blockquote>
+
+   <p>单个的数字，如 <code>4.2</code>，以及字符串，如<code>"four
+point two"</code>，仍然是长度为1的向量，因为没有更基本的数据类型了。
+零长度向量是允许的（也是非常有用的）。
+
+   <p>字符串向量的模式和存储模式都是 <code>"character"</code>。字符向量的单个元素
+常常是<em>字符串</em>。
+
+   </body></html>
+

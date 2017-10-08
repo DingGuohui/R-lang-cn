@@ -1,0 +1,120 @@
+<html lang="zh">
+<head>
+<title>Scope - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Evaluation.html#Evaluation" title="Evaluation">
+<link rel="prev" href="Argument-evaluation.html#Argument-evaluation" title="Argument evaluation">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Scope"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="Argument-evaluation.html#Argument-evaluation">Argument evaluation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Evaluation.html#Evaluation">Evaluation</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">4.3.4 作用域</h4>
+
+<p><a name="index-_00d7_00f7_00d3_00c3_00d3_00f2-168"></a>作用域或作用域规则简单说就是求值程序为一个符号
+寻找值所用规则的集合。
+<a name="index-_00b8_00b3_00d6_00b5_002c-_00b7_00fb_00ba_00c5-169"></a><a name="index-_00b7_00fb_00ba_00c5-170"></a>每种计算机语言都有这样的一套规则。
+在 R里面，这个规则非常的简单，但也确实存在一些机制
+搅乱常见的或默认的规则。
+
+   <p>R 沿用一套称之为<em>词法作用域的</em>规则。
+这表明在表达式创建时变量的
+<a name="index-_00b0_00f3_00b6_00a8-171"></a>有效绑定可用来为表达式中的自由符号提供值。
+
+   <p>作用域的许多有趣的性质
+<a name="index-_00d7_00f7_00d3_00c3_00d3_00f2-172"></a>都和函数的求值有关，
+<a name="index-_00ba_00af_00ca_00fd-173"></a>现在我们集中描述这个问题。一个符号要么是
+<a name="index-_00b0_00f3_00b6_00a8-174"></a>有约束的要么是自由的。一个函数的所有形式参数在函数主体中
+提供了被约束的符号。任何其它在函数主体里面的符号要么是局部变量要么是自由
+变量。局部变量是在函数中定义的变量。因为 R 没有变量的形式定义，
+它们只在需要的时候才使用，这样就很难区分一个变量是否是局部变量。
+局部变量首先需要定义，典型的做法是让它们处在一个赋值操作的左边。
+<a name="index-_00b8_00b3_00d6_00b5-175"></a>
+在求值过程中，如果发现一个自由变量，那么 R 会去给它找一个值。
+作用域规则决定了这个过程如何进行。在 R 里面，
+<a name="index-_00bb_00b7_00be_00b3-176"></a>函数的环境首先会被搜索，然后是它的外围，如此直到全局环境。
+
+   <p>全局环境指向一个为某个匹配符号逐步搜索的环境的搜索列表。
+第一个匹配上的值会被采用。
+
+   <p>当这些规则结合函数能以值的形式从其它函数返回的事实，
+<a name="index-_00ba_00af_00ca_00fd-177"></a>感觉确实不错。但是首先，你必须获得所有特性。<a rel="footnote" href="#fn-1" name="fnd-1"><sup>1</sup></a>
+
+   <p>一个简单的例子是，
+
+<pre class="example">     f &lt;- function(x) {
+         y &lt;- 10
+         g &lt;- function(x) x + y
+         return(g)
+     }
+     h &lt;- f()
+     h(3)
+</pre>
+   <p><a name="index-_00b8_00b3_00d6_00b5-178"></a>一个非常有意思的问题是，当<code>h</code>被求值，什么会发生呢？
+为了描述这个，我们需要一些的新的考虑。
+在函数主体里面，变量可以是被约束的，局部的或者自由的。
+<a name="index-_00ba_00af_00ca_00fd-179"></a>被约束的变量是这些匹配函数形式参数的变量。局部变量指的是
+那些在函数主体内创建和定义的变量。自由变量指的是那些既不是
+局部也不是被约束的变量。当一个函数主体被求值，确定一个局部或
+被约束变量的值没有问题。作用域规则决定了一个语言如何为自由变量
+找恰当的值。
+
+   <p>当 <code>h(3)</code> 被求值，我们发现它的主体就是 <code>g</code> 的主体。
+在那个主体中，<code>x</code> 和 <code>y</code> 都是自由的。在一个词法作用域定义的语言中，
+<a name="index-_00d7_00f7_00d3_00c3_00d3_00f2-180"></a><code>x</code> 的值和 3 关联而 <code>y</code> 和 10 关联，因此 <code>h()</code> 返回值 13。
+在R里面，事实上就是这样发生的。
+
+   <p>在 S里面，因为不同的作用域规则，上面的例子可能会报错并且提示<code>y</code>找不到。
+此时除非在你的工作空间中有一个变量
+<code>y</code>，那么这个值将会被使用。
+
+<!-- This is not correct! -->
+<!-- The scoping rules in @Sl{} are to look in the current frame and then in -->
+<!-- the global -->
+<!-- @cindex 环境 -->
+<!-- environment or workspace.  These rules are very similar to -->
+<!-- the scoping rules used in the @code{C} language. -->
+<!-- @node Closures,  , Evaluation, Functions -->
+<!-- section Closures -->
+<!-- A @emph{closure} is a -->
+<!-- @cindex 函数 -->
+<!-- function together with an environment that -->
+<!-- provides bindings for any free variables in the closure.  Since many -->
+<!-- @R{} functions are bound to environments they are often referred to as -->
+<!-- closures. -->
+<!-- FIXME dot-dot-dot semantics definitely needs somewhere to go -->
+<!-- @node Miscellanea,  , Closures, Functions -->
+<!-- @section Miscellanea -->
+<!--  g(...), ..1, -->
+<!--  Recall() -->
+<div class="footnote">
+<hr>
+<h4>Footnotes</h4><p class="footnote"><small>[<a name="fn-1" href="#fnd-1">1</a>]</small> 译者注：
+原文为&ldquo;When this set of rules is combined with the fact that
+functions can be
+returned as values from other functions then some rather nice, but at
+first glance peculiar, properties obtain.&rdquo;</p>
+
+   <p><hr></div>
+
+   </body></html>
+

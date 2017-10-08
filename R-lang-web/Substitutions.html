@@ -1,0 +1,162 @@
+<html lang="zh">
+<head>
+<title>Substitutions - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Computing-on-the-language.html#Computing-on-the-language" title="Computing on the language">
+<link rel="prev" href="Direct-manipulation-of-language-objects.html#Direct-manipulation-of-language-objects" title="Direct manipulation of language objects">
+<link rel="next" href="More-on-evaluation.html#More-on-evaluation" title="More on evaluation">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Substitutions"></a>Next:&nbsp;<a rel="next" accesskey="n" href="More-on-evaluation.html#More-on-evaluation">More on evaluation</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Direct-manipulation-of-language-objects.html#Direct-manipulation-of-language-objects">Direct manipulation of language objects</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Computing-on-the-language.html#Computing-on-the-language">Computing on the language</a>
+<hr><br>
+</div>
+
+<h3 class="section">6.2 替换</h3>
+
+<p>事实上，向上节内容中提到的一样，修改一个表达式内部结构是很少见的。
+最常见的是，用户简单地想得到一个表达式以分析它并且用它
+来作标记图形一类的事情。这样的一个例子可见于
+<code>plot.default</code> 实现代码的起始部分：
+
+   <p><a name="index-substitute-208"></a>
+<pre class="example">     xlabel &lt;- if (!missing(x))
+         deparse(substitute(x))
+</pre>
+   <p class="noindent">这使得 <code>plot</code>的<code>x</code>参数变量或表达式随后可
+用来标记x-轴。
+
+   <p>实现这一要求的是函数 <code>substitute</code>。它获得表达式
+<code>x</code> 并且替换通过形式参数 <code>x</code> 传递的表达式。
+注意，为了保证这样运行，
+<code>x</code> 必须拥有产生它的值的表达式的
+信息。这和 R 的悠闲求值架构有关（see <a href="Promise-objects.html#Promise-objects">Promise objects</a>）。
+<a name="index-_00b8_00b3_00d6_00b5_002c-_00d3_00c6_00cf_00d0-209"></a>一个形式参数事实上是一个<em>允诺</em>，该对象有三个槽变量，
+一个用于定义它的表达式，一个用于表达式求值的环境，
+还有一个用于表达式的求值结果。
+<code>substitute</code> 识别允诺变量并且替换它的表达式槽变量的值。
+如果 <code>substitute</code> 在一个函数内部被调用，
+该函数的局部变量也受替换支配。
+
+   <p><code>substitute</code> 的参数没有必要是一个简单的标识符，它可以
+是一个含有多个变量的表达式。此时，任何一个变量都会发生替换。
+同样，<code>substitute</code> 有一个额外的参数，它是一个
+变量可以搜索的环境或者列表。例如：
+
+<pre class="example">     &gt; substitute(a + b, list(a = 1, b = quote(x)))
+     1 + x
+</pre>
+   <p>注意，引用（quoting）是<code>x</code>替换所必需的。这种构造方便
+在图中增加数学表达式，如下面的代码所示
+
+<pre class="example">     &gt; plot(0)
+     &gt; for (i in 1:4)
+     +   text(1, 0.2 * i,
+     +        substitute(x[ix] == y, list(ix = i, y = pnorm(i))))
+</pre>
+   <p>值得注意的是替换是纯词法上实现的；
+如果它们被求值了，则不会对结果调用对象的意义进行检验。
+<code>substitute(x &lt;- x + 1, list(x = 2))</code> 会恰当地返回
+<code>2 &lt;- 2 + 1</code>。但是， R的有些部分自己定义了什么是有意义
+和什么无意义的规则，而且事实上就是采用了这些形式上有问题的表达式。
+例如，使用&ldquo;图中数学&rdquo;的特性时常常会有语法上正确，但求值毫无意义的
+构造，如 <span class="samp">{}&gt;=40*" years"</span>。
+
+   <p>替换不会对第一个参数求值。这导致如何替换包含在一个变量中的对象的
+问题。 解决问题的方法是再用一次 <code>substitute</code> ，如下所示
+
+<pre class="example">     &gt; expr &lt;- quote(x + y)
+     &gt; substitute(substitute(e, list(x = 3)), list(e = expr))
+     substitute(x + y, list(x = 3))
+     &gt; eval(substitute(substitute(e, list(x = 3)), list(e = expr)))
+     3 + y
+</pre>
+   <p>替换的精确规则如下：
+第一个参数的解析树的每个符号
+<a name="index-_00b7_00fb_00ba_00c5-210"></a><a name="index-_00bd_00e2_00ce_00f6-211"></a>和第二个参数匹配，既可以是有标签的列表也可以是环境框架。如果它
+是一个简单的局部对象，它的值将被插入， <em>除非</em>它
+匹配全局变量。如果它是一个允诺（常常是函数参数），
+允诺表达式会被替换。如果符号没有被匹配，它不会有任何改变。
+而在最高层次的替换很少有例外的。<a rel="footnote" href="#fn-1" name="fnd-1"><sup>1</sup></a>
+这是从 S 继承而来，原理基本上是变量可能在那个层次上绑定
+使得替换最好和<code>quote</code>类似而且没有控制。<a rel="footnote" href="#fn-2" name="fnd-2"><sup>2</sup></a>
+
+   <p>如果局部变量在<code>substitute</code>使用前被替换，允诺替换的规则和
+S相应的规则稍稍有点不同。
+R 将使用变量的新值，而 S 将无条件地使用参数表达式 &mdash;
+除非它是一个常量。这导致一个很古怪的结果，即在S里面 <code>f((1))</code> 可能和
+<code>f(1)</code> 差异很大。但 R 的规则相当地清晰，尽管
+它也有一些比较奇怪的和悠闲求值相关结果。
+<a name="index-_00b8_00b3_00d6_00b5_002c-_00d3_00c6_00cf_00d0-212"></a>参看下面的例子
+
+<pre class="example">     logplot &lt;- function(y, ylab = deparse(substitute(y))) {
+         y &lt;- log(y)
+         plot(y, ylab = ylab)
+     }
+</pre>
+   <p>这看上去比较直接，但是 y 标签变成了一个比较难看的 <code>c(...)</code> 表达式。
+这是由于悠闲求值的规则导致在<code>y</code>修改<em>后</em>
+<code>ylab</code>表达式的求值。 解决方法是首先强制 <code>ylab</code>求值，即：
+
+<pre class="example">     logplot &lt;- function(y, ylab = deparse(substitute(y))) {
+         ylab
+         y &lt;- log(y)
+         plot(y, ylab = ylab)
+     }
+</pre>
+   <p>注意，这种情况下，<code>eval(ylab)</code>可能很少使用。如果
+<code>ylab</code> 是一个语言或表达式对象，那么这将导致
+这些对象也被求值。但有时结果不是期望的，如传递的数学表达式
+是<code>quote(log[e](y))</code>。
+
+   <p><code>substitute</code> 的一个变种是 <code>bquote</code>，它把一些子
+表达式的值代替它们自己。
+上面的例子可以如下
+<pre class="example">     &gt; plot(0)
+     &gt; for (i in 1:4)
+     +   text(1, 0.2 * i,
+     +        substitute(x[ix] == y, list(ix = i, y = pnorm(i))))
+</pre>
+   <p>也可以更简洁的写成
+<pre class="example">     plot(0)
+     for(i in 1:4)
+        text(1, 0.2*i, bquote( x[.(i)] == .(pnorm(i)) ))
+</pre>
+   <p>除了<code>.()</code>子表达式的内容被它们的值替换外，其它表达式都被引用。
+有一个可选的参数计算其它不同环境中的值。
+<code>bquote</code>的语法源自 LISP 的后置引用（backquote）宏。
+
+   <div class="footnote">
+<hr>
+<h4>Footnotes</h4><p class="footnote"><small>[<a name="fn-1" href="#fnd-1">1</a>]</small> 译者注：
+原文为：&ldquo;The special exception for substituting at the top
+level is admittedly peculiar. &rdquo;</p>
+
+   <p class="footnote"><small>[<a name="fn-2" href="#fnd-2">2</a>]</small> 译者注：
+原文为：&ldquo; It has been inherited from S and the
+rationale is most likely that there is no control over which variables
+might be bound at that level so that it would be better to just make
+substitute act as <code>quote</code>. &rdquo;</p>
+
+   <p><hr></div>
+
+   </body></html>
+

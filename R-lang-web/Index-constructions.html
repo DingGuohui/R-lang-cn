@@ -1,0 +1,63 @@
+<html lang="zh">
+<head>
+<title>Index constructions - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Expressions.html#Expressions" title="Expressions">
+<link rel="prev" href="Infix-and-prefix-operators.html#Infix-and-prefix-operators" title="Infix and prefix operators">
+<link rel="next" href="Compound-expressions.html#Compound-expressions" title="Compound expressions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Index-constructions"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Compound-expressions.html#Compound-expressions">Compound expressions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Infix-and-prefix-operators.html#Infix-and-prefix-operators">Infix and prefix operators</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Expressions.html#Expressions">Expressions</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">10.4.3 索引构造</h4>
+
+<p>R 有三个索引构造，其中两个语法类似
+尽管他们在语义上稍稍有点差异：
+
+<pre class="example">     <var>object</var> [ <var>arg1</var>, ...... , <var>argn</var> ]
+     <var>object</var> [[ <var>arg1</var>, ...... , <var>argn</var> ]]
+</pre>
+   <p><a name="index-_005b-289"></a><a name="index-_005b_005b-290"></a>
+<var>object</var> 在形式上可以是任何合法的表达式，但它
+可理解为指向或者操作一个可取子集的对象。参数常常是
+数字或字符串索引，但其它类型的参数也是允许的
+（特别是<code>drop = FALSE</code>）。
+
+   <p>在内部，这些索引构造以函数调用的形式保存，其中
+函数名字为分别是 <code>"["</code> 和 <code>"[["</code>。
+
+   <p>第三种索引方式是
+
+<pre class="example">     <var>object</var> $ <var>tag</var>
+</pre>
+   <p><a name="index-_0024-291"></a>
+这里， <var>object</var> 如前，而<var>tag</var>是一个标识符或一个文本字符串。
+内部实现是，它依然以一个名为 <code>"$"</code> 的函数调用而保存。
+
+<!-- @node Assignments, Model formulae, Index constructions, Expressions -->
+<!-- @subsection Assignments -->
+<!-- @node Model formulae, Flow control elements, Assignments, Expressions -->
+<!-- @subsection Model formulae -->
+</body></html>
+

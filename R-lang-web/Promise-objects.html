@@ -1,0 +1,59 @@
+<html lang="zh">
+<head>
+<title>Promise objects - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Basic-types.html#Basic-types" title="Basic types">
+<link rel="prev" href="Built_002din-objects-and-special-forms.html#Built_002din-objects-and-special-forms" title="Built-in objects and special forms">
+<link rel="next" href="Dot_002ddot_002ddot.html#Dot_002ddot_002ddot" title="Dot-dot-dot">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Promise-objects"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Dot_002ddot_002ddot.html#Dot_002ddot_002ddot">Dot-dot-dot</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Built_002din-objects-and-special-forms.html#Built_002din-objects-and-special-forms">Built-in objects and special forms</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Basic-types.html#Basic-types">Basic types</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">2.1.8 允诺对象</h4>
+
+<p><a name="index-_00d4_00ca_00c5_00b5-55"></a>允诺对象（promise objects）是 R 的悠闲（lazy）求值机制的一部分。它们含有
+三个槽（slots）：值，表达式和环境。
+<a name="index-_00bb_00b7_00be_00b3-56"></a>当一个函数
+<a name="index-_00ba_00af_00ca_00fd-57"></a><a name="index-_00ba_00af_00ca_00fd_00b2_00ce_00ca_00fd-58"></a>被调用，首先参数匹配，
+然后每个形式参数都会被一个允诺约束。
+用作形似参数的表达式以及函数调用的环境的指针都保存在允诺里面。
+
+   <p>直到该参数被访问，才会有<em>值</em>关联允诺。
+当参数被访问时，保存的表达式会在
+保存的环境中求值，并返回结果。
+<a name="index-_00c7_00f3_00d6_00b5_002c-_00b1_00ed_00b4_00ef_00ca_00bd-59"></a>结果同样被允诺保存。
+函数 <code>substitute</code> 会提取一个表达式槽里面的内容。
+这使得程序员既可以访问允诺相关的值也可以访问相关的表达式。
+
+   <p>在 R 语言里面，允诺对象常常是隐含的对象。
+（在以后的R发布版本中，它们相对R代码是透明的，
+因为它们总是在被访问的时候求值。）
+实际的函数参数是这种类型的。
+函数 <code>delayedAssign</code> 可以使一个允诺
+出现在表达式的外面。通常还没有办法在 R 代码里面
+检验一个对象是否是允诺，同时也没有方法用 R
+代码确定一个允诺的环境。
+
+   </body></html>
+

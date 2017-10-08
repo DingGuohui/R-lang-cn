@@ -1,0 +1,147 @@
+<html lang="zh">
+<head>
+<title>Operators - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Simple-evaluation.html#Simple-evaluation" title="Simple evaluation">
+<link rel="prev" href="Function-calls.html#Function-calls" title="Function calls">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Operators"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="Function-calls.html#Function-calls">Function calls</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Simple-evaluation.html#Simple-evaluation">Simple evaluation</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">3.1.4 操作符</h4>
+
+<p>R 允许使用 C 语言类似的操作符构建算术表达式，
+例如，
+
+<pre class="example">     &gt; 1 + 2
+     [1] 3
+</pre>
+   <p>表达式可以用括号合并成组，混以函数调用，
+然后以一种直接的方式赋给变量
+
+<pre class="example">     &gt; y &lt;- 2 * (a + log(x))
+</pre>
+   <p>R 含有一系列操作符。它们如下表所示。
+
+   <blockquote>
+        <p><table summary=""><tr align="left"><td valign="top" width="10%"><code>-</code>
+</td><td valign="top" width="70%">减号，一元操作符或者二元操作符
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>+</code>
+</td><td valign="top" width="70%">加号，一元操作符或者二元操作符
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>!</code>
+</td><td valign="top" width="70%">一元否操作符
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>~</code>
+</td><td valign="top" width="70%">波浪号，用于模型公式，既可以是一元操作符也可以是二元操作符
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>?</code>
+</td><td valign="top" width="70%">帮助
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>:</code>
+</td><td valign="top" width="70%">序列，二元操作符（在模型公式中，表示交互效应）
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>*</code>
+</td><td valign="top" width="70%">乘法，二元操作符
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>/</code>
+</td><td valign="top" width="70%">除法，二元操作符
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>^</code>
+</td><td valign="top" width="70%">幂运算符，二元操作符
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>%</code><var>x</var><code>%</code>
+</td><td valign="top" width="70%">特殊二元操作符，<var>x</var>可以被任意合法的名字替换
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>%%</code>
+</td><td valign="top" width="70%">求模，二元操作符
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>%/%</code>
+</td><td valign="top" width="70%">整除，二元操作符
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>%*%</code>
+</td><td valign="top" width="70%">矩阵相乘，二元操作符
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>%o%</code>
+</td><td valign="top" width="70%">外积，二元操作符
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>%x%</code>
+</td><td valign="top" width="70%">Kronecker乘积，二元操作符
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>%in%</code>
+</td><td valign="top" width="70%">匹配操作，二元操作符（在模型公式中，表示嵌套）
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>&lt;</code>
+</td><td valign="top" width="70%">小于，二元操作符
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>&gt;</code>
+</td><td valign="top" width="70%">大于，二元操作符
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>==</code>
+</td><td valign="top" width="70%">等于，二元操作符
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>&gt;=</code>
+</td><td valign="top" width="70%">大于等于，二元操作符
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>&lt;=</code>
+</td><td valign="top" width="70%">小于等于，二元操作符
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>&amp;</code>
+</td><td valign="top" width="70%">与操作，二元操作符，向量模式
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>&amp;&amp;</code>
+</td><td valign="top" width="70%">与操作，二元操作符，不是向量模式
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>|</code>
+</td><td valign="top" width="70%">或操作，二元操作符，向量模式
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>||</code>
+</td><td valign="top" width="70%">或操作，二元操作符，不是向量模式
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>&lt;-</code>
+</td><td valign="top" width="70%">左赋值，二元操作符
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>-&gt;</code>
+</td><td valign="top" width="70%">右赋值，二元操作符
+<br></td></tr><tr align="left"><td valign="top" width="10%"><code>$</code>
+</td><td valign="top" width="70%">列表子集，二元操作符
+        <br></td></tr></table>
+</blockquote>
+
+   <p>除了语法上，操作符使用和函数调用没有差异。
+事实上，<code>x + y</code> 和 <code>"+"(x, y)</code> 等价。
+注意既然 <span class="samp">+</span> 不是一个标准的函数名字，
+，那么它就需要被引号括起来。
+
+   <p><a name="index-_00cf_00f2_00c1_00bf-92"></a>R 同时处理数据的整个向量，并且大多数元素操作符和基本的数学函数如
+<code>log</code>是向量模式的（和上面表格中提示的一样）。这意味着如果两个一样
+长度的向量相加会隐式依据向量索引循环计算得到一个
+含有元素方式加和结果的向量。
+这种用法同样适合其它操作符，如<code>-</code>，<code>*</code>，
+和 <code>/</code>，以及可以推广到更高维的结构。
+需要注意的是，两个矩阵的相乘不会得到
+通常的矩阵乘积（<code>%*%</code>操作符用于这种目的）。
+一些和向量操作相关的要点将会在
+<a href="Elementary-arithmetic-operations.html#Elementary-arithmetic-operations">Elementary arithmetic operations</a> 部分讨论。
+<!-- FIXME insert reference -->
+
+   <p>为访问向量的某个元素，我们常常使用
+<code>x[i]</code> 语句。
+
+<pre class="example">     &gt; x &lt;- rnorm(5)
+     &gt; x
+     [1] -0.12526937 -0.27961154 -1.03718717 -0.08156527  1.37167090
+     &gt; x[2]
+     [1] -0.2796115
+</pre>
+   <p>列表分量则更多地用 <code>x$a</code> 和 <code>x[[i]]</code> 方式访问。
+
+<pre class="example">     &gt; x &lt;- options()
+     &gt; x$prompt
+     [1] "&gt; "
+</pre>
+   <p>索引构造（Indexing constructs）同样可以出现在一个赋值操作的右边。
+<a name="index-_00b8_00b3_00d6_00b5-93"></a>
+和其它操作符类似，索引实际上也是通过函数实现，
+可以用 <code>"["(x, 2)</code> 代替 <code>x[2]</code>。
+
+   <p>R的索引操作含有许多高级特性。这部分内容将在
+<a href="Indexing.html#Indexing">Indexing</a>部分进一步描述。
+
+   </body></html>
+

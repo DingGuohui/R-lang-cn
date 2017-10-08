@@ -1,0 +1,131 @@
+<html lang="zh">
+<head>
+<title>Objects - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Introduction.html#Introduction" title="Introduction">
+<link rel="next" href="Evaluation-of-expressions.html#Evaluation-of-expressions" title="Evaluation of expressions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Objects"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Evaluation-of-expressions.html#Evaluation-of-expressions">Evaluation of expressions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Introduction.html#Introduction">Introduction</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr><br>
+</div>
+
+<h2 class="chapter">2 对象</h2>
+
+<!-- needs to be clarified. What is a pointer, what is the pointed objcet, -->
+<!-- what is the context of the pointed objctt? -->
+<p>在所有编程语言中，
+<a name="index-_00b1_00e4_00c1_00bf-2"></a>变量提供了一种访问内存中数据的方法。
+ R 没有提供直接访问计算机内存的方法，
+但提供了许多我们称之为对象的特殊数据结构。
+<a name="index-_00b6_00d4_00cf_00f3-3"></a>这些对象通过变量或者符号（symbol）访问。不过在 R 语言里面，
+符号本身就是对象并且和使用其它对象一样的方式使用。
+这和许多其它语言不同，但有广泛的影响。
+
+   <p>在本章，我们会给出R里面各种数据结构的初步描述。
+对这些数据结构更为详细的讨论会在后面的章节中展开。
+R语言特有的函数 <code>typeof</code>
+<a name="index-typeof-4"></a><a name="index-_00c0_00e0_00d0_00cd-5"></a>返回R对象的<dfn>类型</dfn>。注意在
+R 底层的 C 代码中，所有对象都是指向一个有类型定义
+<code>SEXPREC</code>的结构体（structure）的指针；不同的R数据类型在 C 里面用
+决定结构体各部分信息的 <code>SEXPTYPE</code> 表示。
+
+   <p>下面的表格描述了
+<code>typeof</code> 可能的返回值以及它们的涵义。
+
+<!-- FIXME: Actually, the *VALUES* returned by typeof() are character -->
+<!-- strings. -->
+<blockquote>
+        <p><table summary=""><tr align="left"><td valign="top" width="20%"><code>NULL</code>
+</td><td valign="top" width="70%">空
+<br></td></tr><tr align="left"><td valign="top" width="20%"><code>symbol</code>
+</td><td valign="top" width="70%">一个变量名字
+<br></td></tr><tr align="left"><td valign="top" width="20%"><code>pairlist</code>
+</td><td valign="top" width="70%">成对列表对象
+<br></td></tr><tr align="left"><td valign="top" width="20%"><code>closure</code> </td><td valign="top" width="70%">一个函数
+<br></td></tr><tr align="left"><td valign="top" width="20%"><code>environment</code> </td><td valign="top" width="70%">一个环境
+<a name="index-_00b8_00b3_00d6_00b5_002c-_00d3_00c6_00cf_00d0_00a3_00a8lazy_00a3_00a9-6"></a><br></td></tr><tr align="left"><td valign="top" width="20%"><code>promise</code>  </td><td valign="top" width="70%">一个用于实现悠闲赋值的对象
+<br></td></tr><tr align="left"><td valign="top" width="20%"><code>language</code> </td><td valign="top" width="70%">一个 R 语言构建
+<br></td></tr><tr align="left"><td valign="top" width="20%"><code>special</code>  </td><td valign="top" width="70%">一个不可针对参数求值的内置函数
+<br></td></tr><tr align="left"><td valign="top" width="20%"><code>builtin</code> </td><td valign="top" width="70%">一个可针对参数求值的内置函数
+<!-- FIXME: in SEXPTYPE but not here ... -->
+<!-- @item @code{char} @ a `scalar' string object (internal only) *** -->
+<!-- </FIXME> -->
+<br></td></tr><tr align="left"><td valign="top" width="20%"><code>logical</code> </td><td valign="top" width="70%">含逻辑值的向量
+<br></td></tr><tr align="left"><td valign="top" width="20%"><code>integer</code> </td><td valign="top" width="70%">含整数值的向量
+<br></td></tr><tr align="left"><td valign="top" width="20%"><code>double</code>  </td><td valign="top" width="70%">含实数值的向量
+<br></td></tr><tr align="left"><td valign="top" width="20%"><code>complex</code> </td><td valign="top" width="70%">含复数值的向量
+<br></td></tr><tr align="left"><td valign="top" width="20%"><code>character</code> </td><td valign="top" width="70%">含字符值的向量
+<br></td></tr><tr align="left"><td valign="top" width="20%"><code>...</code> </td><td valign="top" width="70%">特定变量长度参数 ***
+<br></td></tr><tr align="left"><td valign="top" width="20%"><code>any</code> </td><td valign="top" width="70%">一个可以匹配任何类型的特殊类型 ***
+<br></td></tr><tr align="left"><td valign="top" width="20%"><code>expression</code> </td><td valign="top" width="70%">一个表达式对象
+<br></td></tr><tr align="left"><td valign="top" width="20%"><code>list</code> </td><td valign="top" width="70%">一个列表
+<!-- FIXME: in SEXPTYPE but not here ... -->
+<!-- @item BCODESXP @tab byte code -->
+<!-- </FIXME> -->
+<br></td></tr><tr align="left"><td valign="top" width="20%"><code>externalptr</code> </td><td valign="top" width="70%">一个外表指针对象
+<br></td></tr><tr align="left"><td valign="top" width="20%"><code>weakref</code> </td><td valign="top" width="70%">一个弱引用对象（a weak reference object）
+<br></td></tr><tr align="left"><td valign="top" width="20%"><code>raw</code> </td><td valign="top" width="70%">一个字节元素向量
+        <br></td></tr></table>
+</blockquote>
+
+<p class="noindent">我认为用户不用深入以`***'标记的条目，至少没有想象的那么容易；
+但是可以多看一些例子。
+
+   <p><a name="index-mode-7"></a><a name="index-_00c4_00a3_00ca_00bd-8"></a>根据 Becker，Chambers &amp; Wilks (1988)中的说明，函数 <code>mode</code> 返回对象的 <dfn>模式</dfn>信息，
+并且和其它S语言的变种完全兼容。
+<!-- FIXME: -->
+<!-- Should say that many R functions, such as vector(), actually have an -->
+<!-- argument `mode' rather than `type'.  E.g., vector(mode = "double") -->
+<!-- actually creates an object of *type* "double" but *mode* "numeric". -->
+<!-- </FIXME> -->
+<a name="index-storage_002emode-9"></a>最后，同样基于Becker et al. (1988)的考虑，函数<code>storage.mode</code>返回其
+参数的<dfn>存储模式</dfn>（storage mode）。
+该函数常常用于，在外部语言（如C或FORTRAN）中调用函数时确保R对象
+有被调用的程序所期望的数据对象。（在S语言里面，整数值或实数值向量都是
+<code>"numeric"</code>模式，因此它们的存储模式需要
+区分。）
+
+<pre class="example">     &gt; x &lt;- 1:3
+     &gt; typeof(x)
+     [1] "integer"
+     &gt; mode(x)
+     [1] "numeric"
+     &gt; storage.mode(x)
+     [1] "integer"
+</pre>
+   <p>R
+<a name="index-_00b6_00d4_00cf_00f3-10"></a>在计算过程中，对象常常需要强制转换成
+<a name="index-_00c0_00e0_00d0_00cd-11"></a>不同的类型（type）。
+有许多函数可用于显式的强制转换。
+<a name="index-_00c7_00bf_00d6_00c6_00d7_00aa_00bb_00bb-12"></a>在仅仅用 R 语言编程的时候，一个对象的类型通常不会影响计算结果，
+但是当混合使用外部编程语言或不同的操作系统时，
+常常需要保证对象类型的正确。
+
+<ul class="menu">
+<li><a accesskey="1" href="Basic-types.html#Basic-types">Basic types</a>:  基本类型
+<li><a accesskey="2" href="Attributes.html#Attributes">Attributes</a>:  属性
+<li><a accesskey="3" href="Special-compound-objects.html#Special-compound-objects">Special compound objects</a>:  特殊的混合对象
+</ul>
+
+   </body></html>
+

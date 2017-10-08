@@ -1,0 +1,51 @@
+<html lang="zh">
+<head>
+<title>Names - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Attributes.html#Attributes" title="Attributes">
+<link rel="prev" href="Attributes.html#Attributes" title="Attributes">
+<link rel="next" href="Dimensions.html#Dimensions" title="Dimensions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Names"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Dimensions.html#Dimensions">Dimensions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Attributes.html#Attributes">Attributes</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Attributes.html#Attributes">Attributes</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">2.2.1 名字</h4>
+
+<p>如果存在<code>names</code>属性，<code>names</code>属性会为一个向量或列表中的每个元素
+加上标签。当对象被打印时，<code>names</code>属性同样用于为元素加上标签
+（在存在<code>names</code>属性的情况下）。
+<code>names</code>属性还可以用作索引，例如
+<code>quantile(x)["25%"]</code>。
+
+   <p>可以通过 <code>names</code> 和 <code>names&lt;-</code> 构造取得和设置名字。
+<a name="index-names-75"></a><a name="index-names_003c_002d-76"></a><a name="index-_00c0_00e0_00d0_00cd-77"></a>后者将会执行必要的一致性检验以保证名字属性有适合的类型和长度。
+
+   <p>成对列表和一维数组的处理比较特殊。对于成对列表对象，
+一个虚拟的<code>names</code>属性将被使用；<code>names</code>属性实际上
+通过列表分量的标签构建。
+对于一维数组，<code>names</code>属性事实上是访问
+<code>dimnames[[1]]</code>。
+
+   </body></html>
+

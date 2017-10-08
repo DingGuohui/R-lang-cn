@@ -1,0 +1,54 @@
+<html lang="zh">
+<head>
+<title>Separators - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Tokens.html#Tokens" title="Tokens">
+<link rel="prev" href="Special-operators.html#Special-operators" title="Special operators">
+<link rel="next" href="Operator-tokens.html#Operator-tokens" title="Operator tokens">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Separators"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Operator-tokens.html#Operator-tokens">Operator tokens</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Special-operators.html#Special-operators">Special operators</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Tokens.html#Tokens">Tokens</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">10.3.5 分隔符</h4>
+
+<p>尽管不是严格的标记，伸展空格字符（空格和制表符）可以用来界定模糊的标记
+（比较一下 <code>x&lt;-5</code> 和 <code>x &lt; -5</code>）。
+
+   <p>新行既可以作标记分隔也可以是表达式终结。如果一个
+表达式可以在一行末结束，解析器会把它当作一行，否则
+新的一行当作空格处理。分号(<span class="samp">;</span>)
+可用来分隔同一行中独立的基本表达式。
+<a name="index-_00b1_00ed_00b4_00ef_00ca_00bd-285"></a>
+有多个规则用于关键字 <code>else</code> ：在一个组合表达式中，
+<code>else</code>前面的新行会被抛弃，而在最外层，
+新行终止了 <code>if</code> 构造，并且随后的 <code>else</code> 会导致
+语法错误。这是一种有点反常的行为，这是由于
+R 需要能以交互模式使用，而且必须在用户一旦键入&lt;RET&gt;时能判断
+一个输入的表达式是否
+是完整的，不完整的或者不合法的。
+
+   <p>逗号(<span class="samp">,</span>) 用于分隔函数参数和多重索引。
+
+   </body></html>
+

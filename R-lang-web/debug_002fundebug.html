@@ -1,0 +1,72 @@
+<html lang="zh">
+<head>
+<title>debug/undebug - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Debugging.html#Debugging" title="Debugging">
+<link rel="prev" href="browser.html#browser" title="browser">
+<link rel="next" href="trace_002funtrace.html#trace_002funtrace" title="trace/untrace">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="debug_002fundebug"></a>Next:&nbsp;<a rel="next" accesskey="n" href="trace_002funtrace.html#trace_002funtrace">trace/untrace</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="browser.html#browser">browser</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Debugging.html#Debugging">Debugging</a>
+<hr><br>
+</div>
+
+<h3 class="section">9.2 调试/不调试</h3>
+
+<p><a name="index-debug-272"></a><a name="index-undebug-273"></a>
+可以通过 <code>debug(</code><var>fun</var><code>)</code> 对任何函数调用调试器。
+随后，只要该函数求值，调试器都会被调用。调试器允许你控制函数主体里面的
+语句求值。在任一语句求值前，该语句会被打印出来并且给出一个特别的提示。
+可以给定任何命令，包括前面表格中有特殊意义的命令。
+
+   <p>通过调用<code>undebug</code>（以函数作为参数）来关闭调试。
+
+<pre class="example">     &gt; debug(mean.default)
+     &gt; mean(1:10)
+     debugging in: mean.default(1:10)
+     debug: {
+         if (na.rm)
+             x &lt;- x[!is.na(x)]
+         trim &lt;- trim[1]
+         n &lt;- length(c(x, recursive = TRUE))
+         if (trim &gt; 0) {
+             if (trim &gt;= 0.5)
+                 return(median(x, na.rm = FALSE))
+             lo &lt;- floor(n * trim) + 1
+             hi &lt;- n + 1 - lo
+             x &lt;- sort(x, partial = unique(c(lo, hi)))[lo:hi]
+             n &lt;- hi - lo + 1
+         }
+         sum(x)/n
+     }
+     Browse[1]&gt;
+     debug: if (na.rm) x &lt;- x[!is.na(x)]
+     Browse[1]&gt;
+     debug: trim &lt;- trim[1]
+     Browse[1]&gt;
+     debug: n &lt;- length(c(x, recursive = TRUE))
+     Browse[1]&gt; c
+     exiting from: mean.default(1:10)
+     [1] 5.5
+</pre>
+   </body></html>
+

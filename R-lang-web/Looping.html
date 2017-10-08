@@ -1,0 +1,60 @@
+<html lang="zh">
+<head>
+<title>Looping - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Control-structures.html#Control-structures" title="Control structures">
+<link rel="prev" href="if.html#if" title="if">
+<link rel="next" href="repeat.html#repeat" title="repeat">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Looping"></a>Next:&nbsp;<a rel="next" accesskey="n" href="repeat.html#repeat">repeat</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="if.html#if">if</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Control-structures.html#Control-structures">Control structures</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">3.2.2 循环控制</h4>
+
+<p>R 有三种语句实现显式的循环控制。<a rel="footnote" href="#fn-1" name="fnd-1"><sup>1</sup></a>
+它们分别是 <code>for</code>， <code>while</code> 和 <code>repeat</code>。
+两个内置的构造 <code>next</code> 和
+<code>break</code> 提供了对求值过程额外的控制。
+这三个语句都返回最后语句的求值结果。
+因此，可以把这些语句的结果值赋给一个符号，尽管这种做法不太常见。
+R 还提供了其它一些隐式的循环控制函数，如
+<code>tapply</code>，<code>apply</code> 和 <code>lapply</code>。
+此外，许多操作，特别算术操作，都是向量模式的，因此
+你可能不太需要使用循环。
+
+   <p>有两种语句可用于显式地循环控制。
+它们是<code>break</code> 和 <code>next</code>。
+<a name="index-break-96"></a><a name="index-next-97"></a><code>break</code> 语句可以从当前运行的最内部的循环里面跳出。
+<code>next</code> 语句会导致控制立即返回到循环的起点，
+循环的下一次重复（如还有重复的话）然后被执行。当前循环中，
+<code>next</code> 后面的语句不会被执行。
+
+   <div class="footnote">
+<hr>
+<h4>Footnotes</h4><p class="footnote"><small>[<a name="fn-1" href="#fnd-1">1</a>]</small> 循环指的是对某个语句或者语句块进行循环求值。</p>
+
+   <p><hr></div>
+
+   </body></html>
+

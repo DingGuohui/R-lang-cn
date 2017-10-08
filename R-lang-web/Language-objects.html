@@ -1,0 +1,59 @@
+<html lang="zh">
+<head>
+<title>Language objects - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Basic-types.html#Basic-types" title="Basic types">
+<link rel="prev" href="List-objects.html#List-objects" title="List objects">
+<link rel="next" href="Expression-objects.html#Expression-objects" title="Expression objects">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Language-objects"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Expression-objects.html#Expression-objects">Expression objects</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="List-objects.html#List-objects">List objects</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Basic-types.html#Basic-types">Basic types</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">2.1.3 语言对象</h4>
+
+<p>三种对象类型构成了 R 语言的全部。
+它们分别是<em>调用类型（calls）</em>，<em>表达式类型（expressions）</em>
+和<em>命名类型（names）</em>。
+<a name="index-_00b5_00f7_00d3_00c3_00c0_00e0_00d0_00cd-20"></a><a name="index-_00b1_00ed_00b4_00ef_00ca_00bd_00c0_00e0_00d0_00cd-21"></a><a name="index-_00c3_00fc_00c3_00fb_00c0_00e0_00d0_00cd-22"></a><!-- FIXME: -->
+<!-- Better consistently refer to objects of type "expression" as -->
+<!-- ``expression objects'' ... -->
+既然 R 有 <code>"expression"</code> 类型的对象，所以我们应该尽量避免
+在其它地方使用&ldquo;表达式&rdquo;这个词。需要注意的是，
+语法上正确的表达式会被看作是<em>程序语句（statements）</em>。
+<!-- </FIXME> -->
+<a name="index-_00b3_00cc_00d0_00f2_00d3_00ef_00be_00e4-23"></a>
+这些对象分别有 <code>"call"</code>， <code>"expression"</code>，和
+<code>"name"</code> 三种模式。
+<!-- FIXME: Shouldn't we explain their types? -->
+
+   <p>这些对象可以利用 <code>quote</code> 机制从表达式直接创建，
+并且可以通过函数 <code>as.list</code>和 <code>as.call</code> 与列表相互转换。
+<a name="index-quote-24"></a><a name="index-as_002elist-25"></a><a name="index-as_002ecall-26"></a><a name="index-_00bd_00e2_00ce_00f6-27"></a>解析树的分量可以通过标准的索引操作析取。
+
+<ul class="menu">
+<li><a accesskey="1" href="Symbol-objects.html#Symbol-objects">Symbol objects</a>: 符号对象
+</ul>
+
+   </body></html>
+

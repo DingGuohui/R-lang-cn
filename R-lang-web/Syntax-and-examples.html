@@ -1,0 +1,62 @@
+<html lang="zh">
+<head>
+<title>Syntax and examples - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Writing-functions.html#Writing-functions" title="Writing functions">
+<link rel="prev" href="Writing-functions.html#Writing-functions" title="Writing functions">
+<link rel="next" href="Arguments.html#Arguments" title="Arguments">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Syntax-and-examples"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Arguments.html#Arguments">Arguments</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Writing-functions.html#Writing-functions">Writing functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Writing-functions.html#Writing-functions">Writing functions</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">4.1.1 语法和例子</h4>
+
+<p>编写函数的语法如下
+<a name="index-_00ba_00af_00ca_00fd-140"></a>
+<pre class="example">     function ( <var>arglist</var> ) <var>body</var>
+</pre>
+   <p>函数声明的第一个分量就是关键字
+<code>function</code>。它告诉 R你想创建一个函数。
+
+   <p>参数列表是以逗号分割的形式参数列表。
+<a name="index-_00b2_00ce_00ca_00fd-141"></a>形式参数可以是符号，
+<var>symbol</var><span class="samp"> = </span><var>expression</var>形式的语句，或者特殊形式参数
+<span class="samp">...</span>。
+
+   <p><em>函数主体</em>可以是任何合法的 R 表达式。通常，函数主体是
+一组由大括弧 (<span class="samp">{</span> 和 <span class="samp">}</span>) 括起来的表达式。
+
+   <p>一般情况下，
+<a name="index-_00ba_00af_00ca_00fd-142"></a>函数赋给一个符号，但这不是必要的。
+调用 <code>function</code> 所返回的值就是函数。如果它没有命名，那么它就是
+一个匿名函数。
+<a name="index-_00ba_00af_00ca_00fd_002c-_00c4_00e4_00c3_00fb-143"></a>匿名函数常常作为参数用于其它函数，如
+<code>apply</code> 函数族或者 <code>outer</code>。
+
+   <p>这里是一个简单的例子： <code>echo &lt;- function(x) print(x)</code>。
+因此 <code>echo</code> 是一个单参数的函数，当
+<code>echo</code> 被调用时，它会打印它的参数。
+
+   </body></html>
+

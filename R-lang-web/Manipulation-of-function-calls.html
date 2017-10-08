@@ -1,0 +1,160 @@
+<html lang="zh">
+<head>
+<title>Manipulation of function calls - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Computing-on-the-language.html#Computing-on-the-language" title="Computing on the language">
+<link rel="prev" href="Evaluation-of-expression-objects.html#Evaluation-of-expression-objects" title="Evaluation of expression objects">
+<link rel="next" href="Manipulation-of-functions.html#Manipulation-of-functions" title="Manipulation of functions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Manipulation-of-function-calls"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Manipulation-of-functions.html#Manipulation-of-functions">Manipulation of functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Evaluation-of-expression-objects.html#Evaluation-of-expression-objects">Evaluation of expression objects</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Computing-on-the-language.html#Computing-on-the-language">Computing on the language</a>
+<hr><br>
+</div>
+
+<h3 class="section">6.5 函数调用的操作</h3>
+
+<p>可以通过查看<code>sys.call</code>的结果
+<a name="index-_00ba_00af_00ca_00fd-218"></a>来了解一个函数是如何被调用的。
+下面是一个具体的例子，简单展示了一个函数的调用情况：
+
+<pre class="example">     &gt; f &lt;- function(x, y, ...) sys.call()
+     &gt; f(y = 1, 2, z = 3, 4)
+     f(y = 1, 2, z = 3, 4)
+</pre>
+   <p>但是，除了调试，这不总是有用的，因为它需要函数跟踪参数匹配以
+解释函数调用情况。例如，在上面的例子中，它必须
+可以发现<code>x</code> 的第二个事实参数被第一个形式参数匹配。
+
+   <p>通常，我们需要所有事实参数和对应的形式参数绑定的调用。为
+达到这个目的，可以采用 <code>match.call</code>。
+这里是前述例子的一个变种，就是一个通过参数匹配返回
+它自身调用的函数
+
+<pre class="example">     &gt; f &lt;- function(x, y, ...) match.call()
+     &gt; f(y = 1, 2, z = 3, 4)
+     f(x = 2, y = 1, z = 3, 4)
+</pre>
+   <p>注意第二个参数现在和<code>x</code>匹配，并且
+在结果出现在对应的位置中。
+
+   <p>该项技术的最初使用是通过一样的参数调用另外一个函数，
+但可能会删除或增加一些其它的参数。一个典型的应用可以参见
+<code>lm</code> 函数代码的起始部分：
+
+<pre class="example">         mf &lt;- cl &lt;- match.call()
+         mf$singular.ok &lt;- mf$model &lt;- mf$method &lt;- NULL
+         mf$x &lt;- mf$y &lt;- mf$qr &lt;- mf$contrasts &lt;- NULL
+         mf$drop.unused.levels &lt;- TRUE
+         mf[[1]] &lt;- as.name("model.frame")
+         mf &lt;- eval(mf, sys.frame(sys.parent()))
+</pre>
+   <p>注意结果调用在父框架下被求值。
+<a name="index-_00b8_00b3_00d6_00b5-219"></a>在该框架下可以确定相关的表达式是有意义的。
+该调用可以看作是一个列表对象，它的第一个元素是函数名字，其它元素
+是以形式参数名字作为标签的事实参数表达式。
+因此，去除不想要的参数的技术可用来分配
+<code>NULL</code>，如第2和第3行所示，和增加一个我们用标签列表赋值的参数（
+这里传递<code>drop.unused.levels = TRUE</code>），如第4行所示。
+<a name="index-_00b8_00b3_00d6_00b5-220"></a>为了改变被调用的函数的名字，既可以用这里的<code>as.name("model.frame")</code>构造
+也可以用<code>quote(model.frame)</code> 给列表的第一个元素赋值并且确信
+该值就是名字。
+
+   <p><code>match.call</code>函数有一个<code>expand.dots</code>的参数，它是一个开关，如果设为
+<code>FALSE</code>将会使得所有<span class="samp">...</span> 参数
+成为标签为 <span class="samp">...</span> 的单个参数。
+<a name="index-match_002ecall-221"></a>
+<pre class="example">     &gt; f &lt;- function(x, y, ...) match.call(expand.dots = FALSE)
+     &gt; f(y = 1, 2, z = 3, 4)
+     f(x = 2, y = 1, ... = list(z = 3, 4))
+</pre>
+   <p><span class="samp">...</span> 参数是一个列表（准确地说是成对列表），
+它和 S里面调用 <code>list</code>
+不一样：
+
+<pre class="example">     &gt; e1 &lt;- f(y = 1, 2, z = 3, 4)$...
+     &gt; e1
+     $z
+     [1] 3
+     
+     [[2]]
+     [1] 4
+</pre>
+   <p>使用这种形式的 <code>match.call</code> 的原因是简单地摆脱任何
+<span class="samp">...</span> 参数不至于传递一些函数未知的没有详细说明的
+参数。下面是一个来自 <code>plot.formula</code> 的例子：
+
+<pre class="example">     m &lt;- match.call(expand.dots = FALSE)
+     m$... &lt;- NULL
+     m[[1]] &lt;- "model.frame"
+</pre>
+   <p>一个更加精细的应用是函数 <code>update.default</code>。可以在该函数中的
+可选额外参数集合中增加，替换，或取消一些原始调用的参数：
+
+<pre class="example">     extras &lt;- match.call(expand.dots = FALSE)$...
+     if (length(extras) &gt; 0) {
+         existing &lt;- !is.na(match(names(extras), names(call)))
+         for (a in names(extras)[existing]) call[[a]] &lt;- extras[[a]]
+         if (any(!existing)) {
+             call &lt;- c(as.list(call), extras[!existing])
+             call &lt;- as.call(call)
+         }
+     }
+</pre>
+   <p>注意，一旦 <code>extras[[a]] == NULL</code>，
+单个修改已经存在的参数需要小心一点。
+如前所示，在没有强迫的情况下调用一个对象时，
+连接操作（concatenation）不能使用；
+这是一个可以论证的程序问题。
+
+   <p>为创建函数调用，还有两个额外的函数可以使用，它们分别是
+<code>call</code> 和 <code>do.call</code>。
+
+   <p>函数 <code>call</code> 允许通过函数名字和参数列表
+创建一个调用对象
+
+<pre class="example">     &gt; x &lt;- 10.5
+     &gt; call("round", x)
+     round(10.5)
+</pre>
+   <p>如上所见， 是<code>x</code>的值而不是符号
+<a name="index-_00b7_00fb_00ba_00c5-222"></a>加入了调用中，因此和 <code>round(x)</code>有明显的差异。
+这种形式用的非常地少，但是当一个函数的名字可以作为
+一个字符变量时，这会非常有用。
+
+   <p>函数 <code>do.call</code> 是相关的，但会立即对调用求值和
+从含有所有参数的模式为<code>"list"</code>的对象里面获取参数。
+一个很自然的应用是当我们向把一个函数（如<code>cbind</code>）
+用于一个列表或数据框的所有对象时。
+<a name="index-do_002ecall-223"></a>
+<pre class="example">     is.na.data.frame &lt;- function (x) {
+         y &lt;- do.call("cbind", lapply(x, "is.na"))
+         rownames(y) &lt;- row.names(x)
+         y
+     }
+</pre>
+   <p>其它一些应用包括基于 <code>do.call("f",
+list(...))</code> 构造的变种。但是，我们必须知道这包括实际参数调用
+前的参数求值。这可能阻止函数自身的悠闲求值和参数替换方面。
+一个类似的注意同样适用于<code>call</code>函数。
+
+   </body></html>
+

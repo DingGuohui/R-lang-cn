@@ -1,0 +1,56 @@
+<html lang="zh">
+<head>
+<title>Method dispatching - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Object_002doriented-programming.html#Object_002doriented-programming" title="Object-oriented programming">
+<link rel="prev" href="Inheritance.html#Inheritance" title="Inheritance">
+<link rel="next" href="UseMethod.html#UseMethod" title="UseMethod">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Method-dispatching"></a>Next:&nbsp;<a rel="next" accesskey="n" href="UseMethod.html#UseMethod">UseMethod</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Inheritance.html#Inheritance">Inheritance</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Object_002doriented-programming.html#Object_002doriented-programming">Object-oriented programming</a>
+<hr><br>
+</div>
+
+<h3 class="section">5.3 方法分发</h3>
+
+<p><a name="index-_00ba_00af_00ca_00fd_002c-_00b7_00ba_00d0_00cd-191"></a>泛型函数的语句比较单一。它们常常以 <code>foo &lt;- function(x, ...) UseMethod("foo",
+x)</code>的形式出现。 <code>UseMethod</code> 的语义是决定一个恰当的方法，然后
+用同样的参数以调用泛型时一样的参数顺序调用该方法，就好像该调用直接对
+方法进行操作。
+
+   <p>为了确定正确的方法，泛型的第一个参数的类属性会被用于搜寻正确方法。
+<a name="index-_00c3_00fb_00d7_00d6-192"></a>泛型函数的名字和第一个参数的类属性组成 <var>generic</var><code>.</code><var>class</var>
+的形式，然后以此为函数名进行搜索。如果函数找到，则它将会被使用。
+如果不能找到这样的函数，类属性的第二个元素就会被使用，如此直到所有类属性
+的元素被用光。
+如果仍然没有方法被发现，方法 <var>generic</var><code>.</code><var>default</var> 将会被使用。
+如果泛型函数的第一个参数没有类属性，也是调用 <var>generic</var><code>.</code><var>default</var>。
+既然引入了命名空间的概念，方法可能不能直接通过名字访问（即
+<code>get("</code><var>generic</var><code>.</code><var>class</var><code>")</code>会失败），但它们可以通过
+命令 <code>getS3method("</code><var>generic</var><code>","</code><var>class</var><code>")</code> 访问。
+
+   <p><a name="index-_00b6_00d4_00cf_00f3-193"></a>任何对象都可以有 <code>class</code> 属性。该属性可以有任何数目的元素。
+这些元素是定义一个类的字符串。
+当一个泛型函数被调用时，首先检查它的第一个参数的类。
+
+   </body></html>
+

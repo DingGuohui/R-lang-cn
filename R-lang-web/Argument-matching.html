@@ -1,0 +1,68 @@
+<html lang="zh">
+<head>
+<title>Argument matching - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Evaluation.html#Evaluation" title="Evaluation">
+<link rel="prev" href="Evaluation-environment.html#Evaluation-environment" title="Evaluation environment">
+<link rel="next" href="Argument-evaluation.html#Argument-evaluation" title="Argument evaluation">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Argument-matching"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Argument-evaluation.html#Argument-evaluation">Argument evaluation</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Evaluation-environment.html#Evaluation-environment">Evaluation environment</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Evaluation.html#Evaluation">Evaluation</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">4.3.2 参数匹配</h4>
+
+<p>函数求值里面发生的第一件事就是
+<a name="index-_00ba_00af_00ca_00fd-151"></a>将形式参数和实际的或提供的参数匹配。
+这由三步完成：
+
+     <ol type=1 start=1>
+
+     <li><strong>标签的精确匹配</strong>。
+<a name="index-_00c3_00fb_00d7_00d6-152"></a>对于任何一个有名字的给定参数，形式参数列表会用来仔细搜索对应的名字精确
+匹配的参数。一个形式参数对多个实际参数是不允许的，反之也然。
+
+     <li><strong>标签的局部匹配</strong>。
+任一留下的有名字的给定参数将和余下的形式参数进行局部匹配。
+如果给定参数的名字和形式参数的前面部分精确吻合，那么这两个参数
+看作是相互匹配的。多重匹配是不允许的。注意，如果 <code>f &lt;- function(fumble,
+fooey) fbody</code>，那么 <code>f(f = 1, fo = 2)</code> 是违法的，尽管第二个参数仅匹配
+<code>fooey</code>。而 <code>f(f = 1, fooey =
+2)</code> <em>是</em>合法的，因为第二个参数精确匹配会在考虑局部匹配前去掉了。
+如果形式参数包括 <span class="samp">...</span>，那么局部匹配仅仅用于优先于它的参数。
+
+     <li><strong>位置匹配</strong>。
+任何没有匹配上的形式参数依次和<em>没有命名</em>的给定参数比对。
+如果有一个<span class="samp">...</span> 参数，它将吸收所有余下的参数，无论它加了
+标签还是没有标签。
+
+        </ol>
+
+   <p>如果还有没被匹配上的参数，那么一个错误将会被声明。
+
+   <p>参数匹配可以用函数 <code>match.arg</code>，
+<code>match.call</code> 和 <code>match.fun</code> 来实现扩展。
+<a name="index-match_002earg-153"></a><a name="index-match_002ecall-154"></a><a name="index-match_002efun-155"></a>可以通过<code>pmatch</code>访问R的局部匹配算法。
+
+   </body></html>
+

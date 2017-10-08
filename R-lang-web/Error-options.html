@@ -1,0 +1,52 @@
+<html lang="zh">
+<head>
+<title>Error options - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Exception-handling.html#Exception-handling" title="Exception handling">
+<link rel="prev" href="on_002eexit.html#on_002eexit" title="on.exit">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Error-options"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="on_002eexit.html#on_002eexit">on.exit</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Exception-handling.html#Exception-handling">Exception handling</a>
+<hr><br>
+</div>
+
+<h3 class="section">8.4 错误可选项</h3>
+
+<p>有几个 <code>options</code> 变量可用来控制 R
+的错误和警告处理。它们列举如下。
+
+     <dl>
+<dt><span class="samp">warn</span><dd>控制警告信息的打印。
+<br><dt><span class="samp">warning.expression</span><dd>设置一个表达式，当警告发生时执行。常规打印的警告在该选项设置时被抑制了。
+<br><dt><span class="samp">error</span><dd>设置一个错误发生时会被执行的表达式。
+错误和警告信息会在该表达式求值前打印出来了。
+</dl>
+
+   <p>通过 <code>options("error")</code> 设置的表达式在调用 <code>on.exit</code>
+前求值。
+
+   <p>当有错误发生，我们可以用
+<code>options(error = expression(q("yes")))</code>让R程序终止。
+在这种情况下，一个错误会导致
+R 终止但全局环境会被保存。
+
+   </body></html>
+

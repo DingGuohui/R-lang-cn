@@ -1,0 +1,50 @@
+<html lang="zh">
+<head>
+<title>Dot-dot-dot - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Basic-types.html#Basic-types" title="Basic types">
+<link rel="prev" href="Promise-objects.html#Promise-objects" title="Promise objects">
+<link rel="next" href="Environment-objects.html#Environment-objects" title="Environment objects">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Dot_002ddot_002ddot"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Environment-objects.html#Environment-objects">Environment objects</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Promise-objects.html#Promise-objects">Promise objects</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Basic-types.html#Basic-types">Basic types</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">2.1.9 ...对象</h4>
+
+<p><span class="samp">...</span> 对象类型以列表形式保存。<span class="samp">...</span> 的分量
+在 C 代码里面可以像常规的列表一样访问，但在解释型的代码里面
+不像一个对象那样容易访问。
+该对象可以捕获作为一个列表，
+因此在函数 <code>table</code> 的实现代码中，我们可以看到下面的例子
+
+<pre class="example">         args &lt;- list(...)
+     ## ....
+         for (a in args) {
+     ## ....
+</pre>
+   <p><a name="index-_00ba_00af_00ca_00fd-60"></a><a name="index-_00ba_00af_00ca_00fd_00b2_00ce_00ca_00fd-61"></a>如果一个函数以 <span class="samp">...</span> 作为形式参数，那么任何不匹配形式参数的
+实际参数都将匹配<span class="samp">...</span>。
+
+   </body></html>
+

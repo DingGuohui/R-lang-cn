@@ -1,0 +1,93 @@
+<html lang="zh">
+<head>
+<title>if - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Control-structures.html#Control-structures" title="Control structures">
+<link rel="prev" href="Control-structures.html#Control-structures" title="Control structures">
+<link rel="next" href="Looping.html#Looping" title="Looping">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="if"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Looping.html#Looping">Looping</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Control-structures.html#Control-structures">Control structures</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Control-structures.html#Control-structures">Control structures</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">3.2.1 if 语句</h4>
+
+<p><code>if</code>/<code>else</code>语句有条件地对两个语句求值。
+该句式的<em>条件</em>语句会被求值，如果它的
+<em>值</em> 是 <code>TRUE</code> 那么第一个语句将会被执行；
+否则第二个语句会被执行。
+<code>if</code>/<code>else</code> 语句返回所选语句求值结果并作为它的值。
+语法形式为
+
+<pre class="example">     if ( <var>statement1</var> )
+         <var>statement2</var>
+     else
+         <var>statement3</var>
+</pre>
+   <p>首先，<var>statement1</var> 被求值得到 <var>value1</var>。如果
+<var>value1</var> 是一个首元素为 <code>TRUE</code>的逻辑向量，那么
+<var>statement2</var> 将会被求值。如果<var>value1</var>的第一个元素是
+<code>FALSE</code> 那么<var>statement3</var> 将会被求值。如果 <var>value1</var>是一个数值向量，
+那么 <var>statement3</var> 在 <var>value1</var>的第一个元素是零的时候求值，否则
+<var>statement2</var> 将会被求值。
+只有 <var>value1</var> 的第一个元素才会被使用。其它元素都会被忽略的。
+如果 <var>value1</var> 是逻辑和数值向量以外的向量，将会返回错误。
+
+   <p>If/else 语句可以用来防止一些数值计算问题，如对负数进行对数操作。
+因为 if/else 语句和其它语句一样，你可以把它们的值赋给其它变量。
+下面的两个例子等价。
+
+<pre class="example">     &gt; if( any(x &lt;= 0) ) y &lt;- log(1+x) else y &lt;- log(x)
+     &gt; y &lt;- if( any(x &lt;= 0) ) log(1+x) else log(x)
+</pre>
+   <p><code>else</code> 子句是可选的。 语句 <code>if(any(x &lt;= 0))
+x &lt;- x[x &lt;= 0]</code> 是合法的。如果 <code>if</code> 语句不在一个句块中，那么
+<code>else</code>子句（假定存在）必须和
+<var>statement1</var>在同一行。否则，在<var>statement1</var>后的新一行将产生
+一个语法上完整并会被求值的语句。
+
+   <p>If/else 语句可以被嵌套。
+
+<pre class="example">     if ( <var>statement1</var> )
+         <var>statement2</var>
+     else if ( <var>statement3</var> )
+         <var>statement4</var>
+     else if ( <var>statement5</var> )
+         <var>statement6</var>
+     else
+         <var>statement8</var>
+</pre>
+   <p>一个偶数编号的语句将会被求值并且返回结果值。
+如果忽略可选的 <code>else</code> 子句，并且所有奇数编号的
+<var>statement</var> 的值都是 <code>FALSE</code>，那么就没有语句会被
+求值则返回<code>NULL</code>。
+
+   <p>奇数编号的<var>statement</var>会依次求值，直到一个值为
+<code>TRUE</code>，然后对应的偶数编号的
+<var>statement</var> 会被求值。在这个例子中，<var>statement6</var>
+当且仅当 <var>statement1</var> 为 <code>FALSE</code>，
+<var>statement3</var> 为 <code>FALSE</code> 和 <var>statement5</var> 是 <code>TRUE</code>的情况下才会
+被求值。<code>else if</code>子句的数目是没有限制的。
+
+   </body></html>
+

@@ -1,0 +1,73 @@
+<html lang="zh">
+<head>
+<title>Debugging - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Exception-handling.html#Exception-handling" title="Exception handling">
+<link rel="next" href="Parser.html#Parser" title="Parser">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Debugging"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Parser.html#Parser">Parser</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Exception-handling.html#Exception-handling">Exception handling</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr><br>
+</div>
+
+<h2 class="chapter">9 调试</h2>
+
+<p>代码调试通常是一门艺术。 R 提供了多个工具用于帮助
+用户找到代码中的问题。这些工具会使代码在特定的地方暂停
+执行，并且可以跟踪计算过程的当前状态。
+
+   <p>大多数调试都是通过 <code>browser</code> 或 <code>debug</code> 来实现的。
+这两个函数依赖的内在机制是一样的，二者都给用户提供了特别的提示。
+任何命令都可以在提示下键入。该命令的求值环境
+<a name="index-_00bb_00b7_00be_00b3-268"></a>是当前的激活环境。
+这使得你可以检测任何变量等的当前状态。
+
+   <p>R里面有五个不同解释方式的特殊命令。它们是
+
+     <dl>
+<dt><span class="samp">&lt;RET&gt;</span><dd>在函数调试时，去下一个语句处。如果<code>browser</code> 被调用，表示继续执行。
+<br><dt><span class="samp">c</span><dt><span class="samp">cont</span><dd>继续执行。
+<br><dt><span class="samp">n</span><dd>执行函数中的下一条语句。这和 <code>browser</code> 作用类似。
+<br><dt><span class="samp">where</span><dd>显示调用堆栈
+<br><dt><span class="samp">Q</span><dd>挂起执行，立即跳到顶层。
+</dl>
+
+   <p><a name="index-_00c3_00fb_00d7_00d6-269"></a>如果一个局部变量的名字和上面列出命令的名字一样，可以用
+<code>get</code> 访问它的值。把局部变量的名字（要加引号）
+作为参数调用<code>get</code>
+将返回它在当前环境中的值。
+<a name="index-_00bb_00b7_00be_00b3-270"></a>
+调试器仅允许对解释型表达式的访问。如果一个函数调用
+外部语言（如 <strong>C</strong>），那么调试器不能访问外部语言的语句。
+执行控制将会在 R 里面求值的下一个语句处暂停。
+符号调试器如
+<code>gdb</code> 可用来调试编译后的代码。
+
+<ul class="menu">
+<li><a accesskey="1" href="browser.html#browser">browser</a>:  浏览
+<li><a accesskey="2" href="debug_002fundebug.html#debug_002fundebug">debug/undebug</a>: 调试/不调试
+<li><a accesskey="3" href="trace_002funtrace.html#trace_002funtrace">trace/untrace</a>: 跟踪/不跟踪
+<li><a accesskey="4" href="traceback.html#traceback">traceback</a>: 回溯
+</ul>
+
+   </body></html>
+

@@ -1,0 +1,60 @@
+<html lang="zh">
+<head>
+<title>Writing methods - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Object_002doriented-programming.html#Object_002doriented-programming" title="Object-oriented programming">
+<link rel="prev" href="Group-methods.html#Group-methods" title="Group methods">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Writing-methods"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="Group-methods.html#Group-methods">Group methods</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Object_002doriented-programming.html#Object_002doriented-programming">Object-oriented programming</a>
+<hr><br>
+</div>
+
+<h3 class="section">5.7 编写方法</h3>
+
+<p>用户可以很方便地编写它们自己的方法和泛型函数。
+<a name="index-_00ba_00af_00ca_00fd_002c-_00b7_00ba_00d0_00cd-203"></a>泛型函数可以简单地看作调用<code>UseMethod</code>的函数。而方法则是通过
+方法分发的函数。这可以通过调用 <code>UseMethod</code> 或
+<code>NextMethod</code> 实现。
+
+   <p>值得记住的是方法可以直接调用。这就意味着它们可以在不调用<code>UseMethod</code>
+的情况下直接键入，这会导致特殊变量<code>.Generic</code>， <code>.Class</code> 和
+<code>.Method</code> 不会被实例化。在这种情况下，前面讨论的默认规则
+将用于确定这些值。
+
+   <p>泛型函数最常用于为统计对象，一些模型拟合过程中产生的结果通常会提供
+<code>print</code> 和 <code>summary</code> 方法。
+<a name="index-_00ba_00af_00ca_00fd_002c-_00b7_00ba_00d0_00cd-204"></a>为了这样做，每个模型赋予其输出结果一个类属性，然后提供
+特定的方法处理结果并且给出它的易读版本（信息展示方式比较友好的方式）。
+用户只需要记住
+<code>print</code> 或 <code>summary</code> 会提供任何分析结果的友好输出。
+
+<!-- @node Modeling functions, Graphics model, Object-oriented programming, Top -->
+<!-- @chapter Modeling functions -->
+<!-- @node Graphics model, Computing on the language, Modeling functions, Top -->
+<!-- @chapter Graphics model -->
+<!-- @menu -->
+<!-- * Math expressions in text:: -->
+<!-- @end menu -->
+<!-- @node Math expressions in text,  , Graphics model, Graphics model -->
+<!-- @section Math expressions in text -->
+</body></html>
+

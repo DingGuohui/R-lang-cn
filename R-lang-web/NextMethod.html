@@ -1,0 +1,93 @@
+<html lang="zh">
+<head>
+<title>NextMethod - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Object_002doriented-programming.html#Object_002doriented-programming" title="Object-oriented programming">
+<link rel="prev" href="UseMethod.html#UseMethod" title="UseMethod">
+<link rel="next" href="Group-methods.html#Group-methods" title="Group methods">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="NextMethod"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Group-methods.html#Group-methods">Group methods</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="UseMethod.html#UseMethod">UseMethod</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Object_002doriented-programming.html#Object_002doriented-programming">Object-oriented programming</a>
+<hr><br>
+</div>
+
+<h3 class="section">5.5 NextMethod 函数</h3>
+
+<p><a name="index-NextMethod-200"></a>
+<code>NextMethod</code> 用于提供简单的继承机制。
+
+   <p>调用 <code>NextMethod</code> 产生的方法调用在行为上似乎它们被前面的方法调用。
+参数以当前调用方法一样的次序和名字传递给后面继承的方法。
+这意味着它们和泛型调用一样。但是作为参数的表达式是当前方法
+对应的形式参数名字。因此，在<code>NextMethod</code>被调用时，参数已经有它们
+的对应值了。
+
+   <p>未求值的参数仍未求值。缺失的参数仍然缺失。
+
+   <p>调用 <code>NextMethod</code>  的语法是 <code>NextMethod(generic,
+object, ...)</code>。如果没有提供 <code>generic</code>，
+<code>.Generic</code> 的值将会被使用。如果没有提供<code>object</code>，当前方法调用的第一个参数将会
+被使用。<span class="samp">...</span> 参数的值用于修改下一个方法的参数。
+
+   <p>需要注意的是，下一个方法的选择依赖于 <code>.Generic</code> 和 <code>.Class</code>的当前值，
+而不是对象。因此改变<code>NextMethod</code>调用中的对象影响
+下一个方法接受的参数但不影响下一个方法的选择。
+
+   <p>方法可以直接调用。如果那样，就不会有
+<code>.Generic</code>， <code>.Class</code> 或 <code>.Method</code>。这种情况下，
+<code>NextMethod</code>的<code>generic</code>参数必须指定。<code>.Class</code>的值
+设为当前函数的第一个参数对象的类属性。
+<code>.Method</code> 的值是当前函数的名字。
+默认值的选择保证了一个方法无论在直接调用还是通过泛型调用的情况下
+行为不会改变。
+
+<!-- FIXME -->
+<p>一个值得讨论的问题是<code>NextMethod</code>里面<span class="samp">...</span>参数的行为。
+白皮书（White Book）描述该行为如下：
+
+   <p><a name="index-_00c3_00fb_00d7_00d6-201"></a>- 在调用当前方法时用命名参数代替对应的参数。未命名的参数放在参数列表的起始位置。
+
+   <p>我们想做的是：
+
+   <p>-首先为<code>NextMethod</code>进行参数匹配；
+  -如果对象或泛型匹配不错
+  -首先，如果一个命名的列表元素匹配一个参数（命名的或者没有名字的），
+  列表值代替参数值
+  - 第一个未命名的列表元素
+
+   <p>搜索用的值：
+ 类：首先来自 <code>.Class</code>，其次来自方法的第一个参数，最后来自
+ 调用<code>NextMethod</code>时设定的对象
+
+   <p>泛型：首先来自 <code>.Generic</code>，如果没有的话，则来自方法的第一个参数，
+ 如果仍然缺失，则来自<code>NextMethod</code>的调用
+
+   <p>方法：这可能是当前函数的名字。
+
+<!-- I don't know -->
+<!-- what its used for but I don't currently think it's involved in the -->
+<!-- dispatch. -->
+<!-- @node Implicit dispatching, Group methods, NextMethod, Object-oriented programming -->
+<!-- @section Implicit dispatching -->
+<!-- What is implicit dispatching???? -->
+</body></html>
+

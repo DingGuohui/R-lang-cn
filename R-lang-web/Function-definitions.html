@@ -1,0 +1,55 @@
+<html lang="zh">
+<head>
+<title>Function definitions - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Expressions.html#Expressions" title="Expressions">
+<link rel="prev" href="Flow-control-elements.html#Flow-control-elements" title="Flow control elements">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Function-definitions"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="Flow-control-elements.html#Flow-control-elements">Flow control elements</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Expressions.html#Expressions">Expressions</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">10.4.6 函数定义</h4>
+
+<p>函数定义的形式是
+<a name="index-_00ba_00af_00ca_00fd-292"></a>
+<pre class="example">     function ( <var>arglist</var> ) <var>body</var>
+</pre>
+   <p>函数主体是表达式，通常是复合表达式。
+<var>arglist</var> 是一个逗号分隔的条目列表（这些条目可能是标识符），
+或者是<var>identifier</var><span class="samp"> = </span><var>default</var>的形式，或者是特定标记
+<span class="samp">...</span>。<var>default</var> 可以是任意合法的表达式。
+
+   <p>注意函数参数和列表标签等不一样，它不能
+有文本字符串的&ldquo;奇怪名字&rdquo;（strange names）。
+<!-- FIXME: is there a good reason for this? -->
+
+   <p>在内部，函数定义也是以函数调用的方式保存。这个函数的名字就是
+<code>function</code>，它有两个参数，即the <var>arglist</var> 和
+<var>body</var>。 <var>arglist</var> 以有标签的成对列表的形式保存，
+其中标签就是参数名字而值就是默认的表达式。
+
+<!--  We can probably lose this given the brevity of the section -->
+<!-- @node Summary ,  , Syntactic elements, Parser -->
+<!-- @section Summary of language -->
+</body></html>
+

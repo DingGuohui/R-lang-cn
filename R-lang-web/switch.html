@@ -1,0 +1,87 @@
+<html lang="zh">
+<head>
+<title>switch - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Control-structures.html#Control-structures" title="Control structures">
+<link rel="prev" href="for.html#for" title="for">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="switch"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="for.html#for">for</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Control-structures.html#Control-structures">Control structures</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">3.2.6 switch 语句</h4>
+
+<p><a name="index-switch-101"></a>
+技术层面上来说，<code>switch</code> 仅仅是一个函数，但是它的语义学定义
+和其它程序语句的控制结构类似。
+
+   <p>它的语法如下
+
+<pre class="example">     switch (<var>statement</var>, <var>list</var>)
+</pre>
+   <p class="noindent">其中 <var>list</var> 的元素可能有自己的名字。首先，<var>statement</var> 被求值得到结果
+<var>value</var>。如果 <var>value</var> 是 1 到 <var>list</var>长度间的一个数字，
+那么<var>list</var>对应元素将会被求值并返回结果。如果 <var>value</var> 值过大或者过小，
+<code>NULL</code> 将会被返回。
+
+<pre class="example">     &gt; x &lt;- 3
+     &gt; switch(x, 2+2, mean(1:10), rnorm(5))
+     [1]  2.2903605  2.3271663 -0.7060073  1.3622045 -0.2892720
+     &gt; switch(2, 2+2, mean(1:10), rnorm(5))
+     [1] 5.5
+     &gt; switch(6, 2+2, mean(1:10), rnorm(5))
+     NULL
+</pre>
+   <p>如果 <var>value</var> 是字符向量，那么 <span class="samp">...</span> 的元素中名字和 <var>value</var> 准确匹配的
+元素会被执行。如果没有匹配的，
+返回 <code>NULL</code>。
+
+<pre class="example">     &gt; y &lt;- "fruit"
+     &gt; switch(y, fruit = "banana", vegetable = "broccoli", meat = "beef")
+     [1] "banana"
+</pre>
+   <p><code>switch</code> 常用来根据函数一个参数的字符值决定
+后面的执行语句。
+
+<pre class="example">     &gt; centre &lt;- function(x, type) {
+     + switch(type,
+     +        mean = mean(x),
+     +        median = median(x),
+     +        trimmed = mean(x, trim = .1))
+     + }
+     &gt; x &lt;- rcauchy(10)
+     &gt; centre(x, "mean")
+     [1] 0.8760325
+     &gt; centre(x, "median")
+     [1] 0.5360891
+     &gt; centre(x, "trimmed")
+     [1] 0.6086504
+</pre>
+   <p><code>switch</code> 返回值要么是语句的求值结果要么在没有语句被
+求值时的<code>NULL</code>。
+
+   <p>为了从一个已经存在的可选方法列表里面选择一个，<code>switch</code> 可能不是
+最好的实现方案。通常，用 <code>eval</code> 和 子集操作符 <code>[[</code> 直接运行
+ <code>eval(x[[condition]])</code> 会更好。
+
+   </body></html>
+

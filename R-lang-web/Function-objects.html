@@ -1,0 +1,76 @@
+<html lang="zh">
+<head>
+<title>Function objects - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Basic-types.html#Basic-types" title="Basic types">
+<link rel="prev" href="Expression-objects.html#Expression-objects" title="Expression objects">
+<link rel="next" href="NULL-object.html#NULL-object" title="NULL object">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Function-objects"></a>Next:&nbsp;<a rel="next" accesskey="n" href="NULL-object.html#NULL-object">NULL object</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Expression-objects.html#Expression-objects">Expression objects</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Basic-types.html#Basic-types">Basic types</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">2.1.5 函数对象</h4>
+
+<p><a name="index-_00ba_00af_00ca_00fd-41"></a>在 R 里面，函数是对象并且可以有许多和其它对象类似的操作方法。
+函数（更准确地说是函数闭包（function closure））有三个基本的
+组成部分：形式化的参数列表，功能实现的主体和
+<a name="index-_00bb_00b7_00be_00b3-42"></a>环境。参数列表是一个以逗号分割的参数的列表。
+<a name="index-_00b2_00ce_00ca_00fd-43"></a>参数可以是符号，或者是<var>symbol</var><span class="samp"> =
+</span><var>default</var> 的形式，或者是特殊参数 <span class="samp">...</span>。第二种参数形式
+常常用于设置参数的默认值。
+如果函数调用时参数缺省，该值会被采用。
+<span class="samp">...</span>参数比较特殊，而且可以包含任意多的参数。
+它通常在参数个数未知或者某些参数会传递给其它
+函数的情况下使用。
+
+   <p>功能实现的主体是解析过的 R 语句。它常常是大括弧里面的
+一系列程序语句。当然，它也有可能是一个单独的语句，一个
+符号，甚至是一个常量。
+
+   <p>函数的环境
+<a name="index-_00ba_00af_00ca_00fd-44"></a><a name="index-_00bb_00b7_00be_00b3-45"></a>指的是当一个函数被创建时所激活的环境。
+任何被该环境绑定的符号都可以被函数<em>调用</em>和访问。
+函数代码及其对应环境中绑定的东西构成的组合体
+称为`函数闭包'（function closure）。该术语源自函数化编程理论
+（functional programming theory）。
+在本文档中，我们主要使用术语`函数'，但使用`闭包'（closure）来强调
+一个函数相关环境的重要性。
+
+   <p>可以通过 <code>formals</code>， <code>body</code>，和 <code>environment</code> 三个
+构造（这三个构造也可用在赋值语句的左边）来析取和操作闭包的三个部分。
+<a name="index-_00b8_00b3_00d6_00b5_00d3_00ef_00be_00e4-46"></a><a name="index-formals-47"></a><a name="index-body-48"></a><a name="index-environment-49"></a>最后一个构造可以用来去掉不想要的环境捕获物（environment capture）。
+
+   <p>当一个函数被调用时，一个新的环境（称为<em>求值环境（evaluation environment）</em>）
+将会被创建。该环境的外围（enclosure，见<a href="Environment-objects.html#Environment-objects">Environment objects</a>）
+来自函数闭包的环境。
+这个新的环境最初由函数的未被求值的参数构成；
+当求值过程进行时，局部变量将会在该环境中创建。
+
+   <p><a name="index-_00ba_00af_00ca_00fd-50"></a>可以方便地用<code>as.list</code> 和 <code>as.function</code>
+将函数和列表结构相互转换。
+<a name="index-as_002efunction-51"></a>这些方法可以用来实现和S兼容，但我们
+不推崇这样使用。
+
+   </body></html>
+

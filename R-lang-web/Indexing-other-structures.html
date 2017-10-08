@@ -1,0 +1,53 @@
+<html lang="zh">
+<head>
+<title>Indexing other structures - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Indexing.html#Indexing" title="Indexing">
+<link rel="prev" href="Indexing-matrices-and-arrays.html#Indexing-matrices-and-arrays" title="Indexing matrices and arrays">
+<link rel="next" href="Subset-assignment.html#Subset-assignment" title="Subset assignment">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Indexing-other-structures"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Subset-assignment.html#Subset-assignment">Subset assignment</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Indexing-matrices-and-arrays.html#Indexing-matrices-and-arrays">Indexing matrices and arrays</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Indexing.html#Indexing">Indexing</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">3.4.3 其它结构的索引操作</h4>
+
+<p>操作符 <code>[</code> 是一个泛型函数，它允许增加类方法。
+<code>$</code> 和 <code>[[</code> 操作符类似。因此，用户可以对任何结构定义
+索引操作。现在有这样的一个函数，比如说 <code>[.foo</code>，被调用的
+时候它有一个参数集，它的第一个参数是一个被索引的结构而其它的都是索引。
+在使用 <code>$</code> 时，索引参数是<code>"symbol"</code>模式，甚至在使用 <code>x$"abc"</code>
+形式的时候。特别需要明白的是类方法没有必要和基本方法有一样的行为，
+例如考虑局部匹配。
+
+   <p><code>[</code> 类方法的最重要的例子是用于数据框。这里不会仔细讨论这个问题
+（见 <code>[.data.frame</code> 的帮助文档），但很多时候，如果同时给出两个索引
+（甚至一个为空），它将为由同样长度的向量构成的列表结构创建矩阵类型
+的索引。如果只提供单个索引，它将会被解释为索引列表的列&mdash;这种情况下，
+<code>drop</code> 参数会被忽略，同时给出警告。
+
+   <p>基本操作符 <code>$</code> 和 <code>[[</code> 可用于环境。
+此时只允许字符索引，而且不允许局部匹配。
+
+   </body></html>
+

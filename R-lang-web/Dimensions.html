@@ -1,0 +1,45 @@
+<html lang="zh">
+<head>
+<title>Dimensions - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Attributes.html#Attributes" title="Attributes">
+<link rel="prev" href="Names.html#Names" title="Names">
+<link rel="next" href="Dimnames.html#Dimnames" title="Dimnames">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Dimensions"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Dimnames.html#Dimnames">Dimnames</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Names.html#Names">Names</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Attributes.html#Attributes">Attributes</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">2.2.2 维度</h4>
+
+<p><code>dim</code> 属性用于实现数组。
+数组的内容保存在一个列优先排列（column-major order）的向量中而
+<code>dim</code> 属性是一个指定数组各维度长度的整数向量。
+R 保证了向量的长度是各维度长度的乘积。
+一个或多个维度的长度可以为0。
+
+   <p><a name="index-_00cf_00f2_00c1_00bf-78"></a>向量和一维数组不一样，因为后者有
+长度为1的 <code>dim</code> 属性，而前者没有 <code>dim</code> 属性。
+
+   </body></html>
+

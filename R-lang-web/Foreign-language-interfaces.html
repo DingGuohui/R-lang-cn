@@ -1,0 +1,50 @@
+<html lang="zh">
+<head>
+<title>Foreign language interfaces - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="System-and-foreign-language-interfaces.html#System-and-foreign-language-interfaces" title="System and foreign language interfaces">
+<link rel="prev" href="Operating-system-access.html#Operating-system-access" title="Operating system access">
+<link rel="next" href="_002eInternal-and-_002ePrimitive.html#_002eInternal-and-_002ePrimitive" title=".Internal and .Primitive">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Foreign-language-interfaces"></a>Next:&nbsp;<a rel="next" accesskey="n" href="_002eInternal-and-_002ePrimitive.html#_002eInternal-and-_002ePrimitive">.Internal and .Primitive</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Operating-system-access.html#Operating-system-access">Operating system access</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="System-and-foreign-language-interfaces.html#System-and-foreign-language-interfaces">System and foreign language interfaces</a>
+<hr><br>
+</div>
+
+<h3 class="section">7.2 其它语言接口</h3>
+
+<p><a name="index-_002eC-259"></a><a name="index-_002eFortran-260"></a><a name="index-_002eCall-261"></a><a name="index-_002eExternal-262"></a>
+用编译后的代码为R增加函数的
+技术细节可以参考 <a href="../R-exts/System-and-foreign-language-interfaces.html#System-and-foreign-language-interfaces">System and foreign language interfaces (Writing R Extensions)</a>。
+
+   <p>函数 <code>.C</code> 和 <code>.Fortran</code> 提供了标准接口，允许
+在程序构建时（build time）使用外部代码或者通过<code>dyn.load</code>连接 R 和
+已编译的代码。这个两个函数的设计最初是想对 <strong>C</strong> 和
+FORTRAN 的代码分别编译，但是 <code>.C</code> 函数可用于其它能产生 C 接口的语言中，
+如 C++。
+
+   <p>函数 <code>.Call</code> 和 <code>.External</code> 提供了在允许已编译代码
+（主要是编译后的<strong>C</strong>代码）中
+操作R对象的接口。
+
+   </body></html>
+

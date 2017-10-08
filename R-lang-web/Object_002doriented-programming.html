@@ -1,0 +1,105 @@
+<html lang="zh">
+<head>
+<title>Object-oriented programming - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Functions.html#Functions" title="Functions">
+<link rel="next" href="Computing-on-the-language.html#Computing-on-the-language" title="Computing on the language">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Object_002doriented-programming"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Computing-on-the-language.html#Computing-on-the-language">Computing on the language</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Functions.html#Functions">Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr><br>
+</div>
+
+<h2 class="chapter">5 面向对象编程</h2>
+
+<p><a name="index-_00c3_00e6_00cf_00f2_00b6_00d4_00cf_00f3-181"></a>面向对象编程是一种近年来非常流行的编程方式。
+它的流行主要来之一个事实就是它让编写和维护一个复杂系统变得比较容易。
+它通过几种不同的机制来实现这个目标的。
+
+   <p>任何面向对象语言的中心都是类（class）和方法（method）这两个概念。
+类是一个对象的定义。通常一个类包含了多个
+用于保存类特有信息的<em>槽变量</em>（slots）<a rel="footnote" href="#fn-1" name="fnd-1"><sup>1</sup></a>。编程语言中的对象指的
+是类的具体实例。编程就是基于这些类的对象或实例。
+
+   <p>计算过程是通过<em>方法</em>（methods）实现。方法主要是
+<a name="index-_00ba_00af_00ca_00fd-182"></a>用于实现在某个类的对象上进行专门计算的函数。
+这就是为什么使得语言面向对象了。在R里面，由<em>泛型函数</em>（generic functions）
+来决定适当的方法。泛型函数负责判断它的参数的类并且用这些信息选择
+恰当的方法。
+
+   <p>大多数面向对象语言的另外一个特性是&ldquo;继承&rdquo;这个概念。在大多数编程问题中，
+许多对象通常是相互关联。如果一些东西可以重用，编程会变得比较简单。
+
+   <p>如果一个类从另外一个类继承而来，它常常会从父类得到所有的槽变量，
+而且还可以增加新的槽变量。在方法分发的时候（通过泛型函数），如果
+一个类的方法不存在，那么就会在它的父类里面搜索。
+
+   <p>在本章，我们会讨论这种通用的策略如何在R里面已经实现，
+并且讨论当前设计中一些局限性。大多数对象系统都会体现的一个优点是
+它有很好的一致性（consistency）。这通过编译器或解释器按照一定的规则检查实现。
+不幸的是，因为 R 和对象系统融为一体，这个优势不能完全体现。
+用户在一种直接的方式下面使用对象系统必须十分的小心。
+虽然可以展示一些非常有趣功能，
+但这些倾向导致模糊的代码和可能依赖一些不会再被采用的实现细节。
+
+   <p>R里面最广泛的面向对象编程运用是
+<code>print</code>方法，<code>summary</code>方法和<code>plot</code>方法的使用。
+这些方法允许我们只要有一个泛型函数调用，比如说
+<a name="index-_00ba_00af_00ca_00fd_002c-_00b7_00ba_00d0_00cd-183"></a><code>plot</code>，它会基于它的参数类型分发方法并且针对特定的
+数据调用相应的绘图函数。
+
+   <p>为了使概念更清晰，我们将考虑一个概率论教学用的小系统的实现。
+在这个系统中，对象是概率函数和计算矩及绘图的方法。
+概率常常可以通过累计分布函数来描述，
+但也可以通过其它方法实现。例如，一个密度函数，它可以单独存在，也可以
+作为一个矩发生函数存在。
+
+<!-- FIXME -->
+<!-- This example needs help.  MGFs are not used at all, and neither are -->
+<!-- the generic functions.  Also, note that the terminology `pdf' and -->
+<!-- `cdf' may be confusing given the S use of `density' and `probability' -->
+<!-- functions. -->
+<!-- So we can begin by considering a system with three classes, -->
+<!-- @code{"cdf"}, @code{"pdf"} and @code{"mgf"} and three generic functions, -->
+<!-- @code{print}, @code{plot}, and @code{moment}.  Each of the classes can -->
+<!-- be extended in numerous ways; for example we might want a parametric -->
+<!-- representation for some of the more common distributions. -->
+<!-- </FIXME> -->
+<ul class="menu">
+<li><a accesskey="1" href="Definition.html#Definition">Definition</a>:  定义
+<li><a accesskey="2" href="Inheritance.html#Inheritance">Inheritance</a>:  继承
+<li><a accesskey="3" href="Method-dispatching.html#Method-dispatching">Method dispatching</a>: 方法分发
+<li><a accesskey="4" href="UseMethod.html#UseMethod">UseMethod</a>: UseMethod 函数
+<li><a accesskey="5" href="NextMethod.html#NextMethod">NextMethod</a>: NextMethod 函数
+<li><a accesskey="6" href="Group-methods.html#Group-methods">Group methods</a>: 成组方法
+<li><a accesskey="7" href="Writing-methods.html#Writing-methods">Writing methods</a>: 编写方法
+</ul>
+
+   <div class="footnote">
+<hr>
+<h4>Footnotes</h4><p class="footnote"><small>[<a name="fn-1" href="#fnd-1">1</a>]</small> 译者注：类似&ldquo;成员变量&rdquo;，用<code>@</code>符号
+访问</p>
+
+   <p><hr></div>
+
+   </body></html>
+

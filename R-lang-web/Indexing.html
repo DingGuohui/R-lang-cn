@@ -1,0 +1,87 @@
+<html lang="zh">
+<head>
+<title>Indexing - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Evaluation-of-expressions.html#Evaluation-of-expressions" title="Evaluation of expressions">
+<link rel="prev" href="Elementary-arithmetic-operations.html#Elementary-arithmetic-operations" title="Elementary arithmetic operations">
+<link rel="next" href="Scope-of-variables.html#Scope-of-variables" title="Scope of variables">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Indexing"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Scope-of-variables.html#Scope-of-variables">Scope of variables</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Elementary-arithmetic-operations.html#Elementary-arithmetic-operations">Elementary arithmetic operations</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Evaluation-of-expressions.html#Evaluation-of-expressions">Evaluation of expressions</a>
+<hr><br>
+</div>
+
+<h3 class="section">3.4 索引</h3>
+
+<p>R 有多种构造允许通过索引操作来访问单个元素或者子集。
+在基本的向量类型中，可以通过<code>x[i]</code>访问第i个元素，但在
+列表，矩阵和多维数组中也有索引。
+除了用单个的整数进行索引，还有多种形式的索引。索引既可用于提取对象的一部分，
+也可用于替换对象的一部分（或者增加一部分）。
+
+   <p>R 有三种基本的索引操作。语法如下面的例子所示
+
+<pre class="example">     x[i]
+     x[i, j]
+     x[[i]]
+     x[[i, j]]
+     x$a
+     x$"a"
+</pre>
+   <p><a name="index-_005b-110"></a><a name="index-_005b_005b-111"></a><a name="index-_0024-112"></a><a name="index-_00cb_00f7_00d2_00fd-113"></a>
+对于向量和矩阵，<code>[[</code>形式很少使用，尽管它和<code>[</code>在语义上稍稍
+有点不同（例如它去掉了所有<code>names</code> 或 <code>dimnames</code>属性，并且
+在字符索引的时候采用局部匹配）。当用单个索引处理多维结构时， <code>x[[i]]</code> 或者
+<code>x[i]</code> 将会返回<code>x</code>的第 <code>i</code> 个元素。
+
+   <p>对于一个列表，通常使用 <code>[[</code> 去选择任意单个的元素，
+而 <code>[</code> 返回所选元素的列表。
+
+   <p><code>[[</code> 形式允许使用整数或字符索引选出单个的元素，而 <code>[</code>
+允许通过向量进行索引。
+注意，对于一个列表，索引可以使用向量然后向量的任何一个元素将依次用于列表，
+所选的分量，所选分量的分量，等等。<a rel="footnote" href="#fn-1" name="fnd-1"><sup>1</sup></a>
+返回结果仍然是单个元素。
+
+   <p><code>$</code>形式用于列表和成对列表的递归对象。
+它仅仅允许字面上的字符串和符号作为索引。
+也就是说，这种索引不可计算的：当你需要通过对一个表达式求值确定一个索引，
+请使用 <code>x[[expr]]</code>。当 <code>$</code>用于非递归对象时，返回结果是<code>NULL</code>。
+
+<ul class="menu">
+<li><a accesskey="1" href="Indexing-by-vectors.html#Indexing-by-vectors">Indexing by vectors</a>: 通过向量进行索引
+<li><a accesskey="2" href="Indexing-matrices-and-arrays.html#Indexing-matrices-and-arrays">Indexing matrices and arrays</a>: 矩阵和数组的索引操作
+<li><a accesskey="3" href="Indexing-other-structures.html#Indexing-other-structures">Indexing other structures</a>: 其它结构的索引操作
+<li><a accesskey="4" href="Subset-assignment.html#Subset-assignment">Subset assignment</a>: 子集赋值
+</ul>
+
+   <div class="footnote">
+<hr>
+<h4>Footnotes</h4><p class="footnote"><small>[<a name="fn-1" href="#fnd-1">1</a>]</small> 译者注：我测试了一下，和这里描述的不一样。
+原文为：&ldquo;Note though that for a list, the index can be a vector and
+each element of the vector is applied in turn to the list, the
+selected component, the selected component of that component, and so on.&rdquo;</p>
+
+   <p><hr></div>
+
+   </body></html>
+

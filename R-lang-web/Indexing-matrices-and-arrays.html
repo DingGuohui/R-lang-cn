@@ -1,0 +1,93 @@
+<html lang="zh">
+<head>
+<title>Indexing matrices and arrays - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Indexing.html#Indexing" title="Indexing">
+<link rel="prev" href="Indexing-by-vectors.html#Indexing-by-vectors" title="Indexing by vectors">
+<link rel="next" href="Indexing-other-structures.html#Indexing-other-structures" title="Indexing other structures">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Indexing-matrices-and-arrays"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Indexing-other-structures.html#Indexing-other-structures">Indexing other structures</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Indexing-by-vectors.html#Indexing-by-vectors">Indexing by vectors</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Indexing.html#Indexing">Indexing</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">3.4.2 矩阵和数组的索引操作</h4>
+
+<p><a name="index-_00cb_00f7_00d2_00fd-117"></a>多维结构的子集操作通常和将每个索引变量作一维索引的规则一样，只是
+<code>dimnames</code> 分量替换了 <code>names</code>。但也有一些特殊的规则可以使用。
+
+   <p>一般情况下，用对应维度的数字索引访问该结构。
+在可以忽略<code>dim</code> 和 <code>dimnames</code>属性或者<code>c(m)[i]</code>的
+结果已经充分的情况下，依然可能用单个索引。
+注意<code>m[1]</code>常常和 <code>m[1, ]</code> 或 <code>m[, 1]</code>不同。
+
+   <p>可以用一个整数矩阵作为索引。此时，
+矩阵的列数对应结构的维度，返回的结果将是一个长度和索引矩阵行数
+一致的向量。下面的例子展示如何一步提取元素 <code>m[1, 1]</code>
+和 <code>m[2, 2]</code>的方法。
+
+<pre class="example">     &gt; m &lt;- matrix(1:4, 2)
+     &gt; m
+          [,1] [,2]
+     [1,]    1    3
+     [2,]    2    4
+     &gt; i &lt;- matrix(c(1, 1, 2, 2), 2, byrow = TRUE)
+     &gt; i
+          [,1] [,2]
+     [1,]    1    1
+     [2,]    2    2
+     &gt; m[i]
+     [1] 1 4
+</pre>
+   <p class="noindent">负索引不允许用在索引矩阵里面。但 <code>NA</code> 和零值是允许的：
+在一个索引矩阵里面，如果一行里面含有零，那么该行会被忽略，如果
+某一行含有<code>NA</code>，那么结果对应的元素将是
+<code>NA</code>。
+
+   <p>无论使用单个的索引还是矩阵索引，
+<a name="index-_00cb_00f7_00d2_00fd-118"></a><code>names</code> 属性在存在的情况下都会被使用。
+这里假定结构是一维的。
+
+   <p>如果一个索引操作只想得到结构的一个区域，
+就像在一个三维矩阵里面用<code>m[2, , ]</code>选择一个切面，
+则结果中对应的维度属性会被去掉。
+如果是一个一维结构的结果，将会得到一个向量。
+有时，这不是我们想要的，那么可以通过在索引操作中加入参数
+<span class="samp">drop = FALSE</span> 来关闭。注意，这是<code>[</code>函数的一个额外参数，
+和索引计数无关。因此在一个矩阵中以1 × n的形式选中第一行
+的正确做法是<code>m[1, , drop =
+FALSE]</code>。没有关闭维度去除特性通常是在长度偶尔为1的索引里面
+导致失败的原因。这个规则同样可用于一维数组，
+其中任何子集操作都返回一个向量，除非使用<span class="samp">drop
+= FALSE</span>。
+
+   <p>注意，向量之所以能区分一维数组主要在于后者有 <code>dim</code> 和 <code>dimnames</code> 属性
+（二者都是长度为1）。一维数组不容易通过子集操作得到但他们可以显式创建并
+通过<code>table</code>返回。
+有时，这种用法非常有用因为 <code>dimnames</code> 列表的元素有时候本身就被命名了。
+而 <code>names</code> 属性可能不行。
+
+   <p>一些操作如 <code>m[FALSE, ]</code> 会产生一个维度扩展为零（dimension has zero extent）
+的结构。R 一般可以敏感地处理这些结构。
+
+   </body></html>
+

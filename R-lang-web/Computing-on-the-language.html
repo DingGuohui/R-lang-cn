@@ -1,0 +1,67 @@
+<html lang="zh">
+<head>
+<title>Computing on the language - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Object_002doriented-programming.html#Object_002doriented-programming" title="Object-oriented programming">
+<link rel="next" href="System-and-foreign-language-interfaces.html#System-and-foreign-language-interfaces" title="System and foreign language interfaces">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Computing-on-the-language"></a>Next:&nbsp;<a rel="next" accesskey="n" href="System-and-foreign-language-interfaces.html#System-and-foreign-language-interfaces">System and foreign language interfaces</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Object_002doriented-programming.html#Object_002doriented-programming">Object-oriented programming</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr><br>
+</div>
+
+<h2 class="chapter">6 语言上的计算</h2>
+
+<p>R 属于一类编程语言。在该类编程语言中，子程序有能力修改或构建其它子程序，
+求值并且把结果值作为语言自身的一部分。
+这和 Lisp， Scheme 以及其它&ldquo;函数编程&rdquo;（functional programming）语言的变种有点
+类似，但和FORTRAN 以及 ALGOL 类的编程语言形成鲜明对比。Lisp 类的语言
+通过&ldquo;所有东西都是列表&rdquo;（everything is a list）这个理念让这个特性发挥到了极致，
+以致于不能区分程序和数据。
+
+   <p>R 提供了比 Lisp 更友好的编程接口。
+对于用户来说，它至少使用了数学公式和 C 类似的控制结构，但是其引擎
+事实上和 Lisp 非常类似的。R 允许直接访问
+<a name="index-_00bd_00e2_00ce_00f6-205"></a>解析后的表达式和函数，并且允许你更改和随后执行它们，或者
+从草稿中创建全新的函数。
+
+   <p>有很多标准的应用采用了这种便利，如表达式的分析计算或通过系数向量
+产生多项式函数。但是，也有一些非常基础的应用用于R里面解释部分的运行。
+其中的一些应用是作为一个函数在另外一个函数里面作为一部分重用的本质部分，
+因为调用的<code>model.frame</code>创建于多个模建和绘图程序（诚然，这样做有点不太漂亮）。
+其它一些应用简单地允许某些有用函数的优秀接口。
+如 <code>curve</code> 函数，它允许你绘制一个给定函数的表达式（如<code>sin(x)</code>）的图形或者
+便于绘制数学表达式的图形。
+
+   <p>在本章，我们会介绍可以得到的用于语言上的计算的工具集合。
+
+<ul class="menu">
+<li><a accesskey="1" href="Direct-manipulation-of-language-objects.html#Direct-manipulation-of-language-objects">Direct manipulation of language objects</a>:  直接操作语言对象
+<li><a accesskey="2" href="Substitutions.html#Substitutions">Substitutions</a>: 替换
+<li><a accesskey="3" href="More-on-evaluation.html#More-on-evaluation">More on evaluation</a>: 求值之外的东西
+<li><a accesskey="4" href="Evaluation-of-expression-objects.html#Evaluation-of-expression-objects">Evaluation of expression objects</a>: 表达式对象的求值
+<li><a accesskey="5" href="Manipulation-of-function-calls.html#Manipulation-of-function-calls">Manipulation of function calls</a>: 函数调用的操作
+<li><a accesskey="6" href="Manipulation-of-functions.html#Manipulation-of-functions">Manipulation of functions</a>: 函数操作
+</ul>
+
+   </body></html>
+

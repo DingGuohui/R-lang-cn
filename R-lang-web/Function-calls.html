@@ -1,0 +1,71 @@
+<html lang="zh">
+<head>
+<title>Function calls - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Simple-evaluation.html#Simple-evaluation" title="Simple evaluation">
+<link rel="prev" href="Symbol-lookup.html#Symbol-lookup" title="Symbol lookup">
+<link rel="next" href="Operators.html#Operators" title="Operators">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Function-calls"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Operators.html#Operators">Operators</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Symbol-lookup.html#Symbol-lookup">Symbol lookup</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Simple-evaluation.html#Simple-evaluation">Simple evaluation</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">3.1.3 函数调用</h4>
+
+<p>R里面的很多计算都有函数求值。
+我们也把这称之为函数
+<a name="index-_00ba_00af_00ca_00fd_00b5_00f7_00d3_00c3-87"></a><em>调用</em>（invocation）。
+函数调用通过名字和一个以逗号分割的
+参数列表来实现。
+
+<pre class="example">     &gt; mean(1:10)
+     [1] 5.5
+</pre>
+   <p class="noindent">在这个例子中，函数 <code>mean</code> 的调用过程中只有一个参数，就是
+含有1到10之间整数的向量。
+
+   <p>R 含有许多用于各种目的的函数。大多数用来产生一个属于 R 对象的
+结果，但其它一些函数则利用了它们的副作用，如打印和绘图函数。
+
+   <p><a name="index-_00ba_00af_00ca_00fd-88"></a><a name="index-_00ba_00af_00ca_00fd_00b2_00ce_00ca_00fd-89"></a>函数调用可以用<em>标签</em>标记的参数（或<em>命名</em>参数），而在<code>plot(x, y, pch = 3)</code>中，
+一些参数没有标签，这些参数通过<em>位置</em>识别。此时，
+函数必须通过参数在参数列表中所处的序列顺序来判断它们的意义。
+因此前面的例子中，
+<code>x</code> 表示横坐标变量，<code>y</code>表示纵坐标变量。
+使用标签/名字对含有很多可选参数的函数非常方便。
+
+   <p><a name="index-_00ba_00af_00ca_00fd_002c-_00b8_00b3_00d6_00b5-90"></a>一个特别的函数调用可以出现在赋值操作符的左边，
+如下所示
+<a name="index-_00b8_00b3_00d6_00b5-91"></a>
+<pre class="example">     &gt; class(x) &lt;- "foo"
+</pre>
+   <p class="noindent">该语句实际所做的就是利用原始的对象和右边部分调用函数
+<code>class&lt;-</code>。该函数对对象进行修改，返回结果存入原始变量。
+（至少在概念上，这就是所发生的事情。可能，一些额外的努力将用于
+避免不必要的数据重复。）
+
+<!-- FIXME something about common constructor functions: c, -->
+<!-- array, matrix, list, structure (with a warning to use the -->
+<!-- latter with discretion), -->
+</body></html>
+

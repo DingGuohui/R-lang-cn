@@ -1,0 +1,49 @@
+<html lang="zh">
+<head>
+<title>Scope of variables - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Evaluation-of-expressions.html#Evaluation-of-expressions" title="Evaluation of expressions">
+<link rel="prev" href="Indexing.html#Indexing" title="Indexing">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Scope-of-variables"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="Indexing.html#Indexing">Indexing</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Evaluation-of-expressions.html#Evaluation-of-expressions">Evaluation of expressions</a>
+<hr><br>
+</div>
+
+<h3 class="section">3.5 变量作用域</h3>
+
+<p><a name="index-_00d7_00f7_00d3_00c3_00d3_00f2-121"></a>
+<a name="index-_00c3_00fb_00d7_00d6-122"></a>几乎所有的编程语言都有一套作用域规则，允许同样的名字用于不同的对象。
+这使得一个函数内的局部变量可以有同全局变量一样的名字。
+
+   <p>R 采用Pascal类似的<em>词法作用域</em>（lexical scoping）模式。
+但是 R 是一种<em>函数型编程语言</em>（functional programming language），允许
+动态创建和操作函数与语言对象，并且增加了一些特性来反映这些东西。
+
+<ul class="menu">
+<li><a accesskey="1" href="Global-environment.html#Global-environment">Global environment</a>: 全局环境
+<li><a accesskey="2" href="Lexical-environment.html#Lexical-environment">Lexical environment</a>: 词法环境
+<li><a accesskey="3" href="Stacks.html#Stacks">Stacks</a>: 堆栈
+<li><a accesskey="4" href="Search-path.html#Search-path">Search path</a>: 搜索路径
+</ul>
+
+   </body></html>
+

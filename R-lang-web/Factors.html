@@ -1,0 +1,51 @@
+<html lang="zh">
+<head>
+<title>Factors - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Special-compound-objects.html#Special-compound-objects" title="Special compound objects">
+<link rel="prev" href="Special-compound-objects.html#Special-compound-objects" title="Special compound objects">
+<link rel="next" href="Data-frame-objects.html#Data-frame-objects" title="Data frame objects">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Factors"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Data-frame-objects.html#Data-frame-objects">Data frame objects</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Special-compound-objects.html#Special-compound-objects">Special compound objects</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Special-compound-objects.html#Special-compound-objects">Special compound objects</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">2.3.1 因子</h4>
+
+<p>因子可用于描述含有数目有限值（性别，社会阶层等）的条目。
+因子有一个<code>levels</code>属性和<code>"factor"</code>类。
+另外，它还可以拥有一个可选的 <code>contrasts</code> 属性。
+<code>contrasts</code> 属性用于控制模型构建函数中的参数设置。
+<a name="index-_00ba_00af_00ca_00fd_002c-_00bd_00a8_00c4_00a3-80"></a><a name="index-_00bd_00a8_00c4_00a3_00ba_00af_00ca_00fd-81"></a>
+因子可能是完全无序的或者有序的分类。在后面的例子中，
+可以根据因子的不同类型定义并且有一个对应的 <code>class</code> 向量
+<code>c("ordered"," factor")</code>。
+
+   <p>现在，因子通过指定实际水平的整型数组和一个映射整数到名字
+的字符数组来实现。
+不幸得是，用户常常利用这种实现方式让一些计算变得比较简单。
+但是，这只是一个实现的问题，而不能保证R的
+所有实现中都可以这样。
+
+   </body></html>
+

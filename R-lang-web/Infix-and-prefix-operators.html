@@ -1,0 +1,85 @@
+<html lang="zh">
+<head>
+<title>Infix and prefix operators - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Expressions.html#Expressions" title="Expressions">
+<link rel="prev" href="Function-calls-_0028expressions_0029.html#Function-calls-_0028expressions_0029" title="Function calls (expressions)">
+<link rel="next" href="Index-constructions.html#Index-constructions" title="Index constructions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Infix-and-prefix-operators"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Index-constructions.html#Index-constructions">Index constructions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Function-calls-_0028expressions_0029.html#Function-calls-_0028expressions_0029">Function calls (expressions)</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Expressions.html#Expressions">Expressions</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">10.4.2 中缀和前缀操作符</h4>
+
+<p>操作符的优先级如下
+
+<pre class="example">     ::
+     $ @
+     ^
+     - +                <span class="roman">(一元操作符)</span>
+     :
+     %<var>xyz</var>%
+     * /
+     + -                <span class="roman">(二元操作符)</span>
+     &gt; &gt;= &lt; &lt;= == !=
+     !
+     &amp; &amp;&amp;
+     | ||
+     ~                  <span class="roman">(一元操作符和二元操作符)</span>
+     -&gt; -&gt;&gt;
+     =                  <span class="roman">(作为赋值操作符)</span>
+     &lt;- &lt;&lt;-
+</pre>
+   <p>幂操作符 <span class="samp">^</span> 和
+<a name="index-_00b8_00b3_00d6_00b5-287"></a>左赋值操作符
+<span class="samp">&lt;- - = &lt;&lt;-</span> 从右往左操作，所有其它操作符从左往右操作。
+因此 <code>2 ^ 2 ^ 3</code> 和 2 ^ 8 相等而不是 4 ^ 3，
+而 <code>1 - 1 - 1</code> 是 -1，而不是 1。
+
+   <p>注意用于求模和整除的操作符 <code>%%</code> 和 <code>%/%</code>
+优先级高于乘法和除法。
+
+   <p>尽管该操作符要求不太严格，但仍需提起。<span class="samp">=</span> 号
+可用于函数调用时标记参数也可用于函数定义时
+设定默认值。
+
+   <p>从某种意义上说，<span class="samp">$</span>也是一种操作符，但不可以
+放在任意对象的右边，这在<a href="Index-constructions.html#Index-constructions">Index constructions</a> 部分进行了一定的讨论。它比其它任一操作符的优先
+级别都高。
+
+   <p>一个一元或二元操作的解析形式完全等价于一个以操作符作为函数名字
+的函数调用，并且操作数就是函数参数。
+
+   <p>括弧可以看作是一个名为<code>"("</code>的一元操作符。
+这也包括用于设定操作优先（如<code>a * (b + c)</code>）中的括弧。
+<!-- FIXME: Will this get changed? -->
+
+   <p>注意赋值符号是和
+<a name="index-_00b8_00b3_00d6_00b5-288"></a>算术，关系和逻辑操作符类似的操作符。
+在赋值操作的目标侧，任何表达式都是允许的（解析器层次）。
+（从解析器的角度，<code>2 + 2 &lt;- 5</code> 是合法的表达式。尽管求值程序反对。）
+类似的说明还可用于模型公式中的操作符。
+
+   </body></html>
+

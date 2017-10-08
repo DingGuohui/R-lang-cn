@@ -1,0 +1,46 @@
+<html lang="zh">
+<head>
+<title>Evaluation environment - R 语言定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="description" content="R 语言定义">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Evaluation.html#Evaluation" title="Evaluation">
+<link rel="prev" href="Evaluation.html#Evaluation" title="Evaluation">
+<link rel="next" href="Argument-matching.html#Argument-matching" title="Argument matching">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Evaluation-environment"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Argument-matching.html#Argument-matching">Argument matching</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Evaluation.html#Evaluation">Evaluation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Evaluation.html#Evaluation">Evaluation</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">4.3.1 求值环境</h4>
+
+<p>当一个函数被调用时，
+<a name="index-_00ba_00af_00ca_00fd-148"></a>一个新的求值框架会被创建。
+<a name="index-_00c7_00f3_00d6_00b5-149"></a>在这个框架中，形式参数通过 <a href="Argument-matching.html#Argument-matching">Argument matching</a> 部分给定的规则
+匹配给定的参数。函数主体里面的语句随后基于本环境框架求值。
+<a name="index-_00bb_00b7_00be_00b3-150"></a>
+求值框架的外围框架是和被调用的函数关联的环境框架。
+这可能和 S 不一样。虽然许多函数以 <code>.GlobalEnv</code> 作为它们的环境，
+但事实上不总是这样的，因为一些拥有命名空间的包里面定义的函数通常以包的命名空间
+作为它们的环境。
+
+   </body></html>
+
